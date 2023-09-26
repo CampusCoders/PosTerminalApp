@@ -69,7 +69,7 @@ You can access the Figma design of the application [here]().
 
 ## Database Schema
 
-![image]()
+![image](https://github.com/CampusCoders/PosTerminalApp/assets/78374444/58c6dd0f-01ee-4be6-88de-de8b5ef56513)
 
 ## Sample Receipts
 
