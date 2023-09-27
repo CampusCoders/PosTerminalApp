@@ -18,10 +18,6 @@ It is a sample Android mobile application designed to be used on Android Pos Ter
 - The receipt content includes customer information, order information and the logo of the application.
 
 ## Libraries
-
-![image]()
-
---------------
 * [Foundation]
   * [Android KTX](https://developer.android.com/kotlin/ktx) -  It is used to make the application more readable and easier to use.
   * [AppCompat](https://developer.android.com/jetpack/androidx/releases/appcompat) -  It is a library that ensures Android applications are compatible with material design.
@@ -73,7 +69,8 @@ You can access the Figma design of the application [here]().
 
 ## Sample Receipts
 
-![image]()
+<img src="https://github.com/CampusCoders/PosTerminalApp/assets/78374444/167e0d8f-fad9-4d17-85f8-b94fc4fe3aa0" width=250>
+<img src="https://github.com/CampusCoders/PosTerminalApp/assets/78374444/9fca1b75-e8c4-4f2f-b870-326ddcdf5d43" width=250>
 
 ## Authors
 
