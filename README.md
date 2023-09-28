@@ -59,9 +59,10 @@ Use one of the Android Studio builds to install and run the app in your device o
 video
 
 ## Designs
-You can access the Figma design of the application [here]().
 
-![image]()
+You can access the figma design [here](https://www.figma.com/file/bBP1Pn46TUZsndBbc3qRub/PosTerminalApp).
+
+![app](https://github.com/CampusCoders/PosTerminalApp/assets/78374444/b621ed53-52e0-49b4-b07c-dcfc3f006feb)
 
 ## Database Schema
 
