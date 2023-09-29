@@ -1,7 +1,5 @@
 # Pos Terminal App
 
-![image]()
-
 It is a sample Android mobile application designed to be used on Android Pos Terminals in sales workplaces.
 
 ## Features
@@ -80,6 +78,6 @@ You can access the figma design [here](https://www.figma.com/file/bBP1Pn46TUZsnd
 
 ## License
 
-
+This project is licensed under the MIT License. For more information, please see the [LICENSE file](LICENSE).
 
 ## Important Notes
