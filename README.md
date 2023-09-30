@@ -81,3 +81,13 @@ You can access the figma design [here](https://www.figma.com/file/bBP1Pn46TUZsnd
 This project is licensed under the MIT License. For more information, please see the [LICENSE file](LICENSE).
 
 ## Important Notes
+1. The application requires users to perform an initial login on the first screen. The following information is needed for this process:
+
+- Terminal Identity Number (Terminal ID)
+- Turkish ID Number or Tax ID Number (TCKN or VKN)
+- Merchant Identification Number (Merchant ID)
+- Password
+  
+Typically, these details are provided by the distributor for each merchant. In the case of this mobile application example, the necessary information is stored statically in the Constants.kt file. You can modify these details if needed. To input the information easily on the screen, you can click the "test" radio button.
+
+2. The SDK for the POS device is not included in the project due to licensing issues.
