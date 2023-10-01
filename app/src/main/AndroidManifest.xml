@@ -24,6 +24,7 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -34,8 +35,56 @@
         android:theme="@style/Theme.PosTerminalApp"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
-            android:exported="true">
+            android:name=".presentation.sale.views.BarcodeScannerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.UpdateOrAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.EditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.PaymentActivity"
+            android:exported="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.campuscoders.posterminalapp.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name=".presentation.payment.slip.SlipPrinterBitmap"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.payment.views.NFCType"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.payment.views.ICCType"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.payment.views.MCRType"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.CancelSaleEDocumentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.CashierActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.SaleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
