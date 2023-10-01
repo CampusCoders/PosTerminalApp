@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
@@ -89,8 +90,10 @@ class ShoppingCartFragment : Fragment() {
             viewModel.saveToDatabase(false, requireContext(), Constants.CUSTOMER_VKN_TCKN)
         }
         binding.buttonEmptyShoppingCart.setOnClickListener {
-            saleActivity.setShoppingCart(hashMapOf<String, Int>())
-            moveToBackCategoriesFragment()
+            if (showConfirmationDialog()) {
+                saleActivity.setShoppingCart(hashMapOf<String, Int>())
+                moveToBackCategoriesFragment()
+            }
         }
 
         observe()
@@ -129,6 +132,25 @@ class ShoppingCartFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun showConfirmationDialog(): Boolean {
+        var response = false
+
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.setTitle("Emin Misiniz?")
+        alertDialogBuilder.setMessage("Bu işlemi gerçekleştirmek istediğinizden emin misiniz?")
+
+        alertDialogBuilder.setPositiveButton("Evet") { _, _ ->
+            response = true
+        }
+        alertDialogBuilder.setNegativeButton("Hayır") { _, _ ->
+        }
+
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+
+        return response
     }
 
     private fun moveToBackCategoriesFragment() {
