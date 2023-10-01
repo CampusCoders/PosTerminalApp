@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="text_hint">#B6B5B5</color>
+    <color name="background">#1976D2</color>
+    <color name="dark_background">#12569A</color>
+    <color name="start_icon_tint">#575656</color>
+    <color name="gri_renk">#D0D0D0</color>
+    <color name="switch_track_checked">#5EA5DD</color>
+    <color name="switch_track_unchecked">#9E9E9E</color>
+    <color name="red">#FFFF0000</color>
 </resources>

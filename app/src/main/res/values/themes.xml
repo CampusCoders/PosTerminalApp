@@ -1,9 +1,32 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.PosTerminalApp" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.PosTerminalApp" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/dark_background</item>
     </style>
 
     <style name="Theme.PosTerminalApp" parent="Base.Theme.PosTerminalApp" />
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Diğer özellikler -->
+
+        <!-- Status bar rengi için -->
+        <item name="android:statusBarColor">@color/dark_background</item>
+    </style>
+
+    <style name="Theme.SplashScreenTheme" parent="Theme.SplashScreen">
+        <!-- Set the splash screen background, animated icon, and animation duration. -->
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
+             animated drawable. One of these is required. -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_screen2</item>
+        <!-- Required for animated icons -->
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <!-- Set the theme of the Activity that directly follows your splash screen. -->
+        <!-- Required -->
+        <item name="postSplashScreenTheme">@style/Base.Theme.PosTerminalApp</item>
+
+    </style>
+
+
 </resources>

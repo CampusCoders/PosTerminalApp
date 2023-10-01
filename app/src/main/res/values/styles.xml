@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme.NavigationView" parent="Widget.Design.NavigationView">
+        <item name="android:background">@drawable/nav_view_bg</item> <!-- Yuvarlak köşe drawable'ı -->
+    </style>
+</resources>
