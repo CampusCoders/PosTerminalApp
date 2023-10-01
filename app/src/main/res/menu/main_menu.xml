@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/itemSettings"
+        android:title="Ayarlar"
+        android:icon="@drawable/cog" />
+    <item
+        android:id="@+id/itemDailyReport"
+        android:title="Günlük Rapor"
+        android:icon="@drawable/baseline_trending_up_24" />
+    <item
+        android:id="@+id/itemCashierOperations"
+        android:title="Kasiyer İşlemleri"
+        android:icon="@drawable/baseline_account_circle_24"/>
+    <item
+        android:id="@+id/itemAWordQuality"
+        android:title="Yazı Kalitesi"
+        android:icon="@drawable/file_word_box"/>
+    <item
+        android:id="@+id/itemTerminalInformations"
+        android:title="Terminal Bilgileri"
+        android:icon="@drawable/baseline_terminal_24"/>
+</menu>
