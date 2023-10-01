@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Müşteri Bilgileri"
+        app:titleCentered="true">
+
+        <ImageView
+            android:id="@+id/imageViewMenu"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center|end"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/account_reactivate" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="24dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topAppBar">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:paddingHorizontal="16dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card1EArsivBill"
+                    android:layout_width="0dp"
+                    android:layout_height="88dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@color/background"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp"
+                    app:strokeColor="@color/background">
+
+                    <TextView
+                        android:id="@+id/textViewCard1EArsivBill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="E-Arşiv Fatura"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card2EBill"
+                    android:layout_width="0dp"
+                    android:layout_height="88dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp"
+                    app:strokeColor="@color/background">
+
+                    <TextView
+                        android:id="@+id/textViewCard2EBill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="E-Fatura"
+                        android:textColor="@color/background"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutTCKN"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/tckn_vkn"
+                    android:textColorHint="#B6B5B5"
+                    app:endIconMode="clear_text"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+                    app:startIconDrawable="@drawable/card_account_details"
+                    app:startIconTint="#575656">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextTCKN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="11"
+                        android:textColor="@color/black" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutCustomerName"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Ad"
+                    android:textColorHint="#B6B5B5"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+                    app:startIconDrawable="@drawable/baseline_account_circle_24"
+                    app:startIconTint="#575656">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextCustomerName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:textColorHint="#B6B5B5" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutCustomerSurname"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Soyad"
+                    android:textColorHint="#B6B5B5"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+                    app:startIconDrawable="@drawable/baseline_account_circle_24"
+                    app:startIconTint="#575656">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextCustomerSurname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:textColorHint="#B6B5B5" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutPhone"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Telefon No"
+                    android:textColorHint="#B6B5B5"
+                    app:prefixText="+90"
+                    app:prefixTextColor="@color/black"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+                    app:startIconDrawable="@drawable/baseline_phone_iphone_24"
+                    app:startIconTint="#575656">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:textColor="@color/black"
+                        android:textColorHint="#B6B5B5" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutMail"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="E-Posta"
+                    android:textColorHint="#B6B5B5"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+                    app:startIconDrawable="@drawable/baseline_mail_24"
+                    app:startIconTint="#575656">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextMail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:textColorHint="#B6B5B5" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutCity"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="İl"
+                    android:textColorHint="#B6B5B5"
+                    app:boxStrokeColor="@color/background"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+                    app:startIconDrawable="@drawable/city_variant"
+                    app:startIconTint="#575656">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/AutoCompleteTextViewCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutDistrict"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="İlçe"
+                    android:textColorHint="#B6B5B5"
+                    app:boxStrokeColor="@color/background"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+                    app:startIconDrawable="@drawable/city_variant"
+                    app:startIconTint="#575656">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/AutoCompleteTextViewDistrict"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutAddress"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Adres"
+                    android:textColorHint="#B6B5B5"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+                    app:startIconDrawable="@drawable/baseline_location_on_24"
+                    app:startIconTint="#575656">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:textColorHint="#B6B5B5" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutPaymentType"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Ödeme Tipi"
+                    android:textColorHint="#B6B5B5"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+                    app:startIconDrawable="@drawable/cash_100"
+                    app:startIconTint="#575656">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextPaymentType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:textColorHint="#B6B5B5" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutTotal"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Toplam"
+                    android:textColorHint="#B6B5B5"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+                    app:startIconDrawable="@drawable/currency_try"
+                    app:startIconTint="#575656">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextTotal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:textColorHint="#B6B5B5" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="24dp">
+
+                    <Button
+                        android:id="@+id/buttonCancel"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="140dp"
+                        android:layout_height="72dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/background"
+                        android:singleLine="false"
+                        android:text="İptal"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        app:rippleColor="@color/white" />
+
+
+                    <Button
+                        android:id="@+id/buttonContinue"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="140dp"
+                        android:layout_height="72dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/background"
+                        android:text="Devam Et"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        app:rippleColor="@color/white" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/titleTextViewVerificationHead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/verification_code"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/titleTextViewVerificationContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center_vertical|center_horizontal"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:text="@string/verification_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextViewVerificationHead" />
+
+    <TextView
+        android:id="@+id/textViewResend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        android:text="@string/resend"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="@+id/titleTextViewVerificationContent"
+        app:layout_constraintStart_toStartOf="@+id/titleTextViewVerificationContent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextViewVerificationContent">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/textViewCountDownTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:visibility="invisible"
+        android:textSize="16sp"
+        android:text="@string/timer"
+        app:layout_constraintEnd_toEndOf="@+id/titleTextViewVerificationContent"
+        app:layout_constraintStart_toStartOf="@+id/titleTextViewVerificationContent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextViewVerificationContent">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/titleTextViewPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center_vertical|center_horizontal"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:text="@string/sample_phone_number"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCountDownTimer" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextViewPhoneNumber">
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/pin_background">
+
+            <TextView
+                android:id="@+id/textViewPinOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:background="@drawable/pin_background">
+
+            <TextView
+                android:id="@+id/textViewPinTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:background="@drawable/pin_background">
+
+            <TextView
+                android:id="@+id/textViewPinThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:background="@drawable/pin_background">
+
+            <TextView
+                android:id="@+id/textViewPinFour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:background="@drawable/pin_background">
+
+            <TextView
+                android:id="@+id/textViewPinFive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="48dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+        <Button
+            android:id="@+id/buttonVerification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Doğrula"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:rowCount="4">
+
+            <Button
+                android:id="@+id/buttonPinOne"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:onClick="onNumberClick"
+                android:text="1"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small" />
+
+            <Button
+                android:id="@+id/buttonPinTwo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:onClick="onNumberClick"
+                android:text="2"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small" />
+
+            <Button
+                android:id="@+id/buttonPinThree"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:onClick="onNumberClick"
+                android:text="3"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small" />
+
+            <Button
+                android:id="@+id/buttonPinFour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:onClick="onNumberClick"
+                android:text="4"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small" />
+
+            <Button
+                android:id="@+id/buttonPinFive"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:onClick="onNumberClick"
+                android:text="5"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small" />
+
+            <Button
+                android:id="@+id/buttonPinSix"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:onClick="onNumberClick"
+                android:text="6"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small" />
+
+            <Button
+                android:id="@+id/buttonPinSeven"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:onClick="onNumberClick"
+                android:text="7"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small" />
+
+            <Button
+                android:id="@+id/buttonPinEight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:onClick="onNumberClick"
+                android:text="8"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small" />
+
+            <Button
+                android:id="@+id/buttonPinNine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:onClick="onNumberClick"
+                android:text="9"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small" />
+
+            <Button
+                android:id="@+id/buttonPinDeleteAll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:onClick="onDeleteAllClick"
+                android:text="CLR"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small" />
+
+            <Button
+                android:id="@+id/buttonPinZero"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:onClick="onNumberClick"
+                android:text="0"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small" />
+
+            <Button
+                android:id="@+id/buttonPinDelete"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:paddingTop="8dp"
+                android:drawableTop="@drawable/baseline_backspace_24"
+                android:onClick="onDeleteClick"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        </GridLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/materialCardViewCashierItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    android:clickable="true"
+    android:padding="8dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="4dp"
+    app:strokeColor="@android:color/transparent">
+
+    <TextView
+        android:id="@+id/textViewCashierTerminalId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="U0002"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewCashierFullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="right"
+        android:text="Joma2"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewCashierDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="right"
+        android:text="2023-02-08"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewCashierTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="right"
+        android:text="10:37:21"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageViewCashierListDate"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="86dp"
+        android:layout_marginBottom="4dp"
+        android:src="@drawable/baseline_date_range_24"
+        app:tint="@color/black" />
+
+    <ImageView
+        android:id="@+id/imageViewCashierListTime"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="172dp"
+        android:layout_marginBottom="4dp"
+        android:src="@drawable/baseline_access_time_24"
+        app:tint="@color/black" />
+
+</com.google.android.material.card.MaterialCardView>

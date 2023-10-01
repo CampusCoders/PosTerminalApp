@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerParent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Günlük Rapor">
+
+            <ImageView
+                android:id="@+id/imageViewSearch"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/file_document" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <LinearLayout
+            android:id="@id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topAppBar">
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-12dp"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="Fatura"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="KDV"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:text="Toplam"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-40dp"
+                android:padding="24dp">
+
+                <TextView
+                    android:id="@+id/textViewBill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="5 Adet"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewKDV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="₺15,21"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:text="₺84,00"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-24dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <!-- İlk Menü -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutStatus"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:hint="Status"
+                    android:textColorHint="@color/white"
+                    app:boxStrokeColor="@android:color/transparent"
+                    app:boxStrokeWidth="0dp"
+                    app:endIconTint="@color/white"
+                    app:hintTextColor="@color/white"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextViewStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:completionThreshold="1"
+                        android:dropDownAnchor="@id/autoCompleteTextViewStatus"
+                        android:dropDownHeight="wrap_content"
+                        android:focusable="false"
+                        android:inputType="none"
+                        android:popupBackground="@android:color/transparent"
+                        android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- İkinci Menü -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutDocuments"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:hint="Belgeler"
+                    android:textColorHint="@color/white"
+                    app:boxStrokeColor="@android:color/transparent"
+                    app:boxStrokeWidth="0dp"
+                    app:endIconTint="@color/white"
+                    app:hintTextColor="@color/white"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextViewDocuments"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:completionThreshold="1"
+                        android:dropDownAnchor="@id/autoCompleteTextViewDocuments"
+                        android:dropDownHeight="wrap_content"
+                        android:focusable="false"
+                        android:inputType="none"
+                        android:popupBackground="@android:color/transparent"
+                        android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Üçüncü Menü -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutDay"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:hint="Gün"
+                    android:textColorHint="@color/white"
+                    app:boxStrokeColor="@android:color/transparent"
+                    app:boxStrokeWidth="0dp"
+                    app:endIconTint="@color/white"
+                    app:hintTextColor="@color/white"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextViewDay"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:completionThreshold="1"
+                        android:dropDownAnchor="@id/autoCompleteTextViewDay"
+                        android:dropDownHeight="wrap_content"
+                        android:focusable="false"
+                        android:inputType="none"
+                        android:popupBackground="@android:color/transparent"
+                        android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/materialCardViewBill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:clickable="false"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="12dp"
+                    app:strokeColor="@android:color/transparent">
+
+                    <TextView
+                        android:id="@+id/textViewBillStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="Sepet İptal"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewBillStatusContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Başarısız Sepet İptal"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewOrderNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="60dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="12789913466370013425"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewMaliID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="60dp"
+                        android:layout_marginBottom="4dp"
+                        android:gravity="center"
+                        android:text="F2203031100019400"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewTerminaldID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="60dp"
+                        android:layout_marginRight="16dp"
+                        android:gravity="right"
+                        android:text="A00001"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewBillTotal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="16dp"
+                        android:gravity="right"
+                        android:text="₺ 0,00"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewBillDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="4dp"
+                        android:gravity="right"
+                        android:text="2023-02-08"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewBillTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginRight="108dp"
+                        android:layout_marginBottom="4dp"
+                        android:gravity="right"
+                        android:text="10:37:21"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imageViewBillDate"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginEnd="86dp"
+                        android:layout_marginBottom="4dp"
+                        android:src="@drawable/baseline_date_range_24"
+                        app:tint="@color/black" />
+
+                    <ImageView
+                        android:id="@+id/imageViewBillTime"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginEnd="160dp"
+                        android:layout_marginBottom="4dp"
+                        android:src="@drawable/baseline_access_time_24"
+                        app:tint="@color/black" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/menulayout"
+        layout="@layout/navigation_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

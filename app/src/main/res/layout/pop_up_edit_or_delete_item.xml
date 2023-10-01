@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingHorizontal="24dp"
+    android:paddingVertical="12dp"
+    android:gravity="center">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutEdit"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imageViewEdit"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@color/design_default_color_secondary_variant"/>
+
+        <TextView
+            android:id="@+id/textViewEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/item_edit"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutDelete"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imageViewDelete"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@color/accent"/>
+
+        <TextView
+            android:id="@+id/textViewDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/item_delete"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

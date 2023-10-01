@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Ürün Ekle" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="60dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topAppBar">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutProductCode"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Ürün Kodu"
+            app:startIconDrawable="@drawable/barcode_scan"
+            android:textColorHint="#B6B5B5"
+            app:boxStrokeColor="@color/background"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditTextProductCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:textColorHint="#B6B5B5" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutProductName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Kategori Adı"
+            android:textColorHint="#B6B5B5"
+            app:boxStrokeColor="@color/background"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditTextProductName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:textColorHint="#B6B5B5" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutDescription"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Açıklama"
+            android:textColorHint="#B6B5B5"
+            app:boxStrokeColor="@color/background"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditTextDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:textColorHint="#B6B5B5" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardViewCategoryImage"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="left"
+                android:backgroundTint="@color/background"
+                android:clickable="false">
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/package_variant_closed_plus" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutKDV"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="28dp"
+                android:hint="KDV"
+                android:layout_gravity="right"
+                android:textColorHint="#B6B5B5"
+                app:boxStrokeColor="@color/background"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium">
+
+                <AutoCompleteTextView
+                    android:id="@+id/AutoCompleteTextViewKDV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutProductPrice"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Ürün Fiyat"
+            android:textColorHint="#B6B5B5"
+            app:boxStrokeColor="@color/background"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditTextProductPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:cursorVisible="false"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:textColorHint="#B6B5B5" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/buttonAdd"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/background"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Ekle"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:rippleColor="@color/white" />
+
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardViewCamera"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:backgroundTint="@color/white"
+        android:layout_marginEnd="205dp"
+        android:layout_marginBottom="160dp"
+        android:clickable="true"
+        app:layout_anchor="@id/materialCardViewCategoryImage"
+        app:layout_anchorGravity="bottom|right|end">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/camera_plus" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardViewRemove"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:backgroundTint="@color/white"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="160dp"
+        android:clickable="true"
+        app:layout_anchor="@id/materialCardViewCategoryImage"
+        app:layout_anchorGravity="bottom|left|start">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/close_circle" />
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

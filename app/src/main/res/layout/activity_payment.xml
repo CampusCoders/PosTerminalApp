@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.LoginActivity">
+    tools:context=".presentation.PaymentActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+        android:id="@+id/fragmentContainerViewPaymentActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:name="com.campuscoders.posterminalapp.presentation.login.views.LoginFragment"
-        tools:layout="@layout/fragment_login">
+        android:name="com.campuscoders.posterminalapp.presentation.payment.views.CustomerFragment"
+        tools:layout="@layout/fragment_customer">
 
     </androidx.fragment.app.FragmentContainerView>
 
