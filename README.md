@@ -52,9 +52,13 @@ Use one of the Android Studio builds to install and run the app in your device o
 
 ![image]()
 
-## Usage
+## Demo Video
 
-video
+
+
+https://github.com/CampusCoders/PosTerminalApp/assets/78374444/ddb5e77a-9ba4-4a92-8a35-846cb6986e7d
+
+
 
 ## Designs
 
