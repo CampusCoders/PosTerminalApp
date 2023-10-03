@@ -49,16 +49,17 @@ git clone https://github.com/CampusCoders/PosTerminalApp
 Use one of the Android Studio builds to install and run the app in your device or a simulator.
 
 ## Screenshots
+| Login Page | Categories Page | Shopping Cart Page |
+|-------------------|-------------------|-------------------|
+| <img src="https://github.com/CampusCoders/PosTerminalApp/assets/78374444/19c5304a-e5c8-494a-a2d3-8683cc841f96" width=250> | <img src="https://github.com/CampusCoders/PosTerminalApp/assets/78374444/743a168c-343f-4f64-aa4e-7affd17f7cd2" width=250> | <img src="https://github.com/CampusCoders/PosTerminalApp/assets/78374444/e376beb5-d3bb-4ddb-90cc-f07e5bf20502" width=250> |
 
-![image]()
+| Adding Cashier Page | Cashiers Page | Customer Information Page |
+|-------------------|-------------------|-------------------|
+| <img src="https://github.com/CampusCoders/PosTerminalApp/assets/78374444/bd73dc97-e307-42bd-8b24-992214f4f84b" width=250> | <img src="https://github.com/CampusCoders/PosTerminalApp/assets/78374444/ba00c2dc-9f59-451a-b23d-672d3cefd7be" width=250> | <img src="https://github.com/CampusCoders/PosTerminalApp/assets/78374444/3071684c-a9a6-4a3e-96f1-901fb2b8d871" width=250> |
 
 ## Demo Video
 
-
-
 https://github.com/CampusCoders/PosTerminalApp/assets/78374444/ddb5e77a-9ba4-4a92-8a35-846cb6986e7d
-
-
 
 ## Designs
 
