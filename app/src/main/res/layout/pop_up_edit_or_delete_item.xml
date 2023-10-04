@@ -42,7 +42,7 @@
             android:id="@+id/imageViewDelete"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@color/accent"/>
+            android:src="@color/red"/>
 
         <TextView
             android:id="@+id/textViewDelete"

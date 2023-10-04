@@ -11,7 +11,6 @@ import androidx.core.view.GravityCompat
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.ActivityMainBinding
 import com.campuscoders.posterminalapp.utils.CustomSharedPreferences
-import com.cspos.BuildConfig
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -56,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         val mainUserInfos = customSharedPreferences.getMainUserLogin()
         val terminalNo = mainUserInfos["terminal_id"]
         val uyeIsyeriNo = mainUserInfos["uye_isyeri_no"]
-        val versionName = BuildConfig.VERSION_NAME
+        val versionName = "VERSION_NAME"
         val androidVersion = Build.VERSION.RELEASE
         val serialNumber = Build.SERIAL
 

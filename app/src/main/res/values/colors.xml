@@ -10,4 +10,5 @@
     <color name="switch_track_checked">#5EA5DD</color>
     <color name="switch_track_unchecked">#9E9E9E</color>
     <color name="red">#FFFF0000</color>
+    <color name="switch_thumb_unchecked">#949494</color>
 </resources>

@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentUpdateOrAddCategoryBinding
 import com.campuscoders.posterminalapp.domain.model.Categories
+import com.campuscoders.posterminalapp.presentation.edit.UpdateOrAddCategoryViewModel
 import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.glide
 import com.campuscoders.posterminalapp.utils.placeHolderProgressBar

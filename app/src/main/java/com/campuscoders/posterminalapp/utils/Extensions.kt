@@ -55,16 +55,6 @@ fun Int.toCent(): String {
     return this.toString()
 }
 
-fun String.encrypt(): String = AESUtil.encrypt(this)
-
-fun String.decrypt(): String = AESUtil.decrypt(this)
-
-/*
-fun String.encrypt(context: Context): String = AESUtil.encrypt(this,context)
-
-fun String.decrypt(context: Context): String = AESUtil.decrypt(this,KeyStoreUtil.generateOrRetrieveKey(),IVSharedPreferences.getIV(context)!!)
- */
-
 fun Context.showProgressDialog(message: String): Dialog {
     val dialog = Dialog(this)
     dialog.setContentView(R.layout.progress_bar)

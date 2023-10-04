@@ -83,7 +83,7 @@
                 app:endIconMode="password_toggle"
                 app:endIconTint="#575656"
                 app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
-                app:startIconDrawable="@drawable/baseline_phone_iphone_24"
+                app:startIconDrawable="@drawable/baseline_password_24"
                 app:startIconTint="#575656">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -106,7 +106,7 @@
                 app:endIconMode="password_toggle"
                 app:endIconTint="#575656"
                 app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
-                app:startIconDrawable="@drawable/baseline_phone_iphone_24"
+                app:startIconDrawable="@drawable/baseline_password_24"
                 app:startIconTint="#575656">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -126,15 +126,15 @@
                 android:background="@drawable/switchbackground">
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/switchCancelReturn"
+                    android:id="@+id/switchIptalIade"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
                     android:text="İptal İade"
                     android:textColor="#B6B5B5"
                     android:textSize="16sp"
                     android:paddingStart="16dp"
-                    app:thumbTint="@color/background"
-                    app:trackTint="@color/switch_track_unchecked"/>
+                    app:thumbTint="@drawable/switch_thumb"
+                    app:trackTint="@drawable/switch_track"/>
 
             </RelativeLayout>
 
@@ -146,15 +146,15 @@
                 android:background="@drawable/switchbackground">
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/switchPayment"
+                    android:id="@+id/switchTahsilat"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
-                    android:text="Ödeme"
+                    android:text="Tahsilat"
                     android:textColor="#B6B5B5"
                     android:textSize="16sp"
                     android:paddingStart="16dp"
-                    app:thumbTint="@color/background"
-                    app:trackTint="@color/switch_track_unchecked"/>
+                    app:thumbTint="@drawable/switch_thumb"
+                    app:trackTint="@drawable/switch_track"/>
 
             </RelativeLayout>
 
@@ -166,15 +166,15 @@
                 android:background="@drawable/switchbackground">
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/switchCashierDisplay"
+                    android:id="@+id/switchKasiyerGoruntuleme"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
                     android:text="Kasiyer Görüntüleme"
                     android:textColor="#B6B5B5"
                     android:textSize="16sp"
                     android:paddingStart="16dp"
-                    app:thumbTint="@color/background"
-                    app:trackTint="@color/switch_track_unchecked"/>
+                    app:thumbTint="@drawable/switch_thumb"
+                    app:trackTint="@drawable/switch_track"/>
 
             </RelativeLayout>
 
@@ -186,15 +186,15 @@
                 android:background="@drawable/switchbackground">
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/switchAllRapors"
+                    android:id="@+id/switchKasiyerEklemeDuzenleme"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
-                    android:text="Tüm Raporları Gör"
+                    android:text="Kasiyer Ekleme Düzenleme"
                     android:textColor="#B6B5B5"
                     android:textSize="16sp"
                     android:paddingStart="16dp"
-                    app:thumbTint="@color/background"
-                    app:trackTint="@color/switch_track_unchecked"/>
+                    app:thumbTint="@drawable/switch_thumb"
+                    app:trackTint="@drawable/switch_track"/>
 
             </RelativeLayout>
 
@@ -206,15 +206,15 @@
                 android:background="@drawable/switchbackground">
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/switchRaporSaveSend"
+                    android:id="@+id/switchKasiyerSilme"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
-                    android:text="Rapor Kaydet Gönder"
+                    android:text="Kasiyer Silme"
                     android:textColor="#B6B5B5"
                     android:textSize="16sp"
                     android:paddingStart="16dp"
-                    app:thumbTint="@color/background"
-                    app:trackTint="@color/switch_track_unchecked"/>
+                    app:thumbTint="@drawable/switch_thumb"
+                    app:trackTint="@drawable/switch_track"/>
 
             </RelativeLayout>
 
@@ -226,15 +226,15 @@
                 android:background="@drawable/switchbackground">
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/switchPOSManagment"
+                    android:id="@+id/switchUrunGoruntuleme"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
-                    android:text="Pos Yönetimi"
+                    android:text="Ürün Görüntüleme"
                     android:textColor="#B6B5B5"
                     android:textSize="16sp"
                     android:paddingStart="16dp"
-                    app:thumbTint="@color/background"
-                    app:trackTint="@color/switch_track_unchecked"/>
+                    app:thumbTint="@drawable/switch_thumb"
+                    app:trackTint="@drawable/switch_track"/>
 
             </RelativeLayout>
 
@@ -246,17 +246,118 @@
                 android:background="@drawable/switchbackground">
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/switchAdminOffical"
+                    android:id="@+id/switchUrunEklemeDuzenleme"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
-                    android:text="Admin Yetkilisi"
+                    android:text="Ürün Ekleme Duzenleme"
                     android:textColor="#B6B5B5"
                     android:textSize="16sp"
                     android:paddingStart="16dp"
-                    app:thumbTint="@color/background"
-                    app:trackTint="@color/switch_track_unchecked"/>
+                    app:thumbTint="@drawable/switch_thumb"
+                    app:trackTint="@drawable/switch_track"/>
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/switchbackground">
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchUrunSilme"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:text="Ürün Silme"
+                    android:textColor="#B6B5B5"
+                    android:textSize="16sp"
+                    android:paddingStart="16dp"
+                    app:thumbTint="@drawable/switch_thumb"
+                    app:trackTint="@drawable/switch_track"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/switchbackground">
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchTumRaporlariGoruntuleme"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:text="Tüm Raporları Görüntüleme"
+                    android:textColor="#B6B5B5"
+                    android:textSize="16sp"
+                    android:paddingStart="16dp"
+                    app:thumbTint="@drawable/switch_thumb"
+                    app:trackTint="@drawable/switch_track"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/switchbackground">
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchRaporKaydetGonder"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:text="Rapor Kaydet Gönder"
+                    android:textColor="#B6B5B5"
+                    android:textSize="16sp"
+                    android:paddingStart="16dp"
+                    app:thumbTint="@drawable/switch_thumb"
+                    app:trackTint="@drawable/switch_track"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/switchbackground">
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchPosYonetimi"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:text="Pos Yönetimi"
+                    android:textColor="#B6B5B5"
+                    android:textSize="16sp"
+                    android:paddingStart="16dp"
+                    app:thumbTint="@drawable/switch_thumb"
+                    app:trackTint="@drawable/switch_track"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/switchbackground">
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchAdmin"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:text="Admin"
+                    android:textColor="#B6B5B5"
+                    android:textSize="16sp"
+                    android:paddingStart="16dp"
+                    app:thumbTint="@drawable/switch_thumb"
+                    app:trackTint="@drawable/switch_track"/>
+
+            </RelativeLayout>
+
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
@@ -270,7 +371,8 @@
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="140dp"
                     android:layout_height="72dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_weight="1"
                     android:backgroundTint="@color/background"
                     android:singleLine="false"
                     android:text="İptal"
@@ -278,18 +380,15 @@
                     android:textSize="18sp"
                     app:rippleColor="@color/white" />
 
-                <Space
-                    android:layout_width="20dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="16dp" />
 
                 <Button
                     android:id="@+id/buttonSave"
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="140dp"
                     android:layout_height="72dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="24dp"
                     android:backgroundTint="@color/background"
+                    android:layout_weight="1"
                     android:text="Kaydet"
                     android:textColor="@color/white"
                     android:textSize="18sp"

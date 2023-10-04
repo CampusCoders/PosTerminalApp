@@ -23,7 +23,6 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:cardUseCompatPadding="true"
-            app:strokeColor="@color/transparent"
             app:cardBackgroundColor="@color/background"
             android:clickable="true">
 
@@ -42,9 +41,9 @@
                 android:layout_width="124dp"
                 android:layout_height="78dp"
                 android:src="@drawable/mcr"
-                android:tint="@color/white"
                 android:layout_gravity="center"
-                android:layout_marginBottom="24dp"/>
+                android:layout_marginBottom="24dp"
+                app:tint="@color/white" />
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -53,7 +52,6 @@
             android:layout_height="200dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
-            app:strokeColor="@color/transparent"
             app:cardUseCompatPadding="true"
             app:cardBackgroundColor="@color/background"
             android:clickable="true">
@@ -73,9 +71,9 @@
                 android:layout_width="124dp"
                 android:layout_height="78dp"
                 android:src="@drawable/icc"
-                android:tint="@color/white"
                 android:layout_gravity="center"
-                android:layout_marginBottom="24dp"/>
+                android:layout_marginBottom="24dp"
+                app:tint="@color/white" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -85,7 +83,6 @@
             android:layout_height="200dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
-            app:strokeColor="@color/transparent"
             app:cardUseCompatPadding="true"
             app:cardBackgroundColor="@color/background"
             android:clickable="true">
@@ -105,9 +102,9 @@
                 android:layout_width="124dp"
                 android:layout_height="78dp"
                 android:src="@drawable/nfc"
-                android:tint="@color/white"
                 android:layout_gravity="center"
-                android:layout_marginBottom="24dp"/>
+                android:layout_marginBottom="24dp"
+                app:tint="@color/white" />
         </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>

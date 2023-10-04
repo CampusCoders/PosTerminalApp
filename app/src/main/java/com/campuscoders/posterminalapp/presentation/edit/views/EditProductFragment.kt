@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentEditProductBinding
 import com.campuscoders.posterminalapp.presentation.UpdateOrAddActivity
+import com.campuscoders.posterminalapp.presentation.edit.EditProductViewModel
 import com.campuscoders.posterminalapp.presentation.sale.views.BarcodeScannerActivity
 import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.hide
