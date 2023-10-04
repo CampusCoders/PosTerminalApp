@@ -13,7 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.campuscoders.posterminalapp.POSAPIHelper;
+import com.campuscoders.posterminalapp.presentation.payment.api.POSAPIHelper;
 import com.campuscoders.posterminalapp.ByteUtil;
 import com.campuscoders.posterminalapp.R;
 import com.campuscoders.posterminalapp.presentation.SaleActivity;
@@ -26,7 +26,7 @@ public class NFCType extends Activity {
     TextView textViewMsg = null;
     private boolean bIsBack = false;
     private boolean isNFCReadingStopped = false;
-    PosApiHelper PosAPI = PosApiHelper.getInstance();
+    POSAPIHelper PosAPI = POSAPIHelper.getInstance();
 
     SlipPrinter slipPrinter = new SlipPrinter(this);
 

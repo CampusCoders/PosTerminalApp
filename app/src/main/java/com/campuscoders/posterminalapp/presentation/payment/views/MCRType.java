@@ -23,7 +23,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Arrays;
 
-import com.campuscoders.posterminalapp.POSAPIHelper;
+import com.campuscoders.posterminalapp.presentation.payment.api.POSAPIHelper;
 
 public class MCRType extends Activity {
     public byte track1[] = new byte[250];
@@ -41,7 +41,7 @@ public class MCRType extends Activity {
     int successCount = 0;
     int failCount = 0;
     private int RESULT_CODE = 0;
-    PosApiHelper PosAPI = PosApiHelper.getInstance();
+    POSAPIHelper PosAPI = POSAPIHelper.getInstance();
     SlipPrinter slipPrinter = new SlipPrinter(this);
     private Context mContext;
 

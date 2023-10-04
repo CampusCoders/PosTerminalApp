@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.campuscoders.posterminalapp.ByteUtil;
-import com.campuscoders.posterminalapp.POSAPIHelper;
+import com.campuscoders.posterminalapp.presentation.payment.api.POSAPIHelper;
 import com.campuscoders.posterminalapp.R;
 import com.campuscoders.posterminalapp.RESP;
 import com.campuscoders.posterminalapp.SEND;
