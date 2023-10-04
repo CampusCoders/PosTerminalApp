@@ -8,7 +8,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.campuscoders.posterminalapp.presentation.payment.api.POSAPIHelper;
-import com.campuscoders.posterminalapp.Print;
+import com.campuscoders.posterminalapp.presentation.payment.api.Print;
 import com.campuscoders.posterminalapp.R;
 
 

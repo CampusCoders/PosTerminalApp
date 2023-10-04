@@ -14,11 +14,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.campuscoders.posterminalapp.ByteUtil;
+import com.campuscoders.posterminalapp.presentation.payment.api.ByteUtil;
 import com.campuscoders.posterminalapp.presentation.payment.api.POSAPIHelper;
 import com.campuscoders.posterminalapp.R;
-import com.campuscoders.posterminalapp.RESP;
-import com.campuscoders.posterminalapp.SEND;
+import com.campuscoders.posterminalapp.presentation.payment.api.RESP;
+import com.campuscoders.posterminalapp.presentation.payment.api.SEND;
 import com.campuscoders.posterminalapp.presentation.SaleActivity;
 import com.campuscoders.posterminalapp.presentation.payment.slip.SlipPrinter;
 import com.campuscoders.posterminalapp.presentation.sale.views.ShoppingCartItems;
@@ -190,7 +190,7 @@ public class ICCType extends Activity implements View.OnClickListener {
 
             ret = PosAPI.CommandICC(slot, APDUSend.getBytes(), resp);
             if (0 == ret) {
-                ApduResp = new RESP(resp);
+                APDUResp = new RESP(resp);
                 strInfo = ByteUtil.bytearrayToHexString(APDUResp.DataOut, APDUResp.LenOut) + "\n\nSWA:"
                         + ByteUtil.byteToHexString(APDUResp.SWA) + " SWB:" + ByteUtil.byteToHexString(APDUResp.SWB);
                 runOnUiThread(new Runnable() {
