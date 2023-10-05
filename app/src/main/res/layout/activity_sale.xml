@@ -61,8 +61,7 @@
                     android:layout_marginEnd="12dp"
                     android:clickable="true"
                     android:src="@drawable/cart_variant"
-                    app:tint="@color/background"
-                    android:focusable="true"/>
+                    app:tint="@color/background"/>
 
 
             </com.google.android.material.card.MaterialCardView>
