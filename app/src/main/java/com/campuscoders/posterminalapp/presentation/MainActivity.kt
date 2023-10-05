@@ -7,12 +7,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.GravityCompat
+import android.content.Context
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.ActivityMainBinding
 import com.campuscoders.posterminalapp.utils.CustomSharedPreferences
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
+import android.content.pm.PackageManager
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -24,6 +27,38 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val customSharedPreferences = CustomSharedPreferences(this)
+        val terminalUser = customSharedPreferences.getTerminalUserLogin()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val writePermission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            val readPermission = android.Manifest.permission.READ_EXTERNAL_STORAGE
+            val cameraPermission = android.Manifest.permission.CAMERA
+
+            val permissionsToRequest = mutableListOf<String>()
+
+            // CAMERA iznini kontrol et
+            if (checkSelfPermission(cameraPermission) != PackageManager.PERMISSION_GRANTED) {
+                permissionsToRequest.add(cameraPermission)
+            }
+
+            // WRITE_EXTERNAL_STORAGE iznini kontrol et
+            if (checkSelfPermission(writePermission) != PackageManager.PERMISSION_GRANTED) {
+                permissionsToRequest.add(writePermission)
+            }
+
+            // READ_EXTERNAL_STORAGE iznini kontrol et
+            if (checkSelfPermission(readPermission) != PackageManager.PERMISSION_GRANTED) {
+                permissionsToRequest.add(readPermission)
+            }
+
+            // İzinleri talep et
+            if (permissionsToRequest.isNotEmpty()) {
+                val permissionArray = permissionsToRequest.toTypedArray()
+                requestPermissions(permissionArray, 1)
+            }
+        }
+
         val intent = Intent(this, CashierActivity::class.java)
 
         binding.imageViewMenu.setOnClickListener {
@@ -33,12 +68,20 @@ class MainActivity : AppCompatActivity() {
         binding.menulayout.navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.itemDailyReport -> {
-                    intent.putExtra("navigation", "1")
-                    startActivity(intent)
+                    if (terminalUser["tum_raporları_goruntuleme"] as Boolean) {
+                        intent.putExtra("navigation", "1")
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this,"Yetkiniz yok.",Toast.LENGTH_SHORT).show()
+                    }
                 }
                 R.id.itemCashierOperations -> {
-                    intent.putExtra("navigation", "2")
-                    startActivity(intent)
+                    if (terminalUser["kasiyer_goruntuleme"] as Boolean) {
+                        intent.putExtra("navigation", "2")
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this,"Yetkiniz yok.",Toast.LENGTH_SHORT).show()
+                    }
                 }
                 R.id.itemTerminalInformations -> {
                     showTerminalPopup()
@@ -48,6 +91,20 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        binding.menulayout.linearLayoutLogOut.setOnClickListener {
+            logOut()
+        }
+
+    }
+
+    private fun logOut() {
+        val customSharedPreferences = CustomSharedPreferences(this)
+        customSharedPreferences.setMainUserLoginRememberMeManager(false)
+        customSharedPreferences.setMainUserLoginRememberMeCashier(false)
+        val intent = Intent(this,LoginActivity::class.java)
+        intent.putExtra("logout","logout")
+        startActivity(intent)
+        finish()
     }
 
     private fun showTerminalPopup() {
@@ -55,7 +112,7 @@ class MainActivity : AppCompatActivity() {
         val mainUserInfos = customSharedPreferences.getMainUserLogin()
         val terminalNo = mainUserInfos["terminal_id"]
         val uyeIsyeriNo = mainUserInfos["uye_isyeri_no"]
-        val versionName = "VERSION_NAME"
+        val versionName = this.packageManager.getPackageInfo(this.packageName, 0).versionName
         val androidVersion = Build.VERSION.RELEASE
         val serialNumber = Build.SERIAL
 
