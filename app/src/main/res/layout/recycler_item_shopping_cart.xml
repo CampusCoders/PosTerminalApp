@@ -44,7 +44,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:orientation="horizontal">
@@ -63,7 +63,7 @@
                             android:layout_weight="1"
                             android:gravity="left"
                             android:padding="8dp"
-                            android:text="U125234841"
+                            android:text="U12523484123"
                             android:textColor="@color/black" />
 
                     </LinearLayout>
@@ -164,8 +164,10 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/linearLayoutRemove"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="-48dp"
                     android:gravity="center">
 
                     <com.google.android.material.card.MaterialCardView
@@ -175,10 +177,10 @@
                         android:layout_marginTop="-4dp"
                         android:clickable="true"
                         android:focusable="true"
-                        app:cardCornerRadius="8dp"
                         app:cardBackgroundColor="@color/white"
-                        app:strokeColor="@android:color/transparent"
-                        app:cardElevation="4dp">
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp"
+                        app:strokeColor="@android:color/transparent">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -206,4 +208,3 @@
         android:background="@android:color/darker_gray" />
 
 </LinearLayout>
-
