@@ -25,28 +25,29 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="right|center"
                 android:layout_marginEnd="16dp"
-                app:cardBackgroundColor="@color/white"
                 android:clickable="true"
                 android:focusable="true"
-                app:strokeColor="@android:color/transparent"
-                app:cardElevation="4dp">
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="4dp"
+                app:strokeColor="@android:color/transparent">
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:cardBackgroundColor="@color/white"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="8dp"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/white"
                     app:strokeColor="@android:color/transparent">
 
                     <TextView
                         android:id="@+id/textViewTotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="36dp"
                         android:text="100,00"
-                        android:textStyle="bold"
                         android:textSize="16sp"
-                        android:layout_marginStart="36dp"/>
+                        android:textStyle="bold" />
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -55,12 +56,13 @@
                     android:id="@+id/imageViewShoppingCart"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:layout_gravity="center|end"
-                    android:layout_marginEnd="88dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
                     android:clickable="true"
                     android:src="@drawable/cart_variant"
                     app:tint="@color/background"
-                    android:layout_marginStart="12dp"/>
+                    android:focusable="true"/>
 
 
             </com.google.android.material.card.MaterialCardView>

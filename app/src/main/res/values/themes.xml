@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.PosTerminalApp" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/dark_background</item>
+        <item name="colorPrimary">@color/background</item>
     </style>
 
     <style name="Theme.PosTerminalApp" parent="Base.Theme.PosTerminalApp" />
@@ -11,7 +11,7 @@
         <!-- Diğer özellikler -->
 
         <!-- Status bar rengi için -->
-        <item name="android:statusBarColor">@color/dark_background</item>
+        <item name="android:statusBarColor">@color/background</item>
     </style>
 
     <style name="Theme.SplashScreenTheme" parent="Theme.SplashScreen">
