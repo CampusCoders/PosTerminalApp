@@ -68,4 +68,6 @@
     <string name="loading">Yükleniyor...</string>
     <string name="add_cashier">Kasiyer Ekle</string>
     <string name="success_add_cashier">Kasiyer başarıyla eklendi.</string>
+    <string name="dialog_empty">Sepeti Boşalt</string>
+    <string name="dialog_content_empty">Bu işlemi gerçekleştirmek istediğinizden emin misiniz?</string>
 </resources>

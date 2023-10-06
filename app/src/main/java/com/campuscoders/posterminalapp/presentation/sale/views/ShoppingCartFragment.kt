@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentShoppingCartBinding
 import com.campuscoders.posterminalapp.domain.model.ShoppingCart
 import com.campuscoders.posterminalapp.presentation.PaymentActivity
@@ -28,6 +29,8 @@ class ShoppingCartFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: ShoppingCartViewModel
+
+    private lateinit var saleActivity: SaleActivity
 
     private var hashmap = hashMapOf<String, Int>()
 
@@ -68,7 +71,7 @@ class ShoppingCartFragment : Fragment() {
 
         ItemTouchHelper(swipeCallBack).attachToRecyclerView(binding.recyclerViewShoppingCart)
 
-        val saleActivity = (activity as SaleActivity)
+        saleActivity = (activity as SaleActivity)
         saleActivity.setEnabledShoppingCartIcon(false)
         saleActivity.changeSaleActivityTopBarTitle("Sepet")
 
@@ -90,10 +93,7 @@ class ShoppingCartFragment : Fragment() {
             viewModel.saveToDatabase(false, requireContext(), Constants.CUSTOMER_VKN_TCKN)
         }
         binding.buttonEmptyShoppingCart.setOnClickListener {
-            if (showConfirmationDialog()) {
-                saleActivity.setShoppingCart(hashMapOf<String, Int>())
-                moveToBackCategoriesFragment()
-            }
+            showConfirmationDialog()
         }
 
         observe()
@@ -134,23 +134,20 @@ class ShoppingCartFragment : Fragment() {
         }
     }
 
-    private fun showConfirmationDialog(): Boolean {
-        var response = false
-
+    private fun showConfirmationDialog() {
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
-        alertDialogBuilder.setTitle("Emin Misiniz?")
-        alertDialogBuilder.setMessage("Bu işlemi gerçekleştirmek istediğinizden emin misiniz?")
+        alertDialogBuilder.setTitle(requireActivity().getString(R.string.dialog_empty))
+        alertDialogBuilder.setMessage(requireActivity().getString(R.string.dialog_content_empty))
 
         alertDialogBuilder.setPositiveButton("Evet") { _, _ ->
-            response = true
+            saleActivity.setShoppingCart(hashMapOf<String, Int>())
+            moveToBackCategoriesFragment()
         }
         alertDialogBuilder.setNegativeButton("Hayır") { _, _ ->
         }
 
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
-
-        return response
     }
 
     private fun moveToBackCategoriesFragment() {
