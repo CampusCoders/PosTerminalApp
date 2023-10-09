@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="E-Belge Sorgulama">
+        app:title="Satış İptal/E Belge Sorgulama">
 
     </com.google.android.material.appbar.MaterialToolbar>
 
@@ -36,7 +36,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Arama Tipi"
+            android:hint="Doküman No"
             android:textColorHint="#B6B5B5"
             app:boxStrokeColor="@color/background"
             app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
@@ -61,11 +61,11 @@
             android:textColorHint="#B6B5B5"
             app:boxStrokeColor="@color/background"
             app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
-            app:startIconDrawable="@drawable/file_document"
+            app:startIconDrawable="@drawable/point_of_sale"
             app:startIconTint="#575656">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextDocumentNo"
+                android:id="@+id/textInputEditTextSaleCancelNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -127,13 +127,13 @@
             android:layout_marginTop="16dp" />
 
         <Button
-            android:id="@+id/buttonQueryDocument"
+            android:id="@+id/buttonQuerySale"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="140dp"
             android:layout_height="72dp"
             android:layout_marginStart="8dp"
             android:backgroundTint="@color/background"
-            android:text="Belge Sorgula"
+            android:text="Satış Sorgula"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:rippleColor="@color/white" />
