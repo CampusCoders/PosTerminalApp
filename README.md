@@ -69,7 +69,7 @@ You can access the figma design [here](https://www.figma.com/file/bBP1Pn46TUZsnd
 
 ## Database Schema
 
-![image](https://github.com/CampusCoders/PosTerminalApp/assets/78374444/58c6dd0f-01ee-4be6-88de-de8b5ef56513)
+![image](https://github.com/CampusCoders/PosTerminalApp/assets/78374444/e0a8ec5c-ea47-41f1-a5c0-e119df9d1221)
 
 ## Sample Receipts
 
