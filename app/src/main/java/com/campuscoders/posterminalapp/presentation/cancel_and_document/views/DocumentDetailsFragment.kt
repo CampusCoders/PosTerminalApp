@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.campuscoders.posterminalapp.databinding.FragmentDocumentDetailsBinding
+import com.campuscoders.posterminalapp.utils.hide
+import com.campuscoders.posterminalapp.utils.show
 
 class DocumentDetailsFragment: Fragment() {
 
@@ -13,7 +15,8 @@ class DocumentDetailsFragment: Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        _binding = FragmentDocumentDetailsBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,9 +25,11 @@ class DocumentDetailsFragment: Fragment() {
         arguments?.let {
             val from = it.getString("from")
             if (from == "cancel_sale") {
-                // "geri" "satış iptal et"
+                binding.linearLayoutDocument.hide()
+                binding.linearLayoutCancel.show()
             } else {
-                // "geri" "göster" "gönder"
+                binding.linearLayoutCancel.hide()
+                binding.linearLayoutDocument.show()
             }
         }
     }
