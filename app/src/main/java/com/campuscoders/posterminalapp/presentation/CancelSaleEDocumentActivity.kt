@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.FragmentTransaction
 import com.campuscoders.posterminalapp.R
-import com.campuscoders.posterminalapp.presentation.cancel_and_document.views.CancelSaleAndQueryDocument
+import com.campuscoders.posterminalapp.presentation.cancel_and_document.views.CancelSaleAndQueryDocumentFragment
 
 class CancelSaleEDocumentActivity : AppCompatActivity() {
 
@@ -19,7 +19,7 @@ class CancelSaleEDocumentActivity : AppCompatActivity() {
         val intent = intent
         val navigationValue = intent.getStringExtra("navigation")
 
-        val cancelSaleAndQueryDocument = CancelSaleAndQueryDocument()
+        val cancelSaleAndQueryDocumentFragment = CancelSaleAndQueryDocumentFragment()
         val bundle = Bundle()
 
         if (navigationValue == "1") {
@@ -28,10 +28,10 @@ class CancelSaleEDocumentActivity : AppCompatActivity() {
             bundle.putString("from","query_document")
         }
 
-        cancelSaleAndQueryDocument.arguments = bundle
+        cancelSaleAndQueryDocumentFragment.arguments = bundle
 
         ftransaction?.let {
-            it.replace(R.id.fragmentContainerViewCancelSaleEDocument, cancelSaleAndQueryDocument)
+            it.replace(R.id.fragmentContainerViewCancelSaleEDocument, cancelSaleAndQueryDocumentFragment)
             it.commit()
         }
     }
