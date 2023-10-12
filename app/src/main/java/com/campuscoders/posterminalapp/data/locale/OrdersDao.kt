@@ -22,4 +22,13 @@ interface OrdersDao {
 
     @Query("UPDATE Orders SET order_receipt_type = :orderReceiptType, order_date = :orderDate, order_time = :orderTime, order_status = :orderStatus, order_receipt_no = :orderReceiptNo WHERE orderId = :orderId")
     suspend fun updateOrder(orderReceiptType: String, orderDate: String, orderTime: String, orderStatus: String, orderReceiptNo: String, orderId: String): Int
+
+    @Query("SELECT * FROM Orders WHERE order_receipt_no = :orderReceiptNo")
+    suspend fun getOrderByReceiptNo(orderReceiptNo: String): Orders?
+
+    @Query("SELECT * FROM Orders WHERE order_mali_id = :orderMaliId")
+    suspend fun getOrderByMaliId(orderMaliId: String): Orders?
+
+    @Query("SELECT * FROM Orders WHERE order_terminal_id = :orderTerminalId")
+    suspend fun getOrderByTerminalId(orderTerminalId: String): Orders?
 }

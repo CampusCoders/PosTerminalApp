@@ -11,10 +11,12 @@ import com.campuscoders.posterminalapp.data.locale.PosDatabase
 import com.campuscoders.posterminalapp.data.locale.ProductsDao
 import com.campuscoders.posterminalapp.data.locale.TerminalUsersDao
 import com.campuscoders.posterminalapp.data.repository.locale.CashierAndReportRepositoryImpl
+import com.campuscoders.posterminalapp.data.repository.locale.DocumentRepositoryImpl
 import com.campuscoders.posterminalapp.data.repository.locale.EditRepositoryImpl
 import com.campuscoders.posterminalapp.data.repository.locale.LoginRepositoryImpl
 import com.campuscoders.posterminalapp.data.repository.locale.SaleRepositoryImpl
 import com.campuscoders.posterminalapp.domain.repository.locale.CashierAndReportRepository
+import com.campuscoders.posterminalapp.domain.repository.locale.DocumentRepository
 import com.campuscoders.posterminalapp.domain.repository.locale.EditRepository
 import com.campuscoders.posterminalapp.domain.repository.locale.LoginRepository
 import com.campuscoders.posterminalapp.domain.repository.locale.SaleRepository
@@ -85,5 +87,11 @@ object AppModule {
     @Provides
     fun provideCashierAndReportRepository(terminalUsersDao: TerminalUsersDao): CashierAndReportRepository {
         return CashierAndReportRepositoryImpl(terminalUsersDao)
+    }
+
+    @Singleton
+    @Provides
+    fun provideDocumentRepository(ordersDao: OrdersDao): DocumentRepository {
+        return DocumentRepositoryImpl(ordersDao)
     }
 }
