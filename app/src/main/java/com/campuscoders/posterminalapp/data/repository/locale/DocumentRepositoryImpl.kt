@@ -20,4 +20,8 @@ class DocumentRepositoryImpl @Inject constructor(
     override suspend fun fetchOrderDetailsByTerminalId(orderTerminalId: String): Orders? {
         return ordersDao.getOrderByTerminalId(orderTerminalId)
     }
+
+    override suspend fun fetchLatestSuccessfulSale(): Orders? {
+        return ordersDao.getLatestSuccessfulSale()
+    }
 }

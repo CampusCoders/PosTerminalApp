@@ -9,4 +9,6 @@ interface DocumentRepository {
     suspend fun fetchOrderDetailsByMaliId(orderMaliId: String): Orders?
 
     suspend fun fetchOrderDetailsByTerminalId(orderTerminalId: String): Orders?
+
+    suspend fun fetchLatestSuccessfulSale(): Orders?
 }

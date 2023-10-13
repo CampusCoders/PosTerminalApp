@@ -29,4 +29,11 @@ class BaseViewModel(
             }
         }
     }
+
+    fun fetchLatestSuccessfulSale() {
+        // set live data value to loading
+        viewModelScope.launch {
+            //
+        }
+    }
 }

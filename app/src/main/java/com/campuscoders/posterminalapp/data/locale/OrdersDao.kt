@@ -31,4 +31,7 @@ interface OrdersDao {
 
     @Query("SELECT * FROM Orders WHERE order_terminal_id = :orderTerminalId")
     suspend fun getOrderByTerminalId(orderTerminalId: String): Orders?
+
+    @Query("SELECT * FROM Orders WHERE order_status = 'Successful' ORDER BY order_date DESC LIMIT 1")
+    suspend fun getLatestSuccessfulSale(): Orders?
 }
