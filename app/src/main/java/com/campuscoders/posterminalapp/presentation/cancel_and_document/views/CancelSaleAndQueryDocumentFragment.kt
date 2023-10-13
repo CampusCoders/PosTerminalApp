@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentCancelSaleAndQueryDocumentBinding
+import com.campuscoders.posterminalapp.presentation.cancel_and_document.BaseViewModel
 import com.campuscoders.posterminalapp.utils.Constants
 import com.campuscoders.posterminalapp.utils.showProgressDialog
 
@@ -17,6 +19,8 @@ class CancelSaleAndQueryDocumentFragment : Fragment() {
 
     private var _binding: FragmentCancelSaleAndQueryDocumentBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var viewModel: BaseViewModel
 
     private var ftransaction: FragmentTransaction? = null
 
@@ -29,6 +33,8 @@ class CancelSaleAndQueryDocumentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(requireActivity())[BaseViewModel::class.java]
 
         ftransaction = requireActivity().supportFragmentManager.beginTransaction()
 

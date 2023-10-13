@@ -1,10 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/itemSettings"
-        android:title="Ayarlar"
-        android:icon="@drawable/cog" />
-    <item
         android:id="@+id/itemDailyReport"
         android:title="Günlük Rapor"
         android:icon="@drawable/baseline_trending_up_24" />
