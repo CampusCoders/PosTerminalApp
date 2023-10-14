@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.campuscoders.posterminalapp.domain.model.Orders
+import com.campuscoders.posterminalapp.domain.use_case.cancel_and_document.FetchLatestSuccessfulSaleUseCase
 import com.campuscoders.posterminalapp.domain.use_case.cancel_and_document.FetchOrderByMaliIdUseCase
 import com.campuscoders.posterminalapp.domain.use_case.cancel_and_document.FetchOrderByReceiptNoUseCase
 import com.campuscoders.posterminalapp.domain.use_case.cancel_and_document.FetchOrderByTerminalIdUseCase
@@ -14,7 +15,8 @@ import kotlinx.coroutines.launch
 class BaseViewModel(
     private val fetchOrderByReceiptNoUseCase: FetchOrderByReceiptNoUseCase,
     private val fetchOrderByMaliIdUseCase: FetchOrderByMaliIdUseCase,
-    private val fetchOrderByTerminalIdUseCase: FetchOrderByTerminalIdUseCase
+    private val fetchOrderByTerminalIdUseCase: FetchOrderByTerminalIdUseCase,
+    private val fetchLatestSuccessfulSaleUseCase: FetchLatestSuccessfulSaleUseCase
 ): ViewModel() {
 
     private var _statusOrderDetail = MutableLiveData<Resource<Orders>>()
@@ -44,7 +46,8 @@ class BaseViewModel(
     fun fetchLatestSuccessfulSale() {
         _statusOrderDetail.value = Resource.Loading(null)
         viewModelScope.launch {
-            // use case
+            val response = fetchLatestSuccessfulSaleUseCase.executeFetchLatestSuccessfulSale()
+            _statusOrderDetail.value = response
         }
     }
 }
