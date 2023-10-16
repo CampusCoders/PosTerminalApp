@@ -10,9 +10,12 @@ import com.campuscoders.posterminalapp.domain.use_case.cancel_and_document.Fetch
 import com.campuscoders.posterminalapp.domain.use_case.cancel_and_document.FetchOrderByReceiptNoUseCase
 import com.campuscoders.posterminalapp.domain.use_case.cancel_and_document.FetchOrderByTerminalIdUseCase
 import com.campuscoders.posterminalapp.utils.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class BaseViewModel(
+@HiltViewModel
+class BaseViewModel @Inject constructor (
     private val fetchOrderByReceiptNoUseCase: FetchOrderByReceiptNoUseCase,
     private val fetchOrderByMaliIdUseCase: FetchOrderByMaliIdUseCase,
     private val fetchOrderByTerminalIdUseCase: FetchOrderByTerminalIdUseCase,

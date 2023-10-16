@@ -5,7 +5,9 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentTransaction
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.presentation.cancel_and_document.views.CancelSaleAndQueryDocumentFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CancelSaleEDocumentActivity : AppCompatActivity() {
 
     private var ftransaction: FragmentTransaction? = null
