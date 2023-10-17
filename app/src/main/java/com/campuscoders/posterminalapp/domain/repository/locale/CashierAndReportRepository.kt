@@ -12,6 +12,4 @@ interface CashierAndReportRepository {
     suspend fun fetchLastTerminalUserId(): Int?
 
     suspend fun fetchTerminalUserById(terminalId: String): TerminalUsers?
-
-    suspend fun fetchOrdersProductsByOrderId(orderId: String): List<OrdersProducts>?
 }

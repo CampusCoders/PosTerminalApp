@@ -1,6 +1,7 @@
 package com.campuscoders.posterminalapp.domain.repository.locale
 
 import com.campuscoders.posterminalapp.domain.model.Orders
+import com.campuscoders.posterminalapp.domain.model.OrdersProducts
 
 interface DocumentRepository {
 
@@ -11,4 +12,6 @@ interface DocumentRepository {
     suspend fun fetchOrderDetailsByTerminalId(orderTerminalId: String): Orders?
 
     suspend fun fetchLatestSuccessfulSale(): Orders?
+
+    suspend fun fetchOrdersProductsByOrderId(orderId: String): List<OrdersProducts>?
 }
