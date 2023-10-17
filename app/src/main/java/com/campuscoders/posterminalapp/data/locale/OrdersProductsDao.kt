@@ -13,4 +13,7 @@ interface OrdersProductsDao {
 
     @Query("SELECT * FROM OrdersProducts")
     suspend fun getOrdersProducts(): List<OrdersProducts>?
+
+    @Query("SELECT * FROM OrdersProducts WHERE order_products_order_id = :orderId")
+    suspend fun getOrdersProductsByOrderId(orderId: String): List<OrdersProducts>?
 }

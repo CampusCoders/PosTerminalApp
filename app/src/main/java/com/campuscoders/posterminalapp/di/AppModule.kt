@@ -85,8 +85,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideCashierAndReportRepository(terminalUsersDao: TerminalUsersDao): CashierAndReportRepository {
-        return CashierAndReportRepositoryImpl(terminalUsersDao)
+    fun provideCashierAndReportRepository(terminalUsersDao: TerminalUsersDao, ordersProductsDao: OrdersProductsDao): CashierAndReportRepository {
+        return CashierAndReportRepositoryImpl(terminalUsersDao, ordersProductsDao)
     }
 
     @Singleton

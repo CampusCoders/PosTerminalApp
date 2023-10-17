@@ -1,6 +1,6 @@
 package com.campuscoders.posterminalapp.utils
 
-class PriceAndKdvCalculater() {
+class PriceAndKdvCalculator() {
     companion object {
         fun calculateTotalPriceAndKdv(price: Int, priceCent: Int, kdv: Int, quantity: Int): HashMap<String,String> {
             var totalKdvBefore: Int = (price * kdv) / 100 * quantity

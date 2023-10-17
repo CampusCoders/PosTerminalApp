@@ -15,7 +15,7 @@ import com.campuscoders.posterminalapp.domain.use_case.sale.SaveOrderUseCase
 import com.campuscoders.posterminalapp.presentation.sale.views.ShoppingCartItems
 import com.campuscoders.posterminalapp.utils.Constants
 import com.campuscoders.posterminalapp.utils.CustomSharedPreferences
-import com.campuscoders.posterminalapp.utils.PriceAndKdvCalculater
+import com.campuscoders.posterminalapp.utils.PriceAndKdvCalculator
 import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.toCent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -46,7 +46,7 @@ class ShoppingCartViewModel @Inject constructor(
                 when(product) {
                     is Resource.Success -> {
                         product.data?.let {
-                            val hashmap = PriceAndKdvCalculater.calculateTotalPriceAndKdv(it.productPrice!!.toInt(),it.productPriceCents!!.toInt(),it.productKdv!!.toInt(),quantity)
+                            val hashmap = PriceAndKdvCalculator.calculateTotalPriceAndKdv(it.productPrice!!.toInt(),it.productPriceCents!!.toInt(),it.productKdv!!.toInt(),quantity)
                             hashmap["total_cent"] = hashmap["total_cent"]!!.toInt().toCent()
                             hashmap["total_kdv_after"] = hashmap["total_kdv_after"]!!.toInt().toCent()
                             shoppingCartArray.add(
