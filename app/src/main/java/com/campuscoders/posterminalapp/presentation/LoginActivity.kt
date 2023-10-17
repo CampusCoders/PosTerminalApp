@@ -37,7 +37,7 @@ class LoginActivity() : AppCompatActivity() {
             setTheme(R.style.Base_Theme_PosTerminalApp)
             logOut = true
         } else {
-            Thread.sleep(3000)
+            Thread.sleep(2000)
             val splashScreen = installSplashScreen()
         }
 

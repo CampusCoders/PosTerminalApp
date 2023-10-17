@@ -72,4 +72,7 @@
     <string name="dialog_content_empty">Bu işlemi gerçekleştirmek istediğinizden emin misiniz?</string>
     <string name="email">E-Posta</string>
     <string name="customer_information">Lütfen bilgilerden en az birini doldurunuz.</string>
+    <string name="adapter_document_no">Doküman No</string>
+    <string name="adapter_mali_id">Mali ID</string>
+    <string name="adapter_terminal_id">Terminal ID</string>
 </resources>

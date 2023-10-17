@@ -43,10 +43,7 @@ class CancelSaleAndQueryDocumentFragment : Fragment() {
 
         ftransaction = requireActivity().supportFragmentManager.beginTransaction()
 
-        val options = arrayOf("Doküman No", "Mali ID", "Terminal ID")
-        val arrayAdapter = ArrayAdapter<String>(requireContext(),android.R.layout.simple_dropdown_item_1line,options)
-        binding.autoCompleteTextViewSearchType.setAdapter(arrayAdapter)
-        binding.autoCompleteTextViewSearchType.setText("Doküman No")
+        setDropDownMenu()
 
         arguments?.let {
             from = it.getString("from")
@@ -93,13 +90,13 @@ class CancelSaleAndQueryDocumentFragment : Fragment() {
                 is Resource.Success -> {
                     binding.textInputEditTextPDate.setText(it.data?.orderDate)
                     when(binding.autoCompleteTextViewSearchType.text.toString()) {
-                        "Doküman No" -> {
+                        getString(R.string.adapter_document_no) -> {
                             binding.textInputEditTextValue.setText(it.data?.orderReceiptNo)
                         }
-                        "Mali Id" -> {
+                        getString(R.string.adapter_mali_id) -> {
                             binding.textInputEditTextValue.setText(it.data?.orderMaliId)
                         }
-                        "Terminal Id" -> {
+                        getString(R.string.adapter_terminal_id) -> {
                             binding.textInputEditTextValue.setText(it.data?.orderTerminalId)
                         }
                     }
@@ -111,6 +108,19 @@ class CancelSaleAndQueryDocumentFragment : Fragment() {
                     toast(requireContext(),it.message?:"Error",false)
                 }
             }
+        }
+    }
+
+    private fun setDropDownMenu() {
+        val options = arrayOf(getString(R.string.adapter_document_no), getString(R.string.adapter_mali_id), getString(R.string.adapter_terminal_id))
+        val arrayAdapter = ArrayAdapter<String>(requireContext(),android.R.layout.simple_dropdown_item_1line,options)
+        binding.autoCompleteTextViewSearchType.setAdapter(arrayAdapter)
+        binding.autoCompleteTextViewSearchType.setText(getString(R.string.adapter_document_no), false)
+        binding.autoCompleteTextViewSearchType.setOnItemClickListener { _, _, i, _ ->
+            binding.textInputLayoutSearchType.hint = options[i]
+            binding.textInputLayoutValue.hint = options[i]
+            binding.textInputEditTextValue.setText("")
+            binding.textInputEditTextPDate.setText("")
         }
     }
 
