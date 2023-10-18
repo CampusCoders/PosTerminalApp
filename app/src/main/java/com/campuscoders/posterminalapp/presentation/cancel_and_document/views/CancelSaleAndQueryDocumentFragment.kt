@@ -58,9 +58,10 @@ class CancelSaleAndQueryDocumentFragment : Fragment() {
             context?.showProgressDialog(Constants.QUERY_SALE)
             Handler(Looper.getMainLooper()).postDelayed({
 
-                // viewModel
                 val searchType = binding.textInputLayoutSearchType.editText?.text.toString()
                 val searchKey = binding.textInputLayoutValue.editText?.text.toString()
+
+                viewModel.querySale(searchType,searchKey,requireContext())
 
                 val documentDetailsFragment = DocumentDetailsFragment()
                 val bundle = Bundle()
