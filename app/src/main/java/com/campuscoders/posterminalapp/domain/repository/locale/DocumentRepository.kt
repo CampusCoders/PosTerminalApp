@@ -14,4 +14,6 @@ interface DocumentRepository {
     suspend fun fetchLatestSuccessfulSale(): Orders?
 
     suspend fun fetchOrdersProductsByOrderId(orderId: String): List<OrdersProducts>?
+
+    suspend fun cancelSale(orderId: String): Int
 }

@@ -31,4 +31,8 @@ class DocumentRepositoryImpl @Inject constructor(
     override suspend fun fetchOrdersProductsByOrderId(orderId: String): List<OrdersProducts>? {
         return ordersProductsDao.getOrdersProductsByOrderId(orderId)
     }
+
+    override suspend fun cancelSale(orderId: String): Int {
+        return ordersDao.updateOrderStatusAsSaleCancel(orderId)
+    }
 }

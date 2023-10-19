@@ -34,4 +34,7 @@ interface OrdersDao {
 
     @Query("SELECT * FROM Orders WHERE order_status = 'Successful' ORDER BY order_date DESC LIMIT 1")
     suspend fun getLatestSuccessfulSale(): Orders?
+
+    @Query("UPDATE Orders SET order_status = 'Sale Cancel' WHERE orderId = :orderId")
+    suspend fun updateOrderStatusAsSaleCancel(orderId: String): Int
 }

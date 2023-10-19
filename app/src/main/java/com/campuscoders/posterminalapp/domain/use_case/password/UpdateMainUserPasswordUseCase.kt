@@ -9,10 +9,8 @@ class UpdateMainUserPasswordUseCase @Inject constructor(private val repository: 
         return try {
             val response = repository.updateMainUserPassword(vknTckn,newPassword)
             if (response > 0) {
-                println("response success -> $response")
                 Resource.Success(response)
             } else {
-                println("response error -> $response")
                 Resource.Error(null,"Update failed")
             }
         } catch (e: Exception) {
