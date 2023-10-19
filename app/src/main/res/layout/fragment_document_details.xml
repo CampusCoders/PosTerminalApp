@@ -483,7 +483,7 @@
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
             android:backgroundTint="@color/background"
-            android:text="Göster"
+            android:text="Satış İptal Et"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:rippleColor="@color/white" />

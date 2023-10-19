@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentDocumentDetailsBinding
 import com.campuscoders.posterminalapp.domain.model.Orders
 import com.campuscoders.posterminalapp.presentation.cancel_and_document.BaseViewModel
@@ -42,6 +43,25 @@ class DocumentDetailsFragment: Fragment() {
             }
         }
 
+        // Cancel Sale
+        binding.buttonBackCancel.setOnClickListener {
+            // popback
+        }
+        binding.buttonCancelSale.setOnClickListener {
+            viewModel.cancelSale()
+        }
+
+        // Query E-Document
+        binding.buttonBack.setOnClickListener {
+            // popback
+        }
+        binding.buttonShow.setOnClickListener {
+
+        }
+        binding.buttonSend.setOnClickListener {
+            // show popup
+        }
+
         observe()
     }
 
@@ -52,11 +72,9 @@ class DocumentDetailsFragment: Fragment() {
                     viewModel.fetchOrdersProductsList()
                     setOrderDetail(it.data!!)
                 }
-                is Resource.Loading -> {
-
-                }
+                is Resource.Loading -> {}
                 is Resource.Error -> {
-                    toast(requireContext(),it.message?:"Error Order!",false)
+                    toast(requireContext(),it.message?:requireActivity().getString(R.string.couldnt_get_order),false)
                 }
             }
         }
@@ -66,9 +84,18 @@ class DocumentDetailsFragment: Fragment() {
                     binding.textViewTotalAmount.text = it.data!!["price"]
                     binding.textViewTotalTax.text = it.data["tax"]
                 }
-                is Resource.Loading -> {
+                is Resource.Loading -> {}
+                is Resource.Error -> {
+                    toast(requireContext(),it.message?:requireActivity().getString(R.string.couldnt_get_order),false)
+                }
+            }
+        }
+        viewModel.statusCancelSale.observe(viewLifecycleOwner) {
+            when(it) {
+                is Resource.Success -> {
 
                 }
+                is Resource.Loading -> {}
                 is Resource.Error -> {
                     toast(requireContext(),it.message?:"Error Order!",false)
                 }

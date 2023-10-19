@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.domain.model.Orders
 import com.campuscoders.posterminalapp.domain.model.OrdersProducts
+import com.campuscoders.posterminalapp.domain.use_case.cancel_and_document.CancelSaleUseCase
 import com.campuscoders.posterminalapp.domain.use_case.cancel_and_document.FetchLatestSuccessfulSaleUseCase
 import com.campuscoders.posterminalapp.domain.use_case.cancel_and_document.FetchOrderByMaliIdUseCase
 import com.campuscoders.posterminalapp.domain.use_case.cancel_and_document.FetchOrderByReceiptNoUseCase
@@ -24,7 +25,8 @@ class BaseViewModel @Inject constructor (
     private val fetchOrderByMaliIdUseCase: FetchOrderByMaliIdUseCase,
     private val fetchOrderByTerminalIdUseCase: FetchOrderByTerminalIdUseCase,
     private val fetchLatestSuccessfulSaleUseCase: FetchLatestSuccessfulSaleUseCase,
-    private val fetchOrderProductsByOrderIdUseCase: FetchOrderProductsByOrderIdUseCase
+    private val fetchOrderProductsByOrderIdUseCase: FetchOrderProductsByOrderIdUseCase,
+    private val cancelSaleUseCase: CancelSaleUseCase
 ): ViewModel() {
 
     private var _statusOrderDetail = MutableLiveData<Resource<Orders>>()
@@ -34,6 +36,10 @@ class BaseViewModel @Inject constructor (
     private var _statusProductAndTaxPrice = MutableLiveData<Resource<HashMap<String,String>>>()
     val statusProductAndTaxPrice: LiveData<Resource<HashMap<String,String>>>
         get() = _statusProductAndTaxPrice
+
+    private var _statusCancelSale = MutableLiveData<Resource<Int>>()
+    val statusCancelSale: LiveData<Resource<Int>>
+        get() = _statusCancelSale
 
     fun querySale(searchType: String, searchKey: String, context: Context) {
         _statusOrderDetail.value = Resource.Loading(null)
@@ -94,6 +100,16 @@ class BaseViewModel @Inject constructor (
         }
         else {
             _statusProductAndTaxPrice.value = Resource.Error(null,ordersProductsList.message?:"Error")
+        }
+    }
+
+    fun cancelSale() {
+        _statusCancelSale.value = Resource.Loading(null)
+        viewModelScope.launch {
+            if (_statusOrderDetail.value is Resource.Success) {
+                val response = cancelSaleUseCase.executeCancelSale(_statusOrderDetail.value!!.data!!.orderId.toString())
+                _statusCancelSale.value = response
+            }
         }
     }
 }
