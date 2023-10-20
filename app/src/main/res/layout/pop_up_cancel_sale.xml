@@ -57,13 +57,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="₺75,00"
+                android:text="-"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/ımageViewCheckCost"
+                android:id="@+id/imageViewCheckCost"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_gravity="right"
@@ -80,6 +80,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/textViewCancelSale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="E-Belge İptal Edildi"
@@ -97,7 +98,7 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/ımageViewCheckProcess"
+                android:id="@+id/imageViewCheckProcess"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_gravity="end"
@@ -126,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="SAS485657"
+                android:text="-"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />

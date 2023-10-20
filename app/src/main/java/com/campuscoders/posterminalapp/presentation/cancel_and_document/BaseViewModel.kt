@@ -16,6 +16,7 @@ import com.campuscoders.posterminalapp.domain.use_case.cancel_and_document.Fetch
 import com.campuscoders.posterminalapp.domain.use_case.cancel_and_document.FetchOrderProductsByOrderIdUseCase
 import com.campuscoders.posterminalapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -106,6 +107,7 @@ class BaseViewModel @Inject constructor (
     fun cancelSale() {
         _statusCancelSale.value = Resource.Loading(null)
         viewModelScope.launch {
+            delay(2000)
             if (_statusOrderDetail.value is Resource.Success) {
                 val response = cancelSaleUseCase.executeCancelSale(_statusOrderDetail.value!!.data!!.orderId.toString())
                 _statusCancelSale.value = response
