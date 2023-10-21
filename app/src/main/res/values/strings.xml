@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PosTerminalApp</string>
+    <string name="app_name">Pos Terminal</string>
     <string name="dev">Dev</string>
     <string name="test">Test</string>
     <string name="custom">Custom</string>

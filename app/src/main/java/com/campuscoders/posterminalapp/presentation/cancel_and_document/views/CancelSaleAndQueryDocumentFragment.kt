@@ -73,6 +73,7 @@ class CancelSaleAndQueryDocumentFragment : Fragment() {
                 documentDetailsFragment.arguments = bundle
                 ftransaction?.let {
                     it.replace(R.id.fragmentContainerViewCancelSaleEDocument,documentDetailsFragment)
+                    it.addToBackStack(null)
                     it.commit()
                 }
             }, Constants.PROGRESS_BAR_DURATION.toLong())

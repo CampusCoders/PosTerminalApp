@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentDocumentDetailsBinding
@@ -59,7 +58,7 @@ class DocumentDetailsFragment: Fragment() {
 
         // Cancel Sale
         binding.buttonBackCancel.setOnClickListener {
-            // popback
+            ftransaction.popBackStack()
         }
         binding.buttonCancelSale.setOnClickListener {
             viewModel.cancelSale()
@@ -68,7 +67,7 @@ class DocumentDetailsFragment: Fragment() {
 
         // Query E-Document
         binding.buttonBack.setOnClickListener {
-            // popback
+            ftransaction.popBackStack()
         }
         binding.buttonShow.setOnClickListener {
 
@@ -135,7 +134,7 @@ class DocumentDetailsFragment: Fragment() {
 
         buttonOk.setOnClickListener {
             dialog.dismiss()
-            ftransaction.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            ftransaction.popBackStack()
         }
 
         viewModel.statusCancelSale.observe(viewLifecycleOwner) {
