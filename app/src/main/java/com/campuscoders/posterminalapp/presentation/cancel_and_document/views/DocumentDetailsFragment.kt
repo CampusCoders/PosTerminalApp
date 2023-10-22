@@ -19,6 +19,7 @@ import com.campuscoders.posterminalapp.utils.placeHolderProgressBar
 import com.campuscoders.posterminalapp.utils.show
 import com.campuscoders.posterminalapp.utils.toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputEditText
 
 class DocumentDetailsFragment: Fragment() {
 
@@ -70,10 +71,10 @@ class DocumentDetailsFragment: Fragment() {
             ftransaction.popBackStack()
         }
         binding.buttonShow.setOnClickListener {
-
+            toast(requireContext(),"Coming soon",false)
         }
         binding.buttonSend.setOnClickListener {
-            // show popup
+            showCustomerInfoPopUp()
         }
 
         observe()
@@ -157,6 +158,31 @@ class DocumentDetailsFragment: Fragment() {
                     imageViewCheckProcess.setImageDrawable(resources.getDrawable(R.drawable.checkerror))
                 }
             }
+        }
+
+        dialog.show()
+    }
+
+    private fun showCustomerInfoPopUp() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.pop_up_customer_info,null)
+        val dialog = MaterialAlertDialogBuilder(requireContext()).setView(dialogView).setCancelable(false).create()
+
+        val phoneNumber = dialogView.findViewById<TextInputEditText>(R.id.textInputEditTextPhone)
+        val email = dialogView.findViewById<TextInputEditText>(R.id.textInputEditTextEmail)
+        val buttonCancel = dialogView.findViewById<Button>(R.id.buttonCancel)
+        val buttonOk = dialogView.findViewById<Button>(R.id.buttonOk)
+
+        buttonOk.setOnClickListener {
+            if (phoneNumber.text.toString() == "" && email.text.toString() == "") {
+                toast(requireContext(),requireActivity().getString(R.string.customer_information),false)
+            } else {
+                dialog.dismiss()
+                ftransaction.popBackStack()
+            }
+        }
+
+        buttonCancel.setOnClickListener {
+            dialog.dismiss()
         }
 
         dialog.show()
