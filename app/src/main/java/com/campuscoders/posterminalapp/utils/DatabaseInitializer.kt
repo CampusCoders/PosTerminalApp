@@ -156,19 +156,15 @@ class DatabaseInitializer @Inject constructor(
                 "75","0","10","-","10","-","-",
                 "-")
         )
-        println("products init")
         saveAllProductsUseCase.executeSaveAllProducts(*arrayList)
     }
 
     suspend fun initializeCustomer() {
-        val response = saveCustomerUseCase.executeSaveCustomer(
+        saveCustomerUseCase.executeSaveCustomer(
             Customers(Constants.CUSTOMER_VKN_TCKN,Constants.CUSTOMER_COMPANY_NAME,Constants.CUSTOMER_FIRST_NAME,
                 Constants.CUSTOMER_LAST_NAME, Constants.CUSTOMER_PHONE_NUMBER, Constants.CUSTOMER_EMAIL, Constants.CUSTOMER_PROVINCE,
                 Constants.CUSTOMER_DISTRICT, Constants.CUSTOMER_TAX_OFFICE, Constants.CUSTOMER_ADDRESS)
         )
-        if (response is Resource.Success) {
-            println("Başarılı -> ${response.data}")
-        }
     }
 
     private fun getCategoryImageUris(context: Context, packageName: String): List<String> {

@@ -82,7 +82,6 @@ class LoginFragment : Fragment() {
             when (it) {
                 is Resource.Success -> {
                     binding.progressBarLogin.hide()
-                    toast(requireContext(), "SUCCESS! INSERT MAIN USER", false)
                 }
                 is Resource.Loading -> {
                     binding.progressBarLogin.show()
@@ -121,7 +120,6 @@ class LoginFragment : Fragment() {
             when (it) {
                 is Resource.Success -> {
                     binding.progressBarLogin.hide()
-                    toast(requireContext(), "SUCCESS! INSERT TERMINAL USER", false)
                 }
                 is Resource.Loading -> {
                     binding.progressBarLogin.show()

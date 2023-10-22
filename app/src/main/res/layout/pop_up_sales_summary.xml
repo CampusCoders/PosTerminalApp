@@ -67,7 +67,7 @@
                 android:layout_height="48dp"
                 android:layout_gravity="right"
                 android:layout_marginTop="-48dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
                 android:src="@drawable/check_circle" />
 
         </LinearLayout>
@@ -101,7 +101,7 @@
                 android:layout_height="48dp"
                 android:layout_gravity="right"
                 android:layout_marginTop="-48dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
                 android:src="@drawable/check_circle" />
 
         </LinearLayout>
@@ -157,7 +157,7 @@
                 android:layout_height="72dp"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:text="Tamam"
+                android:text="@string/ok"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="18sp"

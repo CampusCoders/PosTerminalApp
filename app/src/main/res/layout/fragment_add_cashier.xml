@@ -375,7 +375,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/background"
                     android:singleLine="false"
-                    android:text="İptal"
+                    android:text="@string/cancel"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     app:rippleColor="@color/white" />
@@ -389,7 +389,7 @@
                     android:layout_marginStart="24dp"
                     android:backgroundTint="@color/background"
                     android:layout_weight="1"
-                    android:text="Kaydet"
+                    android:text="@string/save"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     app:rippleColor="@color/white" />

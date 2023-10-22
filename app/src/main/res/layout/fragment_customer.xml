@@ -71,7 +71,7 @@
                         android:layout_gravity="center"
                         android:text="E-Arşiv Fatura"
                         android:textColor="@color/white"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                 </com.google.android.material.card.MaterialCardView>
@@ -96,7 +96,7 @@
                         android:layout_gravity="center"
                         android:text="E-Fatura"
                         android:textColor="@color/background"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                 </com.google.android.material.card.MaterialCardView>
@@ -344,7 +344,7 @@
                         android:layout_weight="1"
                         android:backgroundTint="@color/background"
                         android:singleLine="false"
-                        android:text="İptal"
+                        android:text="@string/cancel"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         app:rippleColor="@color/white" />

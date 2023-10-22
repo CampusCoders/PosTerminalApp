@@ -26,7 +26,6 @@ class ForgetPasswordViewModel @Inject constructor(
             when(response) {
                 is Resource.Success -> {
                     val cellPhoneNumberFromDb = response.data
-                    println("cellPhoneNumberFromDb -> $cellPhoneNumberFromDb ---  cellPhoneNumber -> $cellPhoneNumber")
                     cellPhoneNumberFromDb?.let {
                         if (it == cellPhoneNumber) {
                             _statusIsMatched.value = Resource.Success(true)

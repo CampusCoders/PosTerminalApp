@@ -43,12 +43,6 @@ class UpdateOrAddCategoryFragment: Fragment() {
 
         viewModel = ViewModelProvider(requireActivity())[UpdateOrAddCategoryViewModel::class.java]
 
-        if (arguments == null) {
-            println("NULL!!")
-        } else {
-            println("NOT NULL!!!")
-        }
-
         arguments?.let {
             val categoryId = it.getInt("category_or_product_id")
             if (categoryId != -1) {
@@ -80,7 +74,6 @@ class UpdateOrAddCategoryFragment: Fragment() {
         viewModel.statusFetchedCategory.observe(viewLifecycleOwner) {
             when(it) {
                 is Resource.Success -> {
-                    println("category success!")
                     it.data?.let {category ->
                         setCategoryInfos(category)
                     }
