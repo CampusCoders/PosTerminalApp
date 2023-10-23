@@ -21,13 +21,13 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textViewOrderStatusContent"
+        android:id="@+id/textViewOrderReceiptType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="36dp"
         android:layout_marginBottom="4dp"
-        android:text="Başarısız Sepet İptal"
+        android:text="E-Arşiv Fatura"
         android:textSize="12sp"
         android:textStyle="bold" />
 
