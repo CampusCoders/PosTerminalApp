@@ -78,4 +78,11 @@
     <string name="adapter_mali_id">Mali ID</string>
     <string name="adapter_terminal_id">Terminal ID</string>
     <string name="couldnt_get_order">Sipariş detayları getirilemedi</string>
+    <string name="adapter_all_result">Bütün Sonuçlar</string>
+    <string name="adapter_successful">Başarılı Satış</string>
+    <string name="adapter_basket_cancel">Sepet İptal</string>
+    <string name="adapter_cancel_sale">Satış İptal</string>
+    <string name="adapter_all_documents">Bütün Belgeler</string>
+    <string name="adapter_e_receipt">E-Fatura</string>
+    <string name="adapter_e_archive_receipt">E-Arşiv Fatura</string>
 </resources>
