@@ -37,4 +37,10 @@ interface OrdersDao {
 
     @Query("UPDATE Orders SET order_status = 'Sale Cancel' WHERE orderId = :orderId")
     suspend fun updateOrderStatusAsSaleCancel(orderId: String): Int
+
+    @Query("SELECT * FROM Orders " +
+            "WHERE (:orderStatus IS NULL OR order_status = :orderStatus) " +
+            "AND (:orderReceiptType IS NULL OR order_receipt_type = :orderReceiptType) " +
+            "AND (:orderDate IS NULL OR order_date = :orderDate)")
+    suspend fun queryDynamically(orderStatus: String?, orderReceiptType: String?, orderDate: String?): List<Orders>?
 }

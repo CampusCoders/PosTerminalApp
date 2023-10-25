@@ -1,14 +1,15 @@
 package com.campuscoders.posterminalapp.data.repository.locale
 
-import com.campuscoders.posterminalapp.data.locale.OrdersProductsDao
+import com.campuscoders.posterminalapp.data.locale.OrdersDao
 import com.campuscoders.posterminalapp.data.locale.TerminalUsersDao
-import com.campuscoders.posterminalapp.domain.model.OrdersProducts
+import com.campuscoders.posterminalapp.domain.model.Orders
 import com.campuscoders.posterminalapp.domain.model.TerminalUsers
 import com.campuscoders.posterminalapp.domain.repository.locale.CashierAndReportRepository
 import javax.inject.Inject
 
 class CashierAndReportRepositoryImpl @Inject constructor(
     private val terminalUsersDao: TerminalUsersDao,
+    private val ordersDao: OrdersDao
 ) : CashierAndReportRepository {
 
     override suspend fun deleteCashier(terminalId: Int): Int {
@@ -25,5 +26,9 @@ class CashierAndReportRepositoryImpl @Inject constructor(
 
     override suspend fun fetchTerminalUserById(terminalId: String): TerminalUsers? {
         return terminalUsersDao.queryTerminalUserById(terminalId)
+    }
+
+    override suspend fun fetchOrdersDynamically(orderStatus: String?, orderReceiptType: String?, orderDate: String?): List<Orders>? {
+        return ordersDao.queryDynamically(orderStatus, orderReceiptType, orderDate)
     }
 }
