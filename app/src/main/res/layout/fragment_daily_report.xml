@@ -52,92 +52,102 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topAppBar">
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout1"
+        <LinearLayout
+            android:id="@+id/linearLayoutCalculations"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-12dp"
-            android:padding="24dp">
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:text="Fatura"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:layout_margin="4dp"
+                android:orientation="vertical"
+                android:gravity="start">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fatura"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewQuantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4 Adet"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="KDV"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:layout_margin="4dp"
+                android:orientation="vertical"
+                android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="KDV"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewTotalTax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₺ 15,21"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:text="Toplam"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:layout_margin="4dp"
+                android:orientation="vertical"
+                android:gravity="end">
 
-            </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Toplam"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-40dp"
-            android:padding="24dp">
+                <TextView
+                    android:id="@+id/textViewTotalPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₺ 84,15"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textViewBill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:text="5 Adet"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/textViewKDV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="₺15,21"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textViewTotal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:text="₺84,00"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
+        </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/linearLayoutFilters"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-24dp"
+            android:padding="8dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -148,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:hint="Status"
+                android:hint="Durum"
                 android:textColorHint="@color/white"
                 app:boxStrokeColor="@android:color/transparent"
                 app:boxStrokeWidth="0dp"
@@ -162,12 +172,12 @@
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
                     android:completionThreshold="1"
+                    android:textColor="@color/white"
                     android:dropDownAnchor="@id/autoCompleteTextViewStatus"
                     android:dropDownHeight="wrap_content"
                     android:focusable="false"
                     android:inputType="none"
-                    android:popupBackground="@android:color/transparent"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -195,9 +205,9 @@
                     android:dropDownAnchor="@id/autoCompleteTextViewDocuments"
                     android:dropDownHeight="wrap_content"
                     android:focusable="false"
+                    android:textColor="@color/white"
                     android:inputType="none"
-                    android:popupBackground="@android:color/transparent"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -225,9 +235,9 @@
                     android:dropDownAnchor="@id/autoCompleteTextViewDay"
                     android:dropDownHeight="wrap_content"
                     android:focusable="false"
+                    android:textColor="@color/white"
                     android:inputType="none"
-                    android:popupBackground="@android:color/transparent"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -255,6 +265,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerViewDailyReport" />
+        app:layout_constraintTop_toTopOf="@id/recyclerViewDailyReport" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

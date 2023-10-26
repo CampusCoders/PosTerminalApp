@@ -7,7 +7,7 @@
     android:layout_margin="12dp"
     android:clickable="false"
     app:cardBackgroundColor="@color/white"
-    app:cardElevation="12dp"
+    app:cardElevation="8dp"
     app:strokeColor="@android:color/transparent">
 
     <TextView

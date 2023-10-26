@@ -85,10 +85,10 @@ class DailyReportFragment : Fragment() {
             }
         }
         viewModel.statusSumOfOrdersTax.observe(viewLifecycleOwner) {
-            binding.textViewKDV.text = it
+            //binding.textViewKDV.text = it
         }
         viewModel.statusSumOfOrdersPrice.observe(viewLifecycleOwner) {
-            binding.textViewTotal.text = it
+            //binding.textViewTotal.text = it
         }
     }
 
