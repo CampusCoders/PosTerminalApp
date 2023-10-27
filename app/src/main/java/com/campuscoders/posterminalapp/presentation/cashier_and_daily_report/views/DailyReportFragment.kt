@@ -73,6 +73,7 @@ class DailyReportFragment : Fragment() {
             when(it) {
                 is Resource.Success -> {
                     binding.progressBarDailyReport.hide()
+                    binding.textViewQuantity.text = it.data?.size.toString() + " Adet"
                     dailyReportAdapter.updateOrderList(it.data?: listOf())
                 }
                 is Resource.Loading -> {

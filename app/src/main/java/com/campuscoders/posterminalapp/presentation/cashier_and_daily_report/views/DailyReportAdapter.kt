@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.RecyclerItemDocumentBinding
 import com.campuscoders.posterminalapp.domain.model.Orders
 
@@ -28,7 +29,18 @@ class DailyReportAdapter: RecyclerView.Adapter<DailyReportAdapter.MyViewHolder>(
     inner class MyViewHolder(val binding: RecyclerItemDocumentBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Orders) {
             //binding.textViewOrderTotal.text
-            binding.textViewOrderStatus.text = item.orderStatus
+            binding.textViewOrderStatus.text = when(item.orderStatus) {
+                "Successful" -> {
+                    binding.root.context.getString(R.string.adapter_successful)
+                }
+                "Basket Cancel" -> {
+                    binding.root.context.getString(R.string.adapter_basket_cancel)
+                }
+                "Sale Cancel" -> {
+                    binding.root.context.getString(R.string.adapter_cancel_sale)
+                }
+                else -> ""
+            }
             binding.textViewOrderDate.text = item.orderDate
             binding.textViewOrderTime.text = item.orderTime
             binding.textViewOrderNo.text = item.orderReceiptNo

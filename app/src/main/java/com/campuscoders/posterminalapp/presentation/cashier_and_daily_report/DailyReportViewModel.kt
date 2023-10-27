@@ -34,13 +34,26 @@ class DailyReportViewModel @Inject constructor(
         _statusOrderList.value = Resource.Loading(null)
         _statusSumOfOrdersPrice.value = "-"
         _statusSumOfOrdersTax.value = "-"
+
         var status: String? = orderStatus
         var receiptType: String? = orderReceiptType
         var date: String? = orderDate
-        if (status == context.getString(R.string.adapter_all_result)) {
-            status = null
-        } else if (receiptType == context.getString(R.string.adapter_all_documents)) {
-            receiptType = null
+
+        if (status == context.getString(R.string.adapter_all_result)) status = null
+        else if (receiptType == context.getString(R.string.adapter_all_documents)) receiptType = null
+
+        status = when(status) {
+            context.getString(R.string.adapter_successful) -> {
+                "Successful"
+            }
+            context.getString(R.string.adapter_basket_cancel) -> {
+                "Basket Cancel"
+            }
+            context.getString(R.string.adapter_cancel_sale) -> {
+                "Sale Cancel"
+            }
+            null -> null
+            else -> ""
         }
         viewModelScope.launch {
             val response = fetchOrdersDynamicallyUseCase.executeFetchOrdersDynamically(status, receiptType, date)
