@@ -34,7 +34,7 @@ interface SaleRepository {
 
     suspend fun fetchOrderById(orderId: String): Orders?
 
-    suspend fun updateOrder(orderReceiptType: String, orderDate: String, orderTime: String, orderStatus: String, orderReceiptNo: String, orderId: String): Int
+    suspend fun updateOrder(orderReceiptType: String, orderDate: String, orderTime: String, orderStatus: String, orderReceiptNo: String, orderId: String, orderTotal: String, orderTotalTax: String): Int
 
     suspend fun saveCustomerToDatabase(customer: Customers): Long
 

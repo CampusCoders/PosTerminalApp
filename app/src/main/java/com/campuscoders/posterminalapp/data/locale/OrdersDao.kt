@@ -20,8 +20,11 @@ interface OrdersDao {
     @Query("SELECT * FROM Orders WHERE orderId = :orderId")
     suspend fun getOrderById(orderId: String): Orders?
 
-    @Query("UPDATE Orders SET order_receipt_type = :orderReceiptType, order_date = :orderDate, order_time = :orderTime, order_status = :orderStatus, order_receipt_no = :orderReceiptNo WHERE orderId = :orderId")
-    suspend fun updateOrder(orderReceiptType: String, orderDate: String, orderTime: String, orderStatus: String, orderReceiptNo: String, orderId: String): Int
+    @Query("UPDATE Orders SET order_receipt_type = :orderReceiptType, order_date = :orderDate, order_time = :orderTime, " +
+            "order_status = :orderStatus, order_receipt_no = :orderReceiptNo, order_total = :orderTotal, " +
+            "order_total_tax = :orderTotalTax WHERE orderId = :orderId")
+    suspend fun updateOrder(orderReceiptType: String, orderDate: String, orderTime: String, orderStatus: String,
+                            orderReceiptNo: String, orderId: String, orderTotal: String, orderTotalTax: String): Int
 
     @Query("SELECT * FROM Orders WHERE order_receipt_no = :orderReceiptNo")
     suspend fun getOrderByReceiptNo(orderReceiptNo: String): Orders?

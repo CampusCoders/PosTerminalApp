@@ -68,6 +68,8 @@ class CustomerFragment : Fragment() {
             val orderId = ShoppingCartItems.getOrderId()
             val date = TimeAndDate.getLocalDate(Constants.DATE_FORMAT)
             val time = TimeAndDate.getTime()
+            val orderTotal = ShoppingCartItems.getTotalPrice()
+            val orderTotalTax = ShoppingCartItems.getTotalTax()
             ShoppingCartItems.setOrderNo(orderReceiptNo)
             ShoppingCartItems.setDate(date)
             ShoppingCartItems.setTime(time)
@@ -77,7 +79,9 @@ class CustomerFragment : Fragment() {
                 time,
                 "Successful",
                 orderReceiptNo,
-                orderId
+                orderId,
+                orderTotal,
+                orderTotalTax
             )
         }
 
@@ -87,6 +91,8 @@ class CustomerFragment : Fragment() {
             val orderId = ShoppingCartItems.getOrderId()
             val date = TimeAndDate.getLocalDate(Constants.DATE_FORMAT)
             val time = TimeAndDate.getTime()
+            val orderTotal = ShoppingCartItems.getTotalPrice()
+            val orderTotalTax = ShoppingCartItems.getTotalTax()
             ShoppingCartItems.setDate(date)
             ShoppingCartItems.setTime(time)
             ShoppingCartItems.setOrderNo(orderReceiptNo)
@@ -96,7 +102,9 @@ class CustomerFragment : Fragment() {
                 time,
                 "Basket Cancel",
                 orderReceiptNo,
-                orderId
+                orderId,
+                orderTotal,
+                orderTotalTax
             )
             toast(requireContext(), requireActivity().getString(R.string.order_cancel), false)
             requireActivity().finish()
@@ -152,7 +160,7 @@ class CustomerFragment : Fragment() {
         binding.AutoCompleteTextViewDistrict.setText(Constants.CUSTOMER_DISTRICT)
         binding.textInputEditTextAddress.setText(Constants.CUSTOMER_ADDRESS)
         binding.textInputEditTextPaymentType.setText(ShoppingCartItems.getPaymentType())
-        binding.textInputEditTextTotal.setText(ShoppingCartItems.getproductTotalPrice())
+        binding.textInputEditTextTotal.setText(ShoppingCartItems.getTotalPrice())
     }
 
     override fun onDestroy() {

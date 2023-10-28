@@ -96,12 +96,12 @@ class ShoppingCartViewModel @Inject constructor(
 
         val empty = ""
         val customSharedPreferences = CustomSharedPreferences(context)
-        val mainUserInfos = customSharedPreferences.getMainUserLogin()
+        val mainUserInfo = customSharedPreferences.getMainUserLogin()
 
         viewModelScope.launch {
             val orderId = saveOrderUseCase.executeSaveOrder(
-                Orders(customerId,empty, paymentType, empty, empty, empty, empty, Constants.ORDER_MALI_ID,mainUserInfos["terminal_id"].toString(),
-                    mainUserInfos["uye_isyeri_no"].toString(), Constants.ORDER_ETTN, Constants.ORDER_NO_BACKEND))
+                Orders(customerId,empty, paymentType, empty, empty, empty, empty, Constants.ORDER_MALI_ID,mainUserInfo["terminal_id"].toString(),
+                    mainUserInfo["uye_isyeri_no"].toString(), Constants.ORDER_ETTN, Constants.ORDER_NO_BACKEND, empty, empty))
             if (orderId is Resource.Success) {
                 ShoppingCartItems.setOrderId(orderId.data.toString())
                 saveOrdersProducts(orderId.data.toString())

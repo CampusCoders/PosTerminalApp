@@ -18,11 +18,11 @@ class ShoppingCartItems {
         fun setShoppingCartList(newList: ArrayList<ShoppingCart>) { shoppingCartList = newList }
         fun getShoppingCartList() = shoppingCartList
 
-        fun setproductTotalPrice(totalPrice: String) { productTotalPrice = totalPrice }
-        fun getproductTotalPrice() = productTotalPrice
+        fun setTotalPrice(totalPrice: String) { productTotalPrice = totalPrice }
+        fun getTotalPrice() = productTotalPrice
 
-        fun setproductTotalKdv(totalKdv: String) { productTotalKdv = totalKdv }
-        fun getproductTotalKdv() = productTotalKdv
+        fun setTotalTax(totalKdv: String) { productTotalKdv = totalKdv }
+        fun getTotalTax() = productTotalKdv
 
         fun setCustomerName(customerName: String) { this.customerName = customerName }
         fun getCustomerName() = customerName

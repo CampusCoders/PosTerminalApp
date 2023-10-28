@@ -19,10 +19,10 @@ class CustomerViewModel @Inject constructor(
     val statusUpdateOrder: LiveData<Resource<Boolean>>
         get() = _statusUpdateOrder
 
-    fun updateOrder(orderReceiptType: String, orderDate: String, orderTime: String, orderStatus: String, orderReceiptNo: String, orderId: String) {
+    fun updateOrder(orderReceiptType: String, orderDate: String, orderTime: String, orderStatus: String, orderReceiptNo: String, orderId: String, orderTotal: String, orderTotalTax: String) {
         _statusUpdateOrder.value = Resource.Loading(null)
         viewModelScope.launch {
-            val response = updateOrderUseCase.executeUpdateOrder(orderReceiptType, orderDate, orderTime, orderStatus, orderReceiptNo, orderId)
+            val response = updateOrderUseCase.executeUpdateOrder(orderReceiptType, orderDate, orderTime, orderStatus, orderReceiptNo, orderId, orderTotal, orderTotalTax)
             _statusUpdateOrder.value = response
         }
     }

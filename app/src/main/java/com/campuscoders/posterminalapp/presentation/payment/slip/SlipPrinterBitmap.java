@@ -30,8 +30,8 @@ public class SlipPrinterBitmap {
     public void generateSlip() {
 
         shoppingCartList = ShoppingCartItems.Companion.getShoppingCartList();
-        String totalPrice = ShoppingCartItems.Companion.getproductTotalPrice();
-        String totalKdv = ShoppingCartItems.Companion.getproductTotalKdv();
+        String totalPrice = ShoppingCartItems.Companion.getTotalPrice();
+        String totalKdv = ShoppingCartItems.Companion.getTotalTax();
         String customerName = ShoppingCartItems.Companion.getCustomerName();
         String orderNo = ShoppingCartItems.Companion.getOrderNo();
         String date = ShoppingCartItems.Companion.getDate();

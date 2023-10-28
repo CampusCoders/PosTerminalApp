@@ -59,7 +59,7 @@ public class NFCType extends Activity {
         TextView totalPrice = dialogView.findViewById(R.id.textViewSaleTotal);
         TextView orderNo = dialogView.findViewById(R.id.textViewOrderNo);
 
-        totalPrice.setText(ShoppingCartItems.Companion.getproductTotalPrice());
+        totalPrice.setText(ShoppingCartItems.Companion.getTotalPrice());
         orderNo.setText(ShoppingCartItems.Companion.getOrderNo());
 
         buttonOk.setOnClickListener(new View.OnClickListener() {
