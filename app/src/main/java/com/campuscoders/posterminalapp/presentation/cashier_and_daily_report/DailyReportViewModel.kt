@@ -30,7 +30,7 @@ class DailyReportViewModel @Inject constructor(
         var date: String? = orderDate
 
         if (status == context.getString(R.string.adapter_all_result)) status = null
-        else if (receiptType == context.getString(R.string.adapter_all_documents)) receiptType = null
+        if (receiptType == context.getString(R.string.adapter_all_documents)) receiptType = null
 
         status = when(status) {
             context.getString(R.string.adapter_successful) -> {
