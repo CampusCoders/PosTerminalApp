@@ -171,8 +171,8 @@ class ShoppingCartFragment : Fragment() {
         totalKdv += totalKdvCent / 100
         totalKdvCent %= 100
 
-        ShoppingCartItems.setTotalPrice("₺$totalPrice,${totalPriceCent.toCent()}")
-        ShoppingCartItems.setTotalTax("₺$totalKdv,${totalKdvCent.toCent()}")
+        ShoppingCartItems.setTotalPrice("$totalPrice,${totalPriceCent.toCent()}")
+        ShoppingCartItems.setTotalTax("$totalKdv,${totalKdvCent.toCent()}")
 
         binding.textViewSumCost.text = "₺$totalPrice,${totalPriceCent.toCent()}"
         binding.textViewKdvCost.text = "₺$totalKdv,${totalKdvCent.toCent()}"

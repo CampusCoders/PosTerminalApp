@@ -18,22 +18,12 @@ class DailyReportViewModel @Inject constructor(
     private val fetchOrdersDynamicallyUseCase: FetchOrdersDynamicallyUseCase
 ): ViewModel() {
 
-    private var _statusSumOfOrdersPrice = MutableLiveData<String>()
-    val statusSumOfOrdersPrice: LiveData<String>
-        get() = _statusSumOfOrdersPrice
-
-    private var _statusSumOfOrdersTax = MutableLiveData<String>()
-    val statusSumOfOrdersTax: LiveData<String>
-        get() = _statusSumOfOrdersPrice
-
     private var _statusOrderList = MutableLiveData<Resource<List<Orders>>>()
     val statusOrderList: LiveData<Resource<List<Orders>>>
         get() = _statusOrderList
 
     fun fetchOrders(orderStatus: String?, orderReceiptType: String?, orderDate: String?, context: Context) {
         _statusOrderList.value = Resource.Loading(null)
-        _statusSumOfOrdersPrice.value = "-"
-        _statusSumOfOrdersTax.value = "-"
 
         var status: String? = orderStatus
         var receiptType: String? = orderReceiptType

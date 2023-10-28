@@ -10,10 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentDailyReportBinding
+import com.campuscoders.posterminalapp.domain.model.Orders
 import com.campuscoders.posterminalapp.presentation.cashier_and_daily_report.DailyReportViewModel
 import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.hide
 import com.campuscoders.posterminalapp.utils.show
+import com.campuscoders.posterminalapp.utils.toCent
 import com.campuscoders.posterminalapp.utils.toast
 
 class DailyReportFragment : Fragment() {
@@ -74,6 +76,7 @@ class DailyReportFragment : Fragment() {
                 is Resource.Success -> {
                     binding.progressBarDailyReport.hide()
                     binding.textViewQuantity.text = it.data?.size.toString() + " Adet"
+                    setCalculations(it.data?: listOf())
                     dailyReportAdapter.updateOrderList(it.data?: listOf())
                 }
                 is Resource.Loading -> {
@@ -85,12 +88,29 @@ class DailyReportFragment : Fragment() {
                 }
             }
         }
-        viewModel.statusSumOfOrdersTax.observe(viewLifecycleOwner) {
-            //binding.textViewKDV.text = it
+    }
+
+    private fun setCalculations(list: List<Orders>) {
+        var totalPrice = 0
+        var totalPriceCent = 0
+        var totalTax = 0
+        var totalTaxCent = 0
+
+        for (i in list) {
+            val splittedTotal = i.orderTotal?.split(",")
+            val splittedTotalTax = i.orderTotalTax?.split(",")
+            totalPrice += splittedTotal!![0].toInt()
+            totalPriceCent += splittedTotal[1].toInt()
+            totalTax += splittedTotalTax!![0].toInt()
+            totalTaxCent += splittedTotalTax[1].toInt()
         }
-        viewModel.statusSumOfOrdersPrice.observe(viewLifecycleOwner) {
-            //binding.textViewTotal.text = it
-        }
+        totalPrice += totalPriceCent / 100
+        totalPriceCent %= 100
+        totalTax += totalTaxCent / 100
+        totalTaxCent %= 100
+
+        binding.textViewTotalPrice.text = "₺$totalPrice,${totalPriceCent.toCent()}"
+        binding.textViewTotalTax.text = "₺$totalTax,${totalTaxCent.toCent()}"
     }
 
     override fun onDestroy() {

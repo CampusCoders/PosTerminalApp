@@ -28,7 +28,7 @@ class DailyReportAdapter: RecyclerView.Adapter<DailyReportAdapter.MyViewHolder>(
 
     inner class MyViewHolder(val binding: RecyclerItemDocumentBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Orders) {
-            binding.textViewOrderTotal.text = item.orderTotal
+            binding.textViewOrderTotal.text = "₺${item.orderTotal}"
             binding.textViewOrderStatus.text = when(item.orderStatus) {
                 "Successful" -> {
                     binding.root.context.getString(R.string.adapter_successful)

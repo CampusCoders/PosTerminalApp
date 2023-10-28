@@ -100,9 +100,9 @@ public class SlipPrinterBitmap {
 
             writer.write(Constants.ORTALA + Constants.BORDER);
             writer.write("\n");
-            writer.write(Constants.SAGA_YASLA + "" + Constants.FONTTOTALANDKDV + "TOPKDV: " + totalKdv);
+            writer.write(Constants.SAGA_YASLA + "" + Constants.FONTTOTALANDKDV + "TOPKDV: ₺" + totalKdv);
             writer.write("\n");
-            writer.write(Constants.SAGA_YASLA + "" + Constants.FONTTOTALANDKDV + "TOPLAM: " + totalPrice);
+            writer.write(Constants.SAGA_YASLA + "" + Constants.FONTTOTALANDKDV + "TOPLAM: ₺" + totalPrice);
             writer.write("\n");
             writer.write(Constants.ORTALA + Constants.BORDER);
             writer.write("\n");

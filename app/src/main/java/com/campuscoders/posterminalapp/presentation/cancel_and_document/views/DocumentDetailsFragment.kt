@@ -97,8 +97,8 @@ class DocumentDetailsFragment: Fragment() {
         viewModel.statusProductAndTaxPrice.observe(viewLifecycleOwner) {
             when(it) {
                 is Resource.Success -> {
-                    binding.textViewTotalAmount.text = it.data!!["price"]
-                    binding.textViewTotalTax.text = it.data["tax"]
+                    binding.textViewTotalAmount.text = "₺${it.data!!["price"]}"
+                    binding.textViewTotalTax.text = "₺${it.data["tax"]}"
                     cost = it.data["price"].toString()
                 }
                 is Resource.Loading -> {}

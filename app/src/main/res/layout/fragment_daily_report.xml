@@ -80,7 +80,7 @@
                     android:id="@+id/textViewQuantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4 Adet"
+                    android:text="     -"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -107,7 +107,7 @@
                     android:id="@+id/textViewTotalTax"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="₺ 15,21"
+                    android:text="-"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -134,7 +134,7 @@
                     android:id="@+id/textViewTotalPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="₺ 84,15"
+                    android:text="-     "
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
