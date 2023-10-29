@@ -65,11 +65,11 @@ https://github.com/CampusCoders/PosTerminalApp/assets/78374444/ddb5e77a-9ba4-4a9
 
 You can access the figma design [here](https://www.figma.com/file/bBP1Pn46TUZsndBbc3qRub/PosTerminalApp).
 
-![app](https://github.com/CampusCoders/PosTerminalApp/assets/78374444/b621ed53-52e0-49b4-b07c-dcfc3f006feb)
+![posterminalapp](https://github.com/CampusCoders/PosTerminalApp/assets/78374444/011839cf-50c4-42d5-9e88-7a3ede999cbb)
 
 ## Database Schema
 
-![image](https://github.com/CampusCoders/PosTerminalApp/assets/78374444/e0a8ec5c-ea47-41f1-a5c0-e119df9d1221)
+![DatabaseSchema)](https://github.com/CampusCoders/PosTerminalApp/assets/78374444/5196c40e-d868-4723-8d41-738dac2221b1)
 
 ## Sample Receipts
 
