@@ -22,4 +22,8 @@ class EditRepositoryImpl @Inject constructor(
     override suspend fun fetchCategoryById(categoryId: Int): Categories? {
         return categoriesDao.getCategoryById(categoryId)
     }
+
+    override suspend fun deleteProductByCategoryId(categoryId: Int): Int {
+        return productsDao.deleteProductByCategoryId(categoryId)
+    }
 }

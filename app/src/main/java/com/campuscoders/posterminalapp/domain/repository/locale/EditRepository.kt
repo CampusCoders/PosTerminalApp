@@ -9,4 +9,6 @@ interface EditRepository {
     suspend fun deleteProductById(productId: Int): Int
 
     suspend fun fetchCategoryById(categoryId: Int): Categories?
+
+    suspend fun deleteProductByCategoryId(categoryId: Int): Int
 }

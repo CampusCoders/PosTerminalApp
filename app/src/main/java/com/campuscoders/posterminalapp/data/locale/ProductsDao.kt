@@ -28,4 +28,7 @@ interface ProductsDao {
 
     @Query("SELECT * FROM Products WHERE product_barcode = :productBarcode")
     suspend fun queryProductByBarcode(productBarcode: String): Products?
+
+    @Query("DELETE FROM Products WHERE product_category_id = :categoryId")
+    suspend fun deleteProductByCategoryId(categoryId: Int): Int
 }
