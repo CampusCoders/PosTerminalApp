@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.campuscoders.posterminalapp.domain.model.Categories
 import com.campuscoders.posterminalapp.domain.use_case.edit.DeleteCategoryByIdUseCase
+import com.campuscoders.posterminalapp.domain.use_case.edit.DeleteProductByCategoryIdUseCase
 import com.campuscoders.posterminalapp.domain.use_case.sale.FetchAllCategoriesUseCase
 import com.campuscoders.posterminalapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class EditCategoryViewModel @Inject constructor(
     private val fetchAllCategoriesUseCase: FetchAllCategoriesUseCase,
-    private val deleteCategoryByIdUseCase: DeleteCategoryByIdUseCase
+    private val deleteCategoryByIdUseCase: DeleteCategoryByIdUseCase,
+    private val deleteProductByCategoryIdUseCase: DeleteProductByCategoryIdUseCase
 ): ViewModel() {
 
     private var _statusCategoriesList = MutableLiveData<Resource<List<Categories>>>()
@@ -41,8 +43,13 @@ class EditCategoryViewModel @Inject constructor(
     fun deleteCategory(categoryId: Int) {
         _statusDeleteCategory.value = Resource.Loading(null)
         viewModelScope.launch {
-            val response = deleteCategoryByIdUseCase.executeDeleteCategoryById(categoryId)
-            _statusDeleteCategory.value = response
+            val responseFromDeleteCategory = deleteCategoryByIdUseCase.executeDeleteCategoryById(categoryId)
+            if (responseFromDeleteCategory is Resource.Success) {
+                val responseFromDeleteProduct = deleteProductByCategoryIdUseCase.executeDeleteProductByCategoryId(categoryId)
+                _statusDeleteCategory.value = responseFromDeleteProduct
+            } else if (responseFromDeleteCategory is Resource.Error) {
+                _statusDeleteCategory.value = responseFromDeleteCategory
+            }
         }
     }
 }

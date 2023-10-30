@@ -28,11 +28,7 @@ class AddCashierFragment : Fragment() {
 
     private var getTerminalIdControl = true
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentAddCashierBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -47,6 +43,7 @@ class AddCashierFragment : Fragment() {
             val terminalId = it.getInt("terminal_id")
             viewModel.getTerminalUser(terminalId.toString())
             getTerminalIdControl = false
+            binding.buttonSave.text = "Güncelle"
         }
 
         if (getTerminalIdControl) {
@@ -116,26 +113,23 @@ class AddCashierFragment : Fragment() {
         val cashierPassword = binding.textInputEditTextPassword.text.toString()
         val cashierPasswordAgain = binding.textInputEditTextPasswordAgain.text.toString()
 
-        if (cashierNameSurname == "" || cashierPassword == "" || cashierPasswordAgain == "") {
+        return if (cashierNameSurname == "" || cashierPassword == "" || cashierPasswordAgain == "") {
             toast(requireContext(), requireActivity().getString(R.string.empty_fields), true)
-            return false
+            false
         } else {
-            return true
+            true
         }
     }
 
     private fun areThePasswordsMatching(): Boolean {
-
         val cashierPassword = binding.textInputEditTextPassword.text.toString()
         val cashierPasswordAgain = binding.textInputEditTextPasswordAgain.text.toString()
-
-        if (cashierPassword != cashierPasswordAgain) {
+        return if (cashierPassword != cashierPasswordAgain) {
             toast(requireContext(), "Parolalar Eşleşmiyor", true)
-            return false
+            false
         } else {
-            return true
+            true
         }
-
     }
 
     private fun observer() {
@@ -147,11 +141,9 @@ class AddCashierFragment : Fragment() {
                     }
                     viewModel.resetFetchedTerminalUser()
                 }
-
                 is Resource.Loading -> {
                     // loading popup
                 }
-
                 is Resource.Error -> {
                     toast(requireContext(), it.message ?: "Error!", false)
                 }
@@ -168,11 +160,9 @@ class AddCashierFragment : Fragment() {
                     )
                     viewModel.resetSaveTerminalUser()
                 }
-
                 is Resource.Loading -> {
                     // loading popup
                 }
-
                 is Resource.Error -> {
                     toast(requireContext(), it.message ?: "Error!", false)
                 }
@@ -185,11 +175,9 @@ class AddCashierFragment : Fragment() {
                         binding.textInputEditTextCashierNo.setText("T0000${terminalId + 1}")
                     }
                 }
-
                 is Resource.Loading -> {
                     // loading popup
                 }
-
                 is Resource.Error -> {
                     toast(requireContext(), it.message ?: "Error!", false)
                 }
