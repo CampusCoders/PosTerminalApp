@@ -3,6 +3,7 @@ package com.campuscoders.posterminalapp.data.locale
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.campuscoders.posterminalapp.domain.model.TerminalUsers
 
 @Dao
@@ -33,4 +34,7 @@ interface TerminalUsersDao {
 
     @Query("SELECT * FROM TerminalUsers WHERE terminalUserId = :terminalId")
     suspend fun queryTerminalUserById(terminalId: String): TerminalUsers?
+
+    @Update
+    suspend fun updateTerminalUser(terminalUser: TerminalUsers): Int
 }

@@ -55,28 +55,30 @@ class CancelSaleAndQueryDocumentFragment : Fragment() {
         }
 
         binding.buttonQuerySale.setOnClickListener {
-            context?.showProgressDialog(Constants.QUERY_SALE)
-            Handler(Looper.getMainLooper()).postDelayed({
+            if (binding.textInputEditTextValue.text.toString() != "") {
+                context?.showProgressDialog(Constants.QUERY_SALE)
+                Handler(Looper.getMainLooper()).postDelayed({
 
-                val searchType = binding.textInputLayoutSearchType.editText?.text.toString()
-                val searchKey = binding.textInputLayoutValue.editText?.text.toString()
+                    val searchType = binding.textInputLayoutSearchType.editText?.text.toString()
+                    val searchKey = binding.textInputLayoutValue.editText?.text.toString()
 
-                viewModel.querySale(searchType,searchKey,requireContext())
+                    viewModel.querySale(searchType,searchKey,requireContext())
 
-                val documentDetailsFragment = DocumentDetailsFragment()
-                val bundle = Bundle()
-                if (from == "cancel_sale") {
-                    bundle.putString("from","cancel_sale")
-                } else {
-                    bundle.putString("from","query_document")
-                }
-                documentDetailsFragment.arguments = bundle
-                ftransaction?.let {
-                    it.replace(R.id.fragmentContainerViewCancelSaleEDocument,documentDetailsFragment)
-                    it.addToBackStack(null)
-                    it.commit()
-                }
-            }, Constants.PROGRESS_BAR_DURATION.toLong())
+                    val documentDetailsFragment = DocumentDetailsFragment()
+                    val bundle = Bundle()
+                    if (from == "cancel_sale") {
+                        bundle.putString("from","cancel_sale")
+                    } else {
+                        bundle.putString("from","query_document")
+                    }
+                    documentDetailsFragment.arguments = bundle
+                    ftransaction?.let {
+                        it.replace(R.id.fragmentContainerViewCancelSaleEDocument,documentDetailsFragment)
+                        it.addToBackStack(null)
+                        it.commit()
+                    }
+                }, Constants.PROGRESS_BAR_DURATION.toLong())
+            } else toast(requireContext(),"Gerekli alanı doldurunuz.",false)
         }
 
         binding.buttonFetchLastSuccess.setOnClickListener {

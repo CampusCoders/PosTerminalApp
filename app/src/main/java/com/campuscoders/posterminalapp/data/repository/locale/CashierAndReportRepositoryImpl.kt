@@ -31,4 +31,8 @@ class CashierAndReportRepositoryImpl @Inject constructor(
     override suspend fun fetchOrdersDynamically(orderStatus: String?, orderReceiptType: String?, orderDate: String?): List<Orders>? {
         return ordersDao.queryDynamically(orderStatus, orderReceiptType, orderDate)
     }
+
+    override suspend fun updateTerminalUser(terminalUsers: TerminalUsers): Int {
+        return terminalUsersDao.updateTerminalUser(terminalUsers)
+    }
 }
