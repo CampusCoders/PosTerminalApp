@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.campuscoders.posterminalapp.domain.model.TerminalUsers
 import com.campuscoders.posterminalapp.domain.use_case.cashier_and_report.FetchLastTerminalUserIdUseCase
 import com.campuscoders.posterminalapp.domain.use_case.cashier_and_report.FetchTerminalUserByIdUseCase
+import com.campuscoders.posterminalapp.domain.use_case.cashier_and_report.UpdateCashierUseCase
 import com.campuscoders.posterminalapp.domain.use_case.login.SaveTerminalUserUseCase
 import com.campuscoders.posterminalapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +18,8 @@ import javax.inject.Inject
 class AddCashierViewModel @Inject constructor(
     private val fetchTerminalUserByIdUseCase: FetchTerminalUserByIdUseCase,
     private val saveTerminalUserUseCase: SaveTerminalUserUseCase,
-    private val fetchLastTerminalUserIdUseCase: FetchLastTerminalUserIdUseCase
+    private val fetchLastTerminalUserIdUseCase: FetchLastTerminalUserIdUseCase,
+    private val updateCashierUseCase: UpdateCashierUseCase
 ): ViewModel() {
 
     private var _statusFetchedTerminalUser = MutableLiveData<Resource<TerminalUsers>>()
@@ -53,6 +55,14 @@ class AddCashierViewModel @Inject constructor(
         viewModelScope.launch {
             val response = fetchLastTerminalUserIdUseCase.executeFetchLastTerminalUserId()
             _statusLastTerminalUserId.value = response
+        }
+    }
+
+    fun updateTerminalUser(terminalUser: TerminalUsers) {
+        _statusSaveTerminalUser.value = Resource.Loading(null)
+        viewModelScope.launch {
+            val response = updateCashierUseCase.executeUpdateCashier(terminalUser)
+            _statusSaveTerminalUser.value = response
         }
     }
 

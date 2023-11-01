@@ -28,6 +28,8 @@ class AddCashierFragment : Fragment() {
 
     private var getTerminalIdControl = true
 
+    private lateinit var terminalUserFromDb: TerminalUsers
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentAddCashierBinding.inflate(inflater, container, false)
         return binding.root
@@ -55,7 +57,8 @@ class AddCashierFragment : Fragment() {
         }
         binding.buttonSave.setOnClickListener {
             if (areTheFieldsNotEmpty() && areThePasswordsMatching()) {
-                viewModel.saveTerminalUser(getTerminalUser())
+                if (!getTerminalIdControl) viewModel.updateTerminalUser(getUpdatedTerminalUser())
+                else viewModel.saveTerminalUser(getTerminalUser())
             }
         }
 
@@ -88,21 +91,46 @@ class AddCashierFragment : Fragment() {
         )
     }
 
+    private fun getUpdatedTerminalUser(): TerminalUsers {
+        val customSharedPreferences = CustomSharedPreferences(requireContext())
+        val mainUserInfos = customSharedPreferences.getMainUserLogin()
+        return terminalUserFromDb.apply {
+            terminalUserTerminalId = binding.textInputEditTextCashierNo.text.toString()
+            terminalUserVknTckn = mainUserInfos["vkn_tckn"].toString()
+            terminalUserUyeIsyeriNo = mainUserInfos["uye_isyeri_no"].toString()
+            terminalUserFullName = binding.textInputEditTextCashierNameSurname.text.toString()
+            terminalUserPassword = binding.textInputEditTextPassword.text.toString()
+            terminalUserDate = TimeAndDate.getLocalDate(Constants.DATE_FORMAT)
+            terminalUserTime = TimeAndDate.getTime()
+            terminalUserIptalIade = binding.switchIptalIade.isChecked
+            terminalUserTahsilat = binding.switchTahsilat.isChecked
+            terminalUserKasiyerGoruntuleme = binding.switchKasiyerGoruntuleme.isChecked
+            terminalUserKasiyerEklemeDuzenleme = binding.switchKasiyerEklemeDuzenleme.isChecked
+            terminalUserKasiyerSilme = binding.switchKasiyerSilme.isChecked
+            terminalUserUrunGoruntuleme = binding.switchUrunGoruntuleme.isChecked
+            terminalUserUrunEklemeDuzenleme = binding.switchUrunEklemeDuzenleme.isChecked
+            terminalUserUrunSilme = binding.switchUrunSilme.isChecked
+            terminalUserTumRaporlariGoruntule = binding.switchTumRaporlariGoruntuleme.isChecked
+            terminalUserRaporKaydetGonder = binding.switchRaporKaydetGonder.isChecked
+            terminalUserPosYonetimi = binding.switchPosYonetimi.isChecked
+            terminalUserAdmin = binding.switchAdmin.isChecked
+        }
+    }
+
     private fun setTerminalUser(terminalUsers: TerminalUsers) {
         binding.textInputEditTextCashierNo.setText(terminalUsers.terminalUserTerminalId)
         binding.textInputEditTextCashierNameSurname.setText(terminalUsers.terminalUserFullName)
+        binding.textInputEditTextPassword.setText(terminalUsers.terminalUserPassword)
+        binding.textInputEditTextPasswordAgain.setText(terminalUsers.terminalUserPassword)
         binding.switchIptalIade.isChecked = terminalUsers.terminalUserIptalIade!!
         binding.switchTahsilat.isChecked = terminalUsers.terminalUserTahsilat!!
         binding.switchKasiyerGoruntuleme.isChecked = terminalUsers.terminalUserKasiyerGoruntuleme!!
-        binding.switchKasiyerEklemeDuzenleme.isChecked =
-            terminalUsers.terminalUserKasiyerEklemeDuzenleme!!
+        binding.switchKasiyerEklemeDuzenleme.isChecked = terminalUsers.terminalUserKasiyerEklemeDuzenleme!!
         binding.switchKasiyerSilme.isChecked = terminalUsers.terminalUserKasiyerSilme!!
         binding.switchUrunGoruntuleme.isChecked = terminalUsers.terminalUserUrunGoruntuleme!!
-        binding.switchUrunEklemeDuzenleme.isChecked =
-            terminalUsers.terminalUserUrunEklemeDuzenleme!!
+        binding.switchUrunEklemeDuzenleme.isChecked = terminalUsers.terminalUserUrunEklemeDuzenleme!!
         binding.switchUrunSilme.isChecked = terminalUsers.terminalUserUrunSilme!!
-        binding.switchTumRaporlariGoruntuleme.isChecked =
-            terminalUsers.terminalUserTumRaporlariGoruntule!!
+        binding.switchTumRaporlariGoruntuleme.isChecked = terminalUsers.terminalUserTumRaporlariGoruntule!!
         binding.switchRaporKaydetGonder.isChecked = terminalUsers.terminalUserRaporKaydetGonder!!
         binding.switchPosYonetimi.isChecked = terminalUsers.terminalUserPosYonetimi!!
         binding.switchAdmin.isChecked = terminalUsers.terminalUserAdmin!!
@@ -138,6 +166,7 @@ class AddCashierFragment : Fragment() {
                 is Resource.Success -> {
                     it.data?.let { terminalUser ->
                         setTerminalUser(terminalUser)
+                        terminalUserFromDb = terminalUser
                     }
                     viewModel.resetFetchedTerminalUser()
                 }

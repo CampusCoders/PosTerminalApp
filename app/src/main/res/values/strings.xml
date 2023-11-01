@@ -69,7 +69,7 @@
     <string name="order_cancel">Sipariş iptal edildi</string>
     <string name="loading">Yükleniyor...</string>
     <string name="add_cashier">Kasiyer Ekle</string>
-    <string name="success_add_cashier">Kasiyer başarıyla eklendi.</string>
+    <string name="success_add_cashier">İşlem başarıyla gerçekleştirildi.</string>
     <string name="dialog_empty">Sepeti Boşalt</string>
     <string name="dialog_content_empty">Bu işlemi gerçekleştirmek istediğinizden emin misiniz?</string>
     <string name="email">E-Posta</string>
