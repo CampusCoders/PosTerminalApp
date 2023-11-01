@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "706775621937",
+    "project_id": "posterminalapp",
+    "storage_bucket": "posterminalapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706775621937:android:6b54340f03e0ed6bddd010",
+        "android_client_info": {
+          "package_name": "com.campuscoders.posterminalapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF-A0v4pTJo4y35bmbZiKdurWu9FiFAX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
