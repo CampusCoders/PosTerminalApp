@@ -14,13 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentShoppingCartBinding
-import com.campuscoders.posterminalapp.domain.model.ShoppingCart
 import com.campuscoders.posterminalapp.presentation.PaymentActivity
 import com.campuscoders.posterminalapp.presentation.SaleActivity
-import com.campuscoders.posterminalapp.presentation.sale.ShoppingCartViewModel
+import com.campuscoders.posterminalapp.presentation.sale.BaseViewModel
 import com.campuscoders.posterminalapp.utils.Constants
 import com.campuscoders.posterminalapp.utils.Resource
-import com.campuscoders.posterminalapp.utils.toCent
 import com.campuscoders.posterminalapp.utils.toast
 
 class ShoppingCartFragment : Fragment() {
@@ -28,11 +26,9 @@ class ShoppingCartFragment : Fragment() {
     private var _binding: FragmentShoppingCartBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: ShoppingCartViewModel
+    private lateinit var baseViewModel: BaseViewModel
 
     private lateinit var saleActivity: SaleActivity
-
-    private var hashmap = hashMapOf<String, Int>()
 
     private val shoppingCartAdapter by lazy {
         ShoppingCartAdapter()
@@ -46,13 +42,16 @@ class ShoppingCartFragment : Fragment() {
                 val layoutPosition = viewHolder.layoutPosition
                 val shoppingCartItem = shoppingCartAdapter.shoppingCartList[layoutPosition]
 
-                viewModel.updateShoppingCartList(layoutPosition)
+                baseViewModel.updateShoppingCartList(layoutPosition)
                 shoppingCartAdapter.notifyChanges()
 
+                /*
                 val saleActivity = (activity as SaleActivity)
 
                 hashmap.remove(shoppingCartItem.productId)
                 saleActivity.setShoppingCart(hashmap)
+
+                 */
             }
         }
 
@@ -64,7 +63,7 @@ class ShoppingCartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity())[ShoppingCartViewModel::class.java]
+        baseViewModel = ViewModelProvider(requireActivity())[BaseViewModel::class.java]
 
         binding.recyclerViewShoppingCart.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.recyclerViewShoppingCart.adapter = shoppingCartAdapter
@@ -75,22 +74,16 @@ class ShoppingCartFragment : Fragment() {
         saleActivity.setEnabledShoppingCartIcon(false)
         saleActivity.changeSaleActivityTopBarTitle("Sepet")
 
-        hashmap = saleActivity.getHashmap()
-        viewModel.showShoppingCartList(hashmap)
-
-        shoppingCartAdapter.setOnRemoveClickListener {position, productId ->
-            viewModel.updateShoppingCartList(position)
+        shoppingCartAdapter.setOnRemoveClickListener {position, _ ->
+            baseViewModel.updateShoppingCartList(position)
             shoppingCartAdapter.notifyChanges()
-
-            hashmap.remove(productId)
-            saleActivity.setShoppingCart(hashmap)
         }
 
         binding.buttonCreditCard.setOnClickListener {
-            viewModel.saveToDatabase(true, requireContext(), Constants.CUSTOMER_VKN_TCKN)
+            baseViewModel.saveToDatabase(true, requireContext(), Constants.CUSTOMER_VKN_TCKN)
         }
         binding.buttonCash.setOnClickListener {
-            viewModel.saveToDatabase(false, requireContext(), Constants.CUSTOMER_VKN_TCKN)
+            baseViewModel.saveToDatabase(false, requireContext(), Constants.CUSTOMER_VKN_TCKN)
         }
         binding.buttonEmptyShoppingCart.setOnClickListener {
             showConfirmationDialog()
@@ -100,29 +93,20 @@ class ShoppingCartFragment : Fragment() {
     }
 
     private fun observe() {
-        viewModel.statusShoppingCartList.observe(viewLifecycleOwner) {
-            when (it) {
-                is Resource.Success -> {
-                    if (it.data!!.isNotEmpty()) {
-                        shoppingCartAdapter.shoppingCartList = it.data
-                        showTotalPriceAndKdv(it.data)
-                    } else {
-                        shoppingCartAdapter.shoppingCartList = it.data
-                        moveToBackCategoriesFragment()
-                    }
-                }
-                is Resource.Loading -> {}
-                is Resource.Error -> {
-                    toast(requireContext(), it.message ?: "shoppingCart list error", false)
-                }
+        baseViewModel.statusShoppingCartList.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                shoppingCartAdapter.shoppingCartList = it
+            } else {
+                shoppingCartAdapter.shoppingCartList = it
+                moveToBackCategoriesFragment()
             }
         }
-        viewModel.statusSaveToDatabase.observe(viewLifecycleOwner) {
+        baseViewModel.statusSaveToDatabase.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     val intent = Intent(requireActivity(), PaymentActivity::class.java)
                     startActivity(intent)
-                    viewModel.resetSaveToDatabaseLiveData()
+                    baseViewModel.resetSaveToDatabaseLiveData()
                 }
                 is Resource.Loading -> {
                     // popup loading screen while waiting move to PaymentActivity
@@ -132,6 +116,12 @@ class ShoppingCartFragment : Fragment() {
                 }
             }
         }
+        baseViewModel.statusTotal.observe(viewLifecycleOwner) {
+            binding.textViewSumCost.text = it
+        }
+        baseViewModel.statusTotalTax.observe(viewLifecycleOwner) {
+            binding.textViewKdvCost.text = it
+        }
     }
 
     private fun showConfirmationDialog() {
@@ -140,7 +130,7 @@ class ShoppingCartFragment : Fragment() {
         alertDialogBuilder.setMessage(requireActivity().getString(R.string.dialog_content_empty))
 
         alertDialogBuilder.setPositiveButton("Evet") { _, _ ->
-            saleActivity.setShoppingCart(hashMapOf<String, Int>())
+            //saleActivity.setShoppingCart(hashMapOf<String, Int>())
             moveToBackCategoriesFragment()
         }
         alertDialogBuilder.setNegativeButton("Hayır") { _, _ ->
@@ -153,29 +143,6 @@ class ShoppingCartFragment : Fragment() {
     private fun moveToBackCategoriesFragment() {
         val ftransaction = requireActivity().supportFragmentManager
         ftransaction.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-    }
-
-    private fun showTotalPriceAndKdv(list: List<ShoppingCart>) {
-        var totalPrice = 0
-        var totalPriceCent = 0
-        var totalKdv = 0
-        var totalKdvCent = 0
-        for (i in list) {
-            totalPrice += i.productPrice.toInt()
-            totalPriceCent += i.productPriceCent.toInt()
-            totalKdv += i.productKdvPrice.toInt()
-            totalKdvCent += i.productKdvCent.toInt()
-        }
-        totalPrice += totalPriceCent / 100
-        totalPriceCent %= 100
-        totalKdv += totalKdvCent / 100
-        totalKdvCent %= 100
-
-        ShoppingCartItems.setTotalPrice("$totalPrice,${totalPriceCent.toCent()}")
-        ShoppingCartItems.setTotalTax("$totalKdv,${totalKdvCent.toCent()}")
-
-        binding.textViewSumCost.text = "₺$totalPrice,${totalPriceCent.toCent()}"
-        binding.textViewKdvCost.text = "₺$totalKdv,${totalKdvCent.toCent()}"
     }
 
     override fun onDestroy() {

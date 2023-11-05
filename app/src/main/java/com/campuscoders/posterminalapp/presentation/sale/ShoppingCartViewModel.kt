@@ -37,7 +37,7 @@ class ShoppingCartViewModel @Inject constructor(
     private var _statusSaveToDatabase = MutableLiveData<Resource<Boolean>>()
     val statusSaveToDatabase: LiveData<Resource<Boolean>>
         get() = _statusSaveToDatabase
-
+/*
     fun showShoppingCartList(hashmap: HashMap<String,Int>) {
         val shoppingCartArray = arrayListOf<ShoppingCart>()
         viewModelScope.launch {
@@ -64,6 +64,8 @@ class ShoppingCartViewModel @Inject constructor(
         }
 
     }
+
+ */
 
     fun updateShoppingCartList(position: Int) {
         _statusShoppingCartList.value = _statusShoppingCartList.value?.data?.let {

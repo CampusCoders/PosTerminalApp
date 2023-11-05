@@ -13,7 +13,6 @@ import com.campuscoders.posterminalapp.utils.Constants
 import com.campuscoders.posterminalapp.utils.hide
 import com.campuscoders.posterminalapp.utils.show
 import com.campuscoders.posterminalapp.utils.showProgressDialog
-import com.campuscoders.posterminalapp.utils.toCent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,7 +21,6 @@ class SaleActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySaleBinding
 
     private var isFabMenuOpen: Boolean = false
-    private var hashmap = hashMapOf<String, Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +33,7 @@ class SaleActivity : AppCompatActivity() {
         }
 
         binding.materialCardViewShoppingCart.setOnClickListener {
-            if (hashmap.isNotEmpty()) {
+            if (binding.textViewShoppingCartItemCount.text != "0") {
                 val ftransaction = supportFragmentManager.beginTransaction()
 
                 ftransaction.replace(R.id.fragmentContainerViewSaleActivity, ShoppingCartFragment())
@@ -75,7 +73,28 @@ class SaleActivity : AppCompatActivity() {
         }
     }
 
-    fun setShoppingCart(hashMapFromProducts: HashMap<String, Int>) {
+    fun setShoppingCart(shoppingCartItemCount: String) {
+
+        if (shoppingCartItemCount == "0") {
+            binding.linearLayoutShoppingCartItemBackground.hide()
+        } else {
+            binding.linearLayoutShoppingCartItemBackground.show()
+
+            val newSizeText = shoppingCartItemCount
+            val currentSizeText = binding.textViewShoppingCartItemCount.text.toString()
+
+            if (currentSizeText != newSizeText) {
+                val slideUpAnimation = AnimationUtils.loadAnimation(this, R.anim.animation_slide_up)
+                binding.textViewShoppingCartItemCount.startAnimation(slideUpAnimation)
+            } else {
+                val shakeAnimation = AnimationUtils.loadAnimation(this, R.anim.animaton_shake)
+                binding.animationContainer.startAnimation(shakeAnimation)
+            }
+
+            binding.textViewShoppingCartItemCount.text = newSizeText
+        }
+
+        /*
         val size = hashMapFromProducts.size
         if (size == 0) {
             binding.linearLayoutShoppingCartItemBackground.hide()
@@ -95,9 +114,9 @@ class SaleActivity : AppCompatActivity() {
             binding.textViewShoppingCartItemCount.text = newSizeText
         }
         hashmap = hashMapFromProducts
-    }
 
-    fun getHashmap() = hashmap
+         */
+    }
 
     fun setEnabledShoppingCartIcon(isEnabled: Boolean) {
         binding.imageViewShoppingCart.isEnabled = isEnabled

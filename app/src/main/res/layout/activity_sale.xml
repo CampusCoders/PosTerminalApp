@@ -164,7 +164,7 @@
         android:background="@drawable/shopping_cart"
         android:paddingHorizontal="9dp"
         android:paddingVertical="3dp"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:layout_anchor="@+id/imageViewShoppingCart"
         app:layout_anchorGravity="end">
 

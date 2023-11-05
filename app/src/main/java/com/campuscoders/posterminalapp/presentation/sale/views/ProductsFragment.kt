@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.campuscoders.posterminalapp.databinding.FragmentProductsBinding
 import com.campuscoders.posterminalapp.presentation.SaleActivity
-import com.campuscoders.posterminalapp.presentation.sale.ProductsViewModel
+import com.campuscoders.posterminalapp.presentation.sale.BaseViewModel
 import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.hide
 import com.campuscoders.posterminalapp.utils.show
@@ -22,7 +22,7 @@ class ProductsFragment: Fragment() {
     private var _binding: FragmentProductsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: ProductsViewModel
+    private lateinit var baseViewModel: BaseViewModel
 
     private var ftransaction: FragmentTransaction? = null
 
@@ -42,7 +42,7 @@ class ProductsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity())[ProductsViewModel::class.java]
+        baseViewModel = ViewModelProvider(requireActivity())[BaseViewModel::class.java]
 
         ftransaction = requireActivity().supportFragmentManager.beginTransaction()
 
@@ -58,9 +58,10 @@ class ProductsFragment: Fragment() {
             val categoryId = it.getString("category_id")
             val topBarTitle = "Kategoriler/${changeTopBarTitle(categoryId.toString())}"
             saleActivity?.changeSaleActivityTopBarTitle(topBarTitle)
-            viewModel.getProductsByCategoryId(categoryId!!)
+            baseViewModel.getProductsByCategoryId(categoryId!!)
         }
 
+        /*
         productsAdapter.setOnItemClickListener {
             // TestActivity'deki shopping textview'i arttır
             hashmapOfProducts = saleActivity?.getHashmap()!!
@@ -72,12 +73,17 @@ class ProductsFragment: Fragment() {
             }
             saleActivity?.setShoppingCart(hashmapOfProducts)
         }
+         */
+
+        productsAdapter.setOnItemClickListener {
+            baseViewModel.addProduct(it.toString())
+        }
 
         observer()
     }
 
     private fun observer() {
-        viewModel.statusProductsList.observe(viewLifecycleOwner) {
+        baseViewModel.statusProductsList.observe(viewLifecycleOwner) {
             when(it) {
                 is Resource.Success -> {
                     binding.progressBarProducts.hide()
@@ -97,6 +103,14 @@ class ProductsFragment: Fragment() {
                     toast(requireContext(),it.message?:"Error Products",false)
                 }
             }
+        }
+        baseViewModel.statusProductsList.observe(viewLifecycleOwner) {
+            if (it is Resource.Error) {
+                toast(requireContext(),it.message?:"statusProductList hata", false)
+            }
+        }
+        baseViewModel.statusShoppingCartQuantity.observe(viewLifecycleOwner) {
+            saleActivity?.setShoppingCart(it.toString())
         }
     }
 

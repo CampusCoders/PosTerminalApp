@@ -10,5 +10,7 @@ data class ShoppingCart(
     var productKdvPrice: String,
     var productKdvCent: String,
     var productKdv: String,
-    var productImage: String
+    var productImage: String,
+    var originalPrice: String,
+    var originalPriceCent: String
 )
