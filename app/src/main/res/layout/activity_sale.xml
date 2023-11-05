@@ -31,13 +31,34 @@
                 app:cardElevation="4dp"
                 app:strokeColor="@android:color/transparent">
 
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/materialCardViewtotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="8dp"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/white"
+                    app:strokeColor="@android:color/transparent">
+
+                    <TextView
+                        android:id="@+id/textViewTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="44dp"
+                        android:text="100,00"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </com.google.android.material.card.MaterialCardView>
+
                 <ImageView
                     android:id="@+id/imageViewShoppingCart"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
+                    android:layout_gravity="center|start"
+                    android:layout_marginHorizontal="6dp"
+                    android:layout_marginVertical="4dp"
                     android:focusable="true"
                     android:src="@drawable/cart_variant"
                     app:tint="@color/background"/>

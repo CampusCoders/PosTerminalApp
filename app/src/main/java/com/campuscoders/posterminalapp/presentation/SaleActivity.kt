@@ -73,6 +73,17 @@ class SaleActivity : AppCompatActivity() {
         }
     }
 
+    fun setShoppingCartTotal(total: String) {
+        if (total == "null") {
+            binding.materialCardViewtotal.hide()
+        } else {
+            binding.materialCardViewtotal.show()
+            val slideUpAnimation = AnimationUtils.loadAnimation(this, R.anim.animation_slide_up)
+            binding.textViewTotal.startAnimation(slideUpAnimation)
+            binding.textViewTotal.text = total
+        }
+    }
+
     fun setShoppingCart(shoppingCartItemCount: String) {
 
         if (shoppingCartItemCount == "0") {

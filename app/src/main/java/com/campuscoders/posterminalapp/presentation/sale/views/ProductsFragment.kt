@@ -26,8 +26,6 @@ class ProductsFragment: Fragment() {
 
     private var ftransaction: FragmentTransaction? = null
 
-    private lateinit var hashmapOfProducts: HashMap<String,Int>
-
     private var saleActivity: SaleActivity? = null
 
     private val productsAdapter by lazy {
@@ -111,6 +109,9 @@ class ProductsFragment: Fragment() {
         }
         baseViewModel.statusShoppingCartQuantity.observe(viewLifecycleOwner) {
             saleActivity?.setShoppingCart(it.toString())
+        }
+        baseViewModel.statusTotal.observe(viewLifecycleOwner) {
+            saleActivity?.setShoppingCartTotal(it)
         }
     }
 
