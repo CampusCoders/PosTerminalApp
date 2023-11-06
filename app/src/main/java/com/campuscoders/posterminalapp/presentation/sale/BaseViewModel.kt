@@ -88,6 +88,7 @@ class BaseViewModel @Inject constructor(
             _statusTotal.value = "₺$totalPrice,${totalPriceCent.toCent()}"
             _statusTotalTax.value = "₺$totalKdv,${totalKdvCent.toCent()}"
         }
+        _statusShoppingCartQuantity.value = _statusShoppingCartList.value?.size
     }
 
     fun addProduct(productId: String) {
@@ -115,7 +116,6 @@ class BaseViewModel @Inject constructor(
 
                     isProductExists = true
                     calculateTotal()
-                    _statusShoppingCartQuantity.value = _statusShoppingCartList.value?.size
                 }
             }
         }
@@ -137,7 +137,6 @@ class BaseViewModel @Inject constructor(
 
                         ShoppingCartItems.setShoppingCartList(arrayListOf())
                         _statusShoppingCartList.value = newShoppingCart?: mutableListOf()
-                        _statusShoppingCartQuantity.value = _statusShoppingCartList.value?.size
                         calculateTotal()
                     }
                 } else if (response is Resource.Error) {
@@ -219,5 +218,10 @@ class BaseViewModel @Inject constructor(
 
     fun resetSaveToDatabaseLiveData() {
         _statusSaveToDatabase = MutableLiveData<Resource<Boolean>>()
+    }
+
+    fun resetShoppingCartList() {
+        _statusShoppingCartList.value = mutableListOf()
+        calculateTotal()
     }
 }

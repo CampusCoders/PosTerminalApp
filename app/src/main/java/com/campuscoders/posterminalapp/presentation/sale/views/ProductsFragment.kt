@@ -59,20 +59,6 @@ class ProductsFragment: Fragment() {
             baseViewModel.getProductsByCategoryId(categoryId!!)
         }
 
-        /*
-        productsAdapter.setOnItemClickListener {
-            // TestActivity'deki shopping textview'i arttır
-            hashmapOfProducts = saleActivity?.getHashmap()!!
-            val productCount = hashmapOfProducts[it.toString()]
-            if (productCount == null) {
-                hashmapOfProducts[it.toString()] = 1
-            } else {
-                hashmapOfProducts[it.toString()] = productCount + 1
-            }
-            saleActivity?.setShoppingCart(hashmapOfProducts)
-        }
-         */
-
         productsAdapter.setOnItemClickListener {
             baseViewModel.addProduct(it.toString())
         }
@@ -100,11 +86,6 @@ class ProductsFragment: Fragment() {
                     binding.progressBarProducts.hide()
                     toast(requireContext(),it.message?:"Error Products",false)
                 }
-            }
-        }
-        baseViewModel.statusProductsList.observe(viewLifecycleOwner) {
-            if (it is Resource.Error) {
-                toast(requireContext(),it.message?:"statusProductList hata", false)
             }
         }
         baseViewModel.statusShoppingCartQuantity.observe(viewLifecycleOwner) {

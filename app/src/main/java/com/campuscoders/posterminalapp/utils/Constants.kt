@@ -45,10 +45,12 @@ object Constants {
     const val MINUTE = DURATION / 60000
     const val PROGRESS_BAR_DURATION = 1000
 
+    // Dialogs
     const val INFORMATIONS_VERIFYING = "Bilgileriniz Doğrulanıyor"
     const val PIN_VERIFYING = "PIN Doğrulanıyor"
     const val LOADING_MALI_ID = "Mali ID Alınıyor"
     const val QUERY_SALE = "Satış Sorgulanıyor"
     const val QUERY_DOCUMENT = "Belge Sorgulanıyor"
     const val SHOPPING_CART = "Ürünler Yükleniyor"
+    const val EMPTY_LIST = "Sepet Boşaltılıyor"
 }

@@ -19,6 +19,7 @@ import com.campuscoders.posterminalapp.presentation.SaleActivity
 import com.campuscoders.posterminalapp.presentation.sale.BaseViewModel
 import com.campuscoders.posterminalapp.utils.Constants
 import com.campuscoders.posterminalapp.utils.Resource
+import com.campuscoders.posterminalapp.utils.showProgressDialog
 import com.campuscoders.posterminalapp.utils.toast
 
 class ShoppingCartFragment : Fragment() {
@@ -40,18 +41,8 @@ class ShoppingCartFragment : Fragment() {
             }
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val layoutPosition = viewHolder.layoutPosition
-                val shoppingCartItem = shoppingCartAdapter.shoppingCartList[layoutPosition]
-
                 baseViewModel.updateShoppingCartList(layoutPosition)
                 shoppingCartAdapter.notifyChanges()
-
-                /*
-                val saleActivity = (activity as SaleActivity)
-
-                hashmap.remove(shoppingCartItem.productId)
-                saleActivity.setShoppingCart(hashmap)
-
-                 */
             }
         }
 
@@ -94,10 +85,8 @@ class ShoppingCartFragment : Fragment() {
 
     private fun observe() {
         baseViewModel.statusShoppingCartList.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) {
-                shoppingCartAdapter.shoppingCartList = it
-            } else {
-                shoppingCartAdapter.shoppingCartList = it
+            shoppingCartAdapter.shoppingCartList = it
+            if (it.isEmpty()) {
                 moveToBackCategoriesFragment()
             }
         }
@@ -116,8 +105,12 @@ class ShoppingCartFragment : Fragment() {
                 }
             }
         }
+        baseViewModel.statusShoppingCartQuantity.observe(viewLifecycleOwner) {
+            saleActivity.setShoppingCart(it.toString())
+        }
         baseViewModel.statusTotal.observe(viewLifecycleOwner) {
             binding.textViewSumCost.text = it
+            saleActivity.setShoppingCartTotal(it)
         }
         baseViewModel.statusTotalTax.observe(viewLifecycleOwner) {
             binding.textViewKdvCost.text = it
@@ -130,7 +123,8 @@ class ShoppingCartFragment : Fragment() {
         alertDialogBuilder.setMessage(requireActivity().getString(R.string.dialog_content_empty))
 
         alertDialogBuilder.setPositiveButton("Evet") { _, _ ->
-            //saleActivity.setShoppingCart(hashMapOf<String, Int>())
+            baseViewModel.resetShoppingCartList()
+            requireActivity().showProgressDialog(Constants.EMPTY_LIST)
             moveToBackCategoriesFragment()
         }
         alertDialogBuilder.setNegativeButton("Hayır") { _, _ ->

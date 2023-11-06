@@ -85,7 +85,6 @@ class SaleActivity : AppCompatActivity() {
     }
 
     fun setShoppingCart(shoppingCartItemCount: String) {
-
         if (shoppingCartItemCount == "0") {
             binding.linearLayoutShoppingCartItemBackground.hide()
         } else {
@@ -104,29 +103,6 @@ class SaleActivity : AppCompatActivity() {
 
             binding.textViewShoppingCartItemCount.text = newSizeText
         }
-
-        /*
-        val size = hashMapFromProducts.size
-        if (size == 0) {
-            binding.linearLayoutShoppingCartItemBackground.hide()
-        } else {
-            binding.linearLayoutShoppingCartItemBackground.show()
-            val newSizeText = size.toString()
-            val currentSizeText = binding.textViewShoppingCartItemCount.text.toString()
-
-            if (currentSizeText != newSizeText) {
-                val slideUpAnimation = AnimationUtils.loadAnimation(this, R.anim.animation_slide_up)
-                binding.textViewShoppingCartItemCount.startAnimation(slideUpAnimation)
-            } else {
-                val shakeAnimation = AnimationUtils.loadAnimation(this, R.anim.animaton_shake)
-                binding.animationContainer.startAnimation(shakeAnimation)
-            }
-
-            binding.textViewShoppingCartItemCount.text = newSizeText
-        }
-        hashmap = hashMapFromProducts
-
-         */
     }
 
     fun setEnabledShoppingCartIcon(isEnabled: Boolean) {
