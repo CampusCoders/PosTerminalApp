@@ -23,6 +23,8 @@ class CategoriesFragment : Fragment() {
     private var _binding: FragmentCategoriesBinding? = null
     private val binding get() = _binding!!
 
+    private var isFabMenuOpen: Boolean = false
+
     private lateinit var viewModel: CategoriesViewModel
 
     private var ftransaction: FragmentTransaction? = null
@@ -38,6 +40,8 @@ class CategoriesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setFabMenu()
 
         viewModel = ViewModelProvider(requireActivity())[CategoriesViewModel::class.java]
         ftransaction = requireActivity().supportFragmentManager.beginTransaction()
@@ -55,10 +59,10 @@ class CategoriesFragment : Fragment() {
             bundle.putString("category_id",it.toString())
             val productsFragment = ProductsFragment()
             productsFragment.arguments = bundle
-            ftransaction?.let {
-                it.replace(R.id.fragmentContainerViewSaleActivity,productsFragment)
-                it.addToBackStack(null)
-                it.commit()
+            ftransaction?.let { ft ->
+                ft.replace(R.id.fragmentContainerViewSaleActivity,productsFragment)
+                ft.addToBackStack(null)
+                ft.commit()
             }
         }
         observer()
@@ -86,6 +90,44 @@ class CategoriesFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun setFabMenu() {
+        binding.extendedFabSettings.hide()
+        binding.floatingActionButtonSearch.hide()
+        binding.floatingActionButtonBarcode.hide()
+
+        binding.floatingActionButtonMainAdd.setOnClickListener {
+            toggleFabMenu()
+
+        }
+        binding.extendedFabSettings.setOnClickListener {
+            toggleFabMenu()
+        }
+        binding.floatingActionButtonBack.setOnClickListener {
+
+        }
+        binding.floatingActionButtonSearch.setOnClickListener {
+
+        }
+        binding.floatingActionButtonBarcode.setOnClickListener {
+
+        }
+    }
+
+    private fun toggleFabMenu() {
+        if (isFabMenuOpen) {
+            binding.extendedFabSettings.hide()
+            binding.floatingActionButtonSearch.hide()
+            binding.floatingActionButtonBarcode.hide()
+            binding.floatingActionButtonMainAdd.show()
+        } else {
+            binding.floatingActionButtonMainAdd.hide()
+            binding.extendedFabSettings.show()
+            binding.floatingActionButtonSearch.show()
+            binding.floatingActionButtonBarcode.show()
+        }
+        isFabMenuOpen = !isFabMenuOpen
     }
 
     override fun onDestroy() {

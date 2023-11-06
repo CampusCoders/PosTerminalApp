@@ -22,6 +22,8 @@ class ProductsFragment: Fragment() {
     private var _binding: FragmentProductsBinding? = null
     private val binding get() = _binding!!
 
+    private var isFabMenuOpen: Boolean = false
+
     private lateinit var baseViewModel: BaseViewModel
 
     private var ftransaction: FragmentTransaction? = null
@@ -39,6 +41,8 @@ class ProductsFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setFabMenu()
 
         baseViewModel = ViewModelProvider(requireActivity())[BaseViewModel::class.java]
 
@@ -111,6 +115,43 @@ class ProductsFragment: Fragment() {
             "11" -> "Ev Eşya"
             else -> "null"
         }
+    }
+
+    private fun setFabMenu() {
+        binding.extendedFabSettings.hide()
+        binding.floatingActionButtonSearch.hide()
+        binding.floatingActionButtonBarcode.hide()
+
+        binding.floatingActionButtonMainAdd.setOnClickListener {
+            toggleFabMenu()
+        }
+        binding.extendedFabSettings.setOnClickListener {
+            toggleFabMenu()
+        }
+        binding.floatingActionButtonBack.setOnClickListener {
+
+        }
+        binding.floatingActionButtonSearch.setOnClickListener {
+
+        }
+        binding.floatingActionButtonBarcode.setOnClickListener {
+
+        }
+    }
+
+    private fun toggleFabMenu() {
+        if (isFabMenuOpen) {
+            binding.extendedFabSettings.hide()
+            binding.floatingActionButtonSearch.hide()
+            binding.floatingActionButtonBarcode.hide()
+            binding.floatingActionButtonMainAdd.show()
+        } else {
+            binding.floatingActionButtonMainAdd.hide()
+            binding.extendedFabSettings.show()
+            binding.floatingActionButtonSearch.show()
+            binding.floatingActionButtonBarcode.show()
+        }
+        isFabMenuOpen = !isFabMenuOpen
     }
 
     override fun onDestroy() {
