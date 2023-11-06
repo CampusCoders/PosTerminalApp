@@ -41,7 +41,8 @@ class ShoppingCartFragment : Fragment() {
             }
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val layoutPosition = viewHolder.layoutPosition
-                baseViewModel.updateShoppingCartList(layoutPosition)
+                val shoppingCartItem = shoppingCartAdapter.shoppingCartList[layoutPosition]
+                baseViewModel.updateShoppingCartList(shoppingCartItem.productId)
                 shoppingCartAdapter.notifyChanges()
             }
         }
@@ -65,8 +66,16 @@ class ShoppingCartFragment : Fragment() {
         saleActivity.setEnabledShoppingCartIcon(false)
         saleActivity.changeSaleActivityTopBarTitle("Sepet")
 
-        shoppingCartAdapter.setOnRemoveClickListener {position, _ ->
-            baseViewModel.updateShoppingCartList(position)
+        shoppingCartAdapter.setOnRemoveClickListener {_, productId ->
+            baseViewModel.updateShoppingCartList(productId)
+            shoppingCartAdapter.notifyChanges()
+        }
+        shoppingCartAdapter.setOnAddClickListener { productId ->
+            baseViewModel.addProduct(productId)
+            shoppingCartAdapter.notifyChanges()
+        }
+        shoppingCartAdapter.setOnMinusClickListener { productId, position ->
+            baseViewModel.decreaseProduct(productId, position)
             shoppingCartAdapter.notifyChanges()
         }
 
@@ -127,8 +136,7 @@ class ShoppingCartFragment : Fragment() {
             requireActivity().showProgressDialog(Constants.EMPTY_LIST)
             moveToBackCategoriesFragment()
         }
-        alertDialogBuilder.setNegativeButton("Hayır") { _, _ ->
-        }
+        alertDialogBuilder.setNegativeButton("Hayır") { _, _ -> }
 
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()

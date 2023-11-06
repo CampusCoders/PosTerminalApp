@@ -146,6 +146,32 @@ class BaseViewModel @Inject constructor(
         }
     }
 
+    fun decreaseProduct(productId: String, position: Int) {
+        _statusShoppingCartList.value?.let { shoppingCartList ->
+            for (item in shoppingCartList) {
+                if (productId == item.productId) {
+                    item.productQuantity = (item.productQuantity.toInt() - 1).toString()
+
+                    if (item.productQuantity == "0") {
+                        updateShoppingCartList(productId)
+                    } else {
+                        val hashmap = PriceAndKdvCalculator.calculateTotalPriceAndKdv(item.originalPrice.toInt(),item.originalPriceCent.toInt(),
+                            item.productKdv.toInt(),item.productQuantity.toInt())
+                        hashmap["total_cent"] = hashmap["total_cent"]!!.toInt().toCent()
+                        hashmap["total_kdv_after"] = hashmap["total_kdv_after"]!!.toInt().toCent()
+
+                        item.productPrice = hashmap["total_price"]?:""
+                        item.productPriceCent = hashmap["total_cent"]?:""
+                        item.productKdvPrice = hashmap["total_kdv_before"]?:""
+                        item.productKdvCent = hashmap["total_kdv_after"]?:""
+                    }
+
+                    calculateTotal()
+                }
+            }
+        }
+    }
+
     fun saveToDatabase(isCreditCard: Boolean, context: Context, vknTckn: String) {
         _statusSaveToDatabase.value = Resource.Loading(null)
 
@@ -207,10 +233,10 @@ class BaseViewModel @Inject constructor(
         }
     }
 
-    fun updateShoppingCartList(position: Int) {
+    fun updateShoppingCartList(productId: String) {
         _statusShoppingCartList.value = _statusShoppingCartList.value?.let {
-            it.filterIndexed { index, _ ->
-                index != position
+            it.filterIndexed { _, shoppingCart ->
+                shoppingCart.productId != productId
             }
         }?.toMutableList()
         calculateTotal()

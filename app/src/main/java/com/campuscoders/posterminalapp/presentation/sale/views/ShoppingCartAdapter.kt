@@ -41,7 +41,7 @@ class ShoppingCartAdapter : RecyclerView.Adapter<ShoppingCartAdapter.MyViewHolde
             binding.textViewCost.text = item.productPrice + "," + item.productPriceCent
             binding.materialCardViewMinus.setOnClickListener {
                 onMinusClickListener?.let {
-                    it(item.productId)
+                    it(item.productId, position)
                 }
             }
             binding.materialCardViewAdd.setOnClickListener {
@@ -57,11 +57,11 @@ class ShoppingCartAdapter : RecyclerView.Adapter<ShoppingCartAdapter.MyViewHolde
         }
     }
 
-    private var onMinusClickListener: ((String) -> Unit)? = null
+    private var onMinusClickListener: ((String, Int) -> Unit)? = null
     private var onAddClickListener: ((String) -> Unit)? = null
     private var onRemoveClickListener: ((Int,String) -> Unit)? = null
 
-    fun setOnMinusClickListener(listener: (String) -> Unit) {
+    fun setOnMinusClickListener(listener: (String, Int) -> Unit) {
         onMinusClickListener = listener
     }
     fun setOnAddClickListener(listener: (String) -> Unit) {
