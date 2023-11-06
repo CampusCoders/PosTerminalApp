@@ -145,8 +145,8 @@ class VerificationFragment : Fragment() {
         return textViews.lastOrNull { it.text.isNotEmpty() }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }

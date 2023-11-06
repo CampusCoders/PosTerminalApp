@@ -6,6 +6,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.ActivitySaleBinding
+import com.campuscoders.posterminalapp.presentation.sale.views.ProductsFragment
 import com.campuscoders.posterminalapp.presentation.sale.views.ShoppingCartFragment
 import com.campuscoders.posterminalapp.utils.Constants
 import com.campuscoders.posterminalapp.utils.hide
@@ -35,6 +36,7 @@ class SaleActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Sepet boş, ürün ekleyiniz.", Toast.LENGTH_SHORT).show()
             }
+            ProductsFragment.abc("merhaba bro!")
         }
     }
 

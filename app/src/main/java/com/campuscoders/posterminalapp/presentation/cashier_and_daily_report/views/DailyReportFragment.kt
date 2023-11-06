@@ -113,8 +113,8 @@ class DailyReportFragment : Fragment() {
         binding.textViewTotalTax.text = "₺$totalTax,${totalTaxCent.toCent()}"
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }

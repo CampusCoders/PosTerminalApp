@@ -1,5 +1,6 @@
 package com.campuscoders.posterminalapp.presentation.sale.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -111,7 +112,8 @@ class CategoriesFragment : Fragment() {
 
         }
         binding.floatingActionButtonBarcode.setOnClickListener {
-
+            val intent = Intent(requireActivity(),BarcodeScannerActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -130,8 +132,8 @@ class CategoriesFragment : Fragment() {
         isFabMenuOpen = !isFabMenuOpen
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }

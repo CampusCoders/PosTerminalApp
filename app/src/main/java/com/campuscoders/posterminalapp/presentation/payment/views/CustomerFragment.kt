@@ -163,8 +163,8 @@ class CustomerFragment : Fragment() {
         binding.textInputEditTextTotal.setText(ShoppingCartItems.getTotalPrice())
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }

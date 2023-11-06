@@ -187,8 +187,8 @@ class EditProductFragment : Fragment() {
         isFabMenuOpen = !isFabMenuOpen
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }
