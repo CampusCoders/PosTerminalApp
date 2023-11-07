@@ -1,6 +1,5 @@
 package com.campuscoders.posterminalapp.presentation.sale.views
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +25,8 @@ class CategoriesFragment : Fragment() {
 
     private var isFabMenuOpen: Boolean = false
 
+    private var saleActivity: SaleActivity? = null
+
     private lateinit var viewModel: BaseViewModel
 
     private var ftransaction: FragmentTransaction? = null
@@ -42,9 +43,13 @@ class CategoriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        saleActivity = activity as? SaleActivity
+
         setFabMenu()
 
         viewModel = ViewModelProvider(requireActivity())[BaseViewModel::class.java]
+        viewModel.getCategories()
+
         ftransaction = requireActivity().supportFragmentManager.beginTransaction()
 
         val staggeredGridLayoutManager = StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL)
@@ -91,6 +96,26 @@ class CategoriesFragment : Fragment() {
                 }
             }
         }
+        viewModel.statusAddProduct.observe(viewLifecycleOwner) {
+            when(it) {
+                is Resource.Success -> {
+                    toast(requireContext(),"${it.data?.productName?:""} ürünü eklendi.",false)
+                    viewModel.resetAddProduct()
+                }
+                is Resource.Loading -> {
+
+                }
+                is Resource.Error -> {
+                    toast(requireContext(),it.message?:"Error Product",false)
+                }
+            }
+        }
+        viewModel.statusShoppingCartQuantity.observe(viewLifecycleOwner) {
+            saleActivity?.setShoppingCart(it.toString())
+        }
+        viewModel.statusTotal.observe(viewLifecycleOwner) {
+            saleActivity?.setShoppingCartTotal(it)
+        }
     }
 
     private fun setFabMenu() {
@@ -112,8 +137,7 @@ class CategoriesFragment : Fragment() {
 
         }
         binding.floatingActionButtonBarcode.setOnClickListener {
-            val intent = Intent(requireActivity(),BarcodeScannerActivity::class.java)
-            startActivity(intent)
+            saleActivity?.goToBarcodeActivity()
         }
     }
 

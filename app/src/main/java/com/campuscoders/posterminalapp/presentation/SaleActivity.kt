@@ -1,12 +1,16 @@
 package com.campuscoders.posterminalapp.presentation
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.ActivitySaleBinding
-import com.campuscoders.posterminalapp.presentation.sale.views.ProductsFragment
+import com.campuscoders.posterminalapp.presentation.sale.BaseViewModel
+import com.campuscoders.posterminalapp.presentation.sale.views.BarcodeScannerActivity
 import com.campuscoders.posterminalapp.presentation.sale.views.ShoppingCartFragment
 import com.campuscoders.posterminalapp.utils.Constants
 import com.campuscoders.posterminalapp.utils.hide
@@ -19,10 +23,14 @@ class SaleActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySaleBinding
 
+    private lateinit var viewModel: BaseViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySaleBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel = ViewModelProvider(this)[BaseViewModel::class.java]
 
         binding.materialCardViewShoppingCart.setOnClickListener {
             if (binding.textViewShoppingCartItemCount.text != "0") {
@@ -36,7 +44,27 @@ class SaleActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Sepet boş, ürün ekleyiniz.", Toast.LENGTH_SHORT).show()
             }
-            ProductsFragment.abc("merhaba bro!")
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == Constants.REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                data?.let {
+                    val barcode = it.getStringExtra(Constants.BARCODE)
+                    viewModel.addProductByBarcode(barcode?:"")
+                }
+            } else {
+                data?.let {
+                    val message = it.getStringExtra(Constants.BARCODE)
+                    Toast.makeText(
+                        this, "Camera initialization error: $message",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 
@@ -78,5 +106,10 @@ class SaleActivity : AppCompatActivity() {
 
     fun changeSaleActivityTopBarTitle(newTitle: String) {
         binding.topAppBarSaleActivity.title = newTitle
+    }
+
+    fun goToBarcodeActivity() {
+        val intent = Intent(this, BarcodeScannerActivity::class.java)
+        startActivityForResult(intent, Constants.REQUEST_CODE)
     }
 }

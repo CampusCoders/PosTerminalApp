@@ -1,6 +1,5 @@
 package com.campuscoders.posterminalapp.presentation.sale.views
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,6 +42,9 @@ class ProductsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        saleActivity = activity as? SaleActivity
+        saleActivity?.setEnabledShoppingCartIcon(true)
+
         setFabMenu()
 
         baseViewModel = ViewModelProvider(requireActivity())[BaseViewModel::class.java]
@@ -52,9 +54,6 @@ class ProductsFragment: Fragment() {
         val staggeredGridLayoutManager = StaggeredGridLayoutManager(3,LinearLayoutManager.VERTICAL)
         binding.recyclerViewProducts.adapter = productsAdapter
         binding.recyclerViewProducts.layoutManager = staggeredGridLayoutManager
-
-        saleActivity = activity as? SaleActivity
-        saleActivity?.setEnabledShoppingCartIcon(true)
 
         val args = arguments
         args?.let {
@@ -90,6 +89,20 @@ class ProductsFragment: Fragment() {
                 is Resource.Error -> {
                     binding.progressBarProducts.hide()
                     toast(requireContext(),it.message?:"Error Products",false)
+                }
+            }
+        }
+        baseViewModel.statusAddProduct.observe(viewLifecycleOwner) {
+            when(it) {
+                is Resource.Success -> {
+                    toast(requireContext(),"${it.data?.productName?:""} ürünü eklendi.",false)
+                    baseViewModel.resetAddProduct()
+                }
+                is Resource.Loading -> {
+
+                }
+                is Resource.Error -> {
+                    toast(requireContext(),it.message?:"Error Product",false)
                 }
             }
         }
@@ -136,8 +149,7 @@ class ProductsFragment: Fragment() {
 
         }
         binding.floatingActionButtonBarcode.setOnClickListener {
-            val intent = Intent(requireActivity(),BarcodeScannerActivity::class.java)
-            startActivity(intent)
+            saleActivity?.goToBarcodeActivity()
         }
     }
 
@@ -154,12 +166,6 @@ class ProductsFragment: Fragment() {
             binding.floatingActionButtonBarcode.show()
         }
         isFabMenuOpen = !isFabMenuOpen
-    }
-
-    companion object {
-        fun abc(a: String) {
-            println(a)
-        }
     }
 
     override fun onDestroyView() {

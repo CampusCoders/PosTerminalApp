@@ -13,6 +13,7 @@ import com.campuscoders.posterminalapp.domain.model.ShoppingCart
 import com.campuscoders.posterminalapp.domain.use_case.sale.FetchAllCategoriesUseCase
 import com.campuscoders.posterminalapp.domain.use_case.sale.FetchAllProductsByCategoryIdUseCase
 import com.campuscoders.posterminalapp.domain.use_case.sale.FetchCustomerByVknTcknUseCase
+import com.campuscoders.posterminalapp.domain.use_case.sale.FetchProductByBarcodeUseCase
 import com.campuscoders.posterminalapp.domain.use_case.sale.FetchProductByProductIdUseCase
 import com.campuscoders.posterminalapp.domain.use_case.sale.SaveAllOrdersProductsUseCase
 import com.campuscoders.posterminalapp.domain.use_case.sale.SaveOrderUseCase
@@ -33,7 +34,8 @@ class BaseViewModel @Inject constructor(
     private val saveOrderUseCase: SaveOrderUseCase,
     private val saveAllOrdersProductsByUseCase: SaveAllOrdersProductsUseCase,
     private val fetchCustomerByVknTcknUseCase: FetchCustomerByVknTcknUseCase,
-    private val fetchAllCategoriesUseCase: FetchAllCategoriesUseCase
+    private val fetchAllCategoriesUseCase: FetchAllCategoriesUseCase,
+    private val fetchProductByBarcodeUseCase: FetchProductByBarcodeUseCase
 ) : ViewModel() {
 
     private var _statusCategoriesList = MutableLiveData<Resource<List<Categories>>>()
@@ -47,6 +49,10 @@ class BaseViewModel @Inject constructor(
     private var _statusTotalTax = MutableLiveData<String>()
     val statusTotalTax: LiveData<String>
         get() = _statusTotalTax
+
+    private var _statusAddProduct = MutableLiveData<Resource<Products>>()
+    val statusAddProduct: LiveData<Resource<Products>>
+        get() = _statusAddProduct
 
     private var _statusShoppingCartList = MutableLiveData<MutableList<ShoppingCart>>()
     val statusShoppingCartList: LiveData<MutableList<ShoppingCart>>
@@ -77,6 +83,18 @@ class BaseViewModel @Inject constructor(
         viewModelScope.launch {
             val response = fetchAllProductsByCategoryIdUseCase.executeFetchAllProductsByCategoryId(categoryId)
             _statusProductsList.value = response
+        }
+    }
+
+    fun addProductByBarcode(barcode: String) {
+        _statusAddProduct.value = Resource.Loading()
+        viewModelScope.launch {
+            val response = fetchProductByBarcodeUseCase.executeFetchProductByBarcode(barcode)
+            if (response is Resource.Success) {
+                val productId = response.data?.productId.toString()
+                addProduct(productId)
+            }
+            _statusAddProduct.value = response
         }
     }
 
@@ -259,6 +277,10 @@ class BaseViewModel @Inject constructor(
 
     fun resetSaveToDatabaseLiveData() {
         _statusSaveToDatabase = MutableLiveData<Resource<Boolean>>()
+    }
+
+    fun resetAddProduct() {
+        _statusAddProduct = MutableLiveData<Resource<Products>>()
     }
 
     fun resetShoppingCartList() {

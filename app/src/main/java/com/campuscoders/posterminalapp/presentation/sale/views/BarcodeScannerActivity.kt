@@ -1,7 +1,8 @@
 package com.campuscoders.posterminalapp.presentation.sale.views
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.budiyev.android.codescanner.AutoFocusMode
 import com.budiyev.android.codescanner.CodeScanner
@@ -10,7 +11,7 @@ import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.campuscoders.posterminalapp.R
-
+import com.campuscoders.posterminalapp.utils.Constants
 
 class BarcodeScannerActivity : AppCompatActivity() {
 
@@ -34,16 +35,18 @@ class BarcodeScannerActivity : AppCompatActivity() {
         // Callbacks
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
-                Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
+                val intent = Intent()
+                intent.putExtra(Constants.BARCODE,it.text)
+                setResult(Activity.RESULT_OK, intent)
                 finish()
             }
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
             runOnUiThread {
-                Toast.makeText(
-                    this, "Camera initialization error: ${it.message}",
-                    Toast.LENGTH_LONG
-                ).show()
+                val intent = Intent()
+                intent.putExtra(Constants.BARCODE,it.message)
+                setResult(Activity.RESULT_CANCELED, intent)
+                finish()
             }
         }
 

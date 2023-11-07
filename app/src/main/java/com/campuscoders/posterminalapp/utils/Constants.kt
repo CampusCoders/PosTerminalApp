@@ -39,6 +39,8 @@ object Constants {
     const val ORDER_NO_BACKEND = "3dht840nvb47228vhd39a920fjb949"
 
     const val DATE_FORMAT = "yyyy-MM-dd"
+    const val BARCODE = "barcode"
+    const val REQUEST_CODE = 0
 
     const val TEST_PIN = "00000"
     const val DURATION = 60000
