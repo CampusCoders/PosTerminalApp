@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentCategoriesBinding
 import com.campuscoders.posterminalapp.presentation.SaleActivity
-import com.campuscoders.posterminalapp.presentation.sale.CategoriesViewModel
+import com.campuscoders.posterminalapp.presentation.sale.BaseViewModel
 import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.hide
 import com.campuscoders.posterminalapp.utils.show
@@ -26,7 +26,7 @@ class CategoriesFragment : Fragment() {
 
     private var isFabMenuOpen: Boolean = false
 
-    private lateinit var viewModel: CategoriesViewModel
+    private lateinit var viewModel: BaseViewModel
 
     private var ftransaction: FragmentTransaction? = null
 
@@ -44,7 +44,7 @@ class CategoriesFragment : Fragment() {
 
         setFabMenu()
 
-        viewModel = ViewModelProvider(requireActivity())[CategoriesViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[BaseViewModel::class.java]
         ftransaction = requireActivity().supportFragmentManager.beginTransaction()
 
         val staggeredGridLayoutManager = StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL)

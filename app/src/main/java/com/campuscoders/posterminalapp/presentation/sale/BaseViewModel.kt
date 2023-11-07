@@ -5,10 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.campuscoders.posterminalapp.domain.model.Categories
 import com.campuscoders.posterminalapp.domain.model.Orders
 import com.campuscoders.posterminalapp.domain.model.OrdersProducts
 import com.campuscoders.posterminalapp.domain.model.Products
 import com.campuscoders.posterminalapp.domain.model.ShoppingCart
+import com.campuscoders.posterminalapp.domain.use_case.sale.FetchAllCategoriesUseCase
 import com.campuscoders.posterminalapp.domain.use_case.sale.FetchAllProductsByCategoryIdUseCase
 import com.campuscoders.posterminalapp.domain.use_case.sale.FetchCustomerByVknTcknUseCase
 import com.campuscoders.posterminalapp.domain.use_case.sale.FetchProductByProductIdUseCase
@@ -30,8 +32,13 @@ class BaseViewModel @Inject constructor(
     private val fetchAllProductsByCategoryIdUseCase: FetchAllProductsByCategoryIdUseCase,
     private val saveOrderUseCase: SaveOrderUseCase,
     private val saveAllOrdersProductsByUseCase: SaveAllOrdersProductsUseCase,
-    private val fetchCustomerByVknTcknUseCase: FetchCustomerByVknTcknUseCase
+    private val fetchCustomerByVknTcknUseCase: FetchCustomerByVknTcknUseCase,
+    private val fetchAllCategoriesUseCase: FetchAllCategoriesUseCase
 ) : ViewModel() {
+
+    private var _statusCategoriesList = MutableLiveData<Resource<List<Categories>>>()
+    val statusCategoriesList: LiveData<Resource<List<Categories>>>
+        get() = _statusCategoriesList
 
     private var _statusTotal = MutableLiveData<String>()
     val statusTotal: LiveData<String>
@@ -56,6 +63,14 @@ class BaseViewModel @Inject constructor(
     private var _statusSaveToDatabase = MutableLiveData<Resource<Boolean>>()
     val statusSaveToDatabase: LiveData<Resource<Boolean>>
         get() = _statusSaveToDatabase
+
+    fun getCategories() {
+        _statusCategoriesList.value = Resource.Loading(null)
+        viewModelScope.launch {
+            val response = fetchAllCategoriesUseCase.executeFetchAllCategories()
+            _statusCategoriesList.value = response
+        }
+    }
 
     fun getProductsByCategoryId(categoryId: String) {
         _statusProductsList.value = Resource.Loading(null)
