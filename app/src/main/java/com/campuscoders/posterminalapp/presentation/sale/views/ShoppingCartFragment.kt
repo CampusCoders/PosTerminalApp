@@ -21,6 +21,7 @@ import com.campuscoders.posterminalapp.utils.Constants
 import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.showProgressDialog
 import com.campuscoders.posterminalapp.utils.toast
+import com.google.android.material.snackbar.Snackbar
 
 class ShoppingCartFragment : Fragment() {
 
@@ -42,8 +43,16 @@ class ShoppingCartFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val layoutPosition = viewHolder.layoutPosition
                 val shoppingCartItem = shoppingCartAdapter.shoppingCartList[layoutPosition]
+
+                val oldShoppingCartList = baseViewModel.statusShoppingCartList.value
                 baseViewModel.updateShoppingCartList(shoppingCartItem.productId)
                 shoppingCartAdapter.notifyChanges()
+
+                Snackbar.make(binding.root, "${shoppingCartItem.productName} ürünü silindi.", Snackbar.LENGTH_LONG)
+                    .setAction("Geri al") {
+                        baseViewModel.replaceOldVersion(oldShoppingCartList?: mutableListOf())
+                    }
+                    .show()
             }
         }
 
@@ -66,9 +75,14 @@ class ShoppingCartFragment : Fragment() {
         saleActivity.setEnabledShoppingCartIcon(false)
         saleActivity.changeSaleActivityTopBarTitle("Sepet")
 
-        shoppingCartAdapter.setOnRemoveClickListener {_, productId ->
+        shoppingCartAdapter.setOnRemoveClickListener {productName, productId ->
+            val oldShoppingCartList = baseViewModel.statusShoppingCartList.value
             baseViewModel.updateShoppingCartList(productId)
-            shoppingCartAdapter.notifyChanges()
+            Snackbar.make(binding.root, "$productName ürünü silindi.", Snackbar.LENGTH_LONG)
+                .setAction("Geri al") {
+                    baseViewModel.replaceOldVersion(oldShoppingCartList?: mutableListOf())
+                }
+                .show()
         }
         shoppingCartAdapter.setOnAddClickListener { productId ->
             baseViewModel.addProduct(productId)
@@ -95,6 +109,7 @@ class ShoppingCartFragment : Fragment() {
     private fun observe() {
         baseViewModel.statusShoppingCartList.observe(viewLifecycleOwner) {
             shoppingCartAdapter.shoppingCartList = it
+            shoppingCartAdapter.notifyChanges()
             if (it.isEmpty()) {
                 moveToBackCategoriesFragment()
             }

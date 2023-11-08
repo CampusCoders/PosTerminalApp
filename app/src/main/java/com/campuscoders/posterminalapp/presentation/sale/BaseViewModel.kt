@@ -260,6 +260,11 @@ class BaseViewModel @Inject constructor(
         calculateTotal()
     }
 
+    fun replaceOldVersion(oldList: MutableList<ShoppingCart>) {
+        _statusShoppingCartList.value = oldList
+        calculateTotal()
+    }
+
     fun resetSaveToDatabaseLiveData() {
         _statusSaveToDatabase = MutableLiveData<Resource<Boolean>>()
     }

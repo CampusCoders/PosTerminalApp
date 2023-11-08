@@ -51,7 +51,7 @@ class ShoppingCartAdapter : RecyclerView.Adapter<ShoppingCartAdapter.MyViewHolde
             }
             binding.materialCardViewRemove.setOnClickListener {
                 onRemoveClickListener?.let {
-                    it(position, item.productId)
+                    it(item.productName, item.productId)
                 }
             }
         }
@@ -59,7 +59,7 @@ class ShoppingCartAdapter : RecyclerView.Adapter<ShoppingCartAdapter.MyViewHolde
 
     private var onMinusClickListener: ((String, Int) -> Unit)? = null
     private var onAddClickListener: ((String) -> Unit)? = null
-    private var onRemoveClickListener: ((Int,String) -> Unit)? = null
+    private var onRemoveClickListener: ((String,String) -> Unit)? = null
 
     fun setOnMinusClickListener(listener: (String, Int) -> Unit) {
         onMinusClickListener = listener
@@ -67,7 +67,7 @@ class ShoppingCartAdapter : RecyclerView.Adapter<ShoppingCartAdapter.MyViewHolde
     fun setOnAddClickListener(listener: (String) -> Unit) {
         onAddClickListener = listener
     }
-    fun setOnRemoveClickListener(listener: (Int, String) -> Unit) {
+    fun setOnRemoveClickListener(listener: (String, String) -> Unit) {
         onRemoveClickListener = listener
     }
 
