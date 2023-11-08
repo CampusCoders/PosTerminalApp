@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentCategoriesBinding
 import com.campuscoders.posterminalapp.presentation.SaleActivity
-import com.campuscoders.posterminalapp.presentation.sale.BaseViewModel
+import com.campuscoders.posterminalapp.presentation.sale.CategoriesViewModel
 import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.hide
 import com.campuscoders.posterminalapp.utils.show
@@ -27,7 +27,7 @@ class CategoriesFragment : Fragment() {
 
     private var saleActivity: SaleActivity? = null
 
-    private lateinit var viewModel: BaseViewModel
+    private lateinit var viewModel: CategoriesViewModel
 
     private var ftransaction: FragmentTransaction? = null
 
@@ -47,8 +47,7 @@ class CategoriesFragment : Fragment() {
 
         setFabMenu()
 
-        viewModel = ViewModelProvider(requireActivity())[BaseViewModel::class.java]
-        viewModel.getCategories()
+        viewModel = ViewModelProvider(requireActivity())[CategoriesViewModel::class.java]
 
         ftransaction = requireActivity().supportFragmentManager.beginTransaction()
 
@@ -95,26 +94,6 @@ class CategoriesFragment : Fragment() {
                     toast(requireContext(),it.message?:"Error Categories",false)
                 }
             }
-        }
-        viewModel.statusAddProduct.observe(viewLifecycleOwner) {
-            when(it) {
-                is Resource.Success -> {
-                    toast(requireContext(),"${it.data?.productName?:""} ürünü eklendi.",false)
-                    viewModel.resetAddProduct()
-                }
-                is Resource.Loading -> {
-
-                }
-                is Resource.Error -> {
-                    toast(requireContext(),it.message?:"Error Product",false)
-                }
-            }
-        }
-        viewModel.statusShoppingCartQuantity.observe(viewLifecycleOwner) {
-            saleActivity?.setShoppingCart(it.toString())
-        }
-        viewModel.statusTotal.observe(viewLifecycleOwner) {
-            saleActivity?.setShoppingCartTotal(it)
         }
     }
 

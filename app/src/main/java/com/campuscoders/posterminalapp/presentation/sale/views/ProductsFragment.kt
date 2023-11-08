@@ -92,26 +92,6 @@ class ProductsFragment: Fragment() {
                 }
             }
         }
-        baseViewModel.statusAddProduct.observe(viewLifecycleOwner) {
-            when(it) {
-                is Resource.Success -> {
-                    toast(requireContext(),"${it.data?.productName?:""} ürünü eklendi.",false)
-                    baseViewModel.resetAddProduct()
-                }
-                is Resource.Loading -> {
-
-                }
-                is Resource.Error -> {
-                    toast(requireContext(),it.message?:"Error Product",false)
-                }
-            }
-        }
-        baseViewModel.statusShoppingCartQuantity.observe(viewLifecycleOwner) {
-            saleActivity?.setShoppingCart(it.toString())
-        }
-        baseViewModel.statusTotal.observe(viewLifecycleOwner) {
-            saleActivity?.setShoppingCartTotal(it)
-        }
     }
 
     private fun changeTopBarTitle(categoryId: String): String {

@@ -13,6 +13,7 @@ import com.campuscoders.posterminalapp.presentation.sale.BaseViewModel
 import com.campuscoders.posterminalapp.presentation.sale.views.BarcodeScannerActivity
 import com.campuscoders.posterminalapp.presentation.sale.views.ShoppingCartFragment
 import com.campuscoders.posterminalapp.utils.Constants
+import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.hide
 import com.campuscoders.posterminalapp.utils.show
 import com.campuscoders.posterminalapp.utils.showProgressDialog
@@ -44,6 +45,31 @@ class SaleActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Sepet boş, ürün ekleyiniz.", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        observe()
+    }
+
+    private fun observe() {
+        viewModel.statusAddProduct.observe(this) {
+            when(it) {
+                is Resource.Success -> {
+                    Toast.makeText(this,"${it.data?.productName?:""} ${resources.getString(
+                        R.string.add_product)}",Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Loading -> {
+                    println("::: loading :::")
+                }
+                is Resource.Error -> {
+                    Toast.makeText(this,it.message?:"Error Product",Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        viewModel.statusShoppingCartQuantity.observe(this) {
+            setShoppingCart(it.toString())
+        }
+        viewModel.statusTotal.observe(this) {
+            setShoppingCartTotal(it)
         }
     }
 

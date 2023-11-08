@@ -11,7 +11,7 @@ class FetchProductByBarcodeUseCase @Inject constructor(private val repository: S
             val response = repository.fetchProductByBarcode(barcode)
             response?.let {
                 Resource.Success(it)
-            } ?: Resource.Error(null,"Ürün bulunamadı")
+            } ?: Resource.Error(null,"Ürün bulunamadı.")
         } catch (e: Exception) {
             Resource.Error(null,e.localizedMessage?:"Error - (executeFetchProductByBarcode)")
         }

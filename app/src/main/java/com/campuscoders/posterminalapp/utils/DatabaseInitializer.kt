@@ -95,7 +95,7 @@ class DatabaseInitializer @Inject constructor(
             Products("7","Kruvasan","0016","-",uriList[15],"432109876543",
                 "28","50","10","-","10","-","-",
                 "-"),
-            Products("2","Su (0.5 Lt.)","0017","-",uriList[16],"321098765432",
+            Products("2","Su (0.5 Lt.)","0017","-",uriList[16],"8696971191568",
                 "5","0","10","-","10","-","-",
                 "-"),
             Products("2","Kola (1 Lt.)","0018","-",uriList[17],"210987654321",
