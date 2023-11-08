@@ -2,6 +2,7 @@ package com.campuscoders.posterminalapp.presentation.sale.views
 
 import android.app.Activity
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.budiyev.android.codescanner.AutoFocusMode
@@ -17,12 +18,16 @@ class BarcodeScannerActivity : AppCompatActivity() {
 
     private lateinit var codeScanner: CodeScanner
 
+    private var mediaPlayer: MediaPlayer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_barcode_scanner)
 
         val scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
         codeScanner = CodeScanner(this, scannerView)
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.scanner_sound)
 
         // Parameters (default values)
         codeScanner.camera = CodeScanner.CAMERA_BACK // or CAMERA_FRONT or specific camera id
@@ -35,6 +40,7 @@ class BarcodeScannerActivity : AppCompatActivity() {
         // Callbacks
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
+                mediaPlayer?.start()
                 val intent = Intent()
                 intent.putExtra(Constants.BARCODE,it.text)
                 setResult(Activity.RESULT_OK, intent)
@@ -43,6 +49,7 @@ class BarcodeScannerActivity : AppCompatActivity() {
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
             runOnUiThread {
+                mediaPlayer?.start()
                 val intent = Intent()
                 intent.putExtra(Constants.BARCODE,it.message)
                 setResult(Activity.RESULT_CANCELED, intent)
@@ -63,5 +70,10 @@ class BarcodeScannerActivity : AppCompatActivity() {
     override fun onPause() {
         codeScanner.releaseResources()
         super.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer?.release()
     }
 }

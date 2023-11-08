@@ -17,6 +17,7 @@ import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.hide
 import com.campuscoders.posterminalapp.utils.show
 import com.campuscoders.posterminalapp.utils.showProgressDialog
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -54,8 +55,7 @@ class SaleActivity : AppCompatActivity() {
         viewModel.statusAddProduct.observe(this) {
             when(it) {
                 is Resource.Success -> {
-                    Toast.makeText(this,"${it.data?.productName?:""} ${resources.getString(
-                        R.string.add_product)}",Toast.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, "${it.data?.productName?:""} ${resources.getString(R.string.add_product)}", Snackbar.LENGTH_SHORT).show()
                 }
                 is Resource.Loading -> {
                     println("::: loading :::")
