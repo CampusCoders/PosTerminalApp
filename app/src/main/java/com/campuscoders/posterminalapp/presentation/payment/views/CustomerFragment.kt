@@ -68,6 +68,7 @@ class CustomerFragment : Fragment() {
             val orderId = ShoppingCartItems.getOrderId()
             val date = TimeAndDate.getLocalDate(Constants.DATE_FORMAT)
             val time = TimeAndDate.getTime()
+            val timestamp = System.currentTimeMillis()
             val orderTotal = ShoppingCartItems.getTotalPrice()
             val orderTotalTax = ShoppingCartItems.getTotalTax()
             ShoppingCartItems.setOrderNo(orderReceiptNo)
@@ -81,7 +82,8 @@ class CustomerFragment : Fragment() {
                 orderReceiptNo,
                 orderId,
                 orderTotal,
-                orderTotalTax
+                orderTotalTax,
+                timestamp
             )
         }
 
@@ -91,6 +93,7 @@ class CustomerFragment : Fragment() {
             val orderId = ShoppingCartItems.getOrderId()
             val date = TimeAndDate.getLocalDate(Constants.DATE_FORMAT)
             val time = TimeAndDate.getTime()
+            val timestamp = System.currentTimeMillis()
             val orderTotal = ShoppingCartItems.getTotalPrice()
             val orderTotalTax = ShoppingCartItems.getTotalTax()
             ShoppingCartItems.setDate(date)
@@ -104,7 +107,8 @@ class CustomerFragment : Fragment() {
                 orderReceiptNo,
                 orderId,
                 orderTotal,
-                orderTotalTax
+                orderTotalTax,
+                timestamp
             )
             toast(requireContext(), requireActivity().getString(R.string.order_cancel), false)
             requireActivity().finish()

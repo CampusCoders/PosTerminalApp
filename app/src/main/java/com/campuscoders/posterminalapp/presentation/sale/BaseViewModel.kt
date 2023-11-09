@@ -218,7 +218,7 @@ class BaseViewModel @Inject constructor(
         viewModelScope.launch {
             val orderId = saveOrderUseCase.executeSaveOrder(
                 Orders(customerId,empty, paymentType, empty, empty, empty, empty, Constants.ORDER_MALI_ID,mainUserInfo["terminal_id"].toString(),
-                    mainUserInfo["uye_isyeri_no"].toString(), Constants.ORDER_ETTN, Constants.ORDER_NO_BACKEND, empty, empty)
+                    mainUserInfo["uye_isyeri_no"].toString(), Constants.ORDER_ETTN, Constants.ORDER_NO_BACKEND, empty, empty, null)
             )
             if (orderId is Resource.Success) {
                 ShoppingCartItems.setOrderId(orderId.data.toString())

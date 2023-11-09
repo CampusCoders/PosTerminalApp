@@ -19,7 +19,8 @@ data class Orders(
     @ColumnInfo(name = "order_ettn") var orderETTN: String? = "",
     @ColumnInfo(name = "order_order_no_backend") var orderOrderNoBackend: String? = "",
     @ColumnInfo(name = "order_total") var orderTotal: String? = "",
-    @ColumnInfo(name = "order_total_tax") var orderTotalTax: String? = ""
+    @ColumnInfo(name = "order_total_tax") var orderTotalTax: String? = "",
+    @ColumnInfo(name = "order_timestamp") var orderTimestamp: Long?
 ) {
     @PrimaryKey(autoGenerate = true)
     var orderId: Int = 0

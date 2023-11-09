@@ -6,12 +6,12 @@ import com.campuscoders.posterminalapp.utils.Resource
 import javax.inject.Inject
 
 class FetchOrdersDynamicallyUseCase @Inject constructor(private val repository: CashierAndReportRepository) {
-    suspend fun executeFetchOrdersDynamically(orderStatus: String?, orderReceiptType: String?, orderDate: String?): Resource<List<Orders>> {
+    suspend fun executeFetchOrdersDynamically(orderStatus: String?, orderReceiptType: String?, orderStartDate: Long?, orderEndDate: Long?): Resource<List<Orders>> {
         return try {
-            val response = repository.fetchOrdersDynamically(orderStatus,orderReceiptType,orderDate)
+            val response = repository.fetchOrdersDynamically(orderStatus,orderReceiptType,orderStartDate,orderEndDate)
             response?.let {
                 Resource.Success(it)
-            } ?: Resource.Error(null,"List of orders is empty")
+            } ?: Resource.Error(null,"Sipariş bulunamadı.")
         } catch (e: Exception) {
             Resource.Error(null,e.localizedMessage?:"Exception!")
         }

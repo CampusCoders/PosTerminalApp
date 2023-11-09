@@ -13,7 +13,7 @@ interface CashierAndReportRepository {
 
     suspend fun fetchTerminalUserById(terminalId: String): TerminalUsers?
 
-    suspend fun fetchOrdersDynamically(orderStatus: String?, orderReceiptType: String?, orderDate: String?): List<Orders>?
+    suspend fun fetchOrdersDynamically(orderStatus: String?, orderReceiptType: String?, orderStartDate: Long?, orderEndDate: Long?): List<Orders>?
 
     suspend fun updateTerminalUser(terminalUsers: TerminalUsers): Int
 }

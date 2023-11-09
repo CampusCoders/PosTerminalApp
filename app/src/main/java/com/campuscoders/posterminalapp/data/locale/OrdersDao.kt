@@ -22,9 +22,9 @@ interface OrdersDao {
 
     @Query("UPDATE Orders SET order_receipt_type = :orderReceiptType, order_date = :orderDate, order_time = :orderTime, " +
             "order_status = :orderStatus, order_receipt_no = :orderReceiptNo, order_total = :orderTotal, " +
-            "order_total_tax = :orderTotalTax WHERE orderId = :orderId")
+            "order_total_tax = :orderTotalTax, order_timestamp = :orderTimestamp WHERE orderId = :orderId")
     suspend fun updateOrder(orderReceiptType: String, orderDate: String, orderTime: String, orderStatus: String,
-                            orderReceiptNo: String, orderId: String, orderTotal: String, orderTotalTax: String): Int
+                            orderReceiptNo: String, orderId: String, orderTotal: String, orderTotalTax: String, orderTimestamp: Long): Int
 
     @Query("SELECT * FROM Orders WHERE order_receipt_no = :orderReceiptNo")
     suspend fun getOrderByReceiptNo(orderReceiptNo: String): Orders?
@@ -44,6 +44,6 @@ interface OrdersDao {
     @Query("SELECT * FROM Orders " +
             "WHERE (:orderStatus IS NULL OR order_status = :orderStatus) " +
             "AND (:orderReceiptType IS NULL OR order_receipt_type = :orderReceiptType) " +
-            "AND (:orderDate IS NULL OR order_date = :orderDate)")
-    suspend fun queryDynamically(orderStatus: String?, orderReceiptType: String?, orderDate: String?): List<Orders>?
+            "AND (:orderStartDate AND :orderEndDate IS NULL OR order_timestamp BETWEEN :orderStartDate AND :orderEndDate)")
+    suspend fun queryDynamically(orderStatus: String?, orderReceiptType: String?, orderStartDate: Long?, orderEndDate: Long?): List<Orders>?
 }

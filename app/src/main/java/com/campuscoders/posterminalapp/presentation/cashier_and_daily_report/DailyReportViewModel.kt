@@ -49,7 +49,7 @@ class DailyReportViewModel @Inject constructor(
         val hashMap = DateRange.getDateRange(orderDate?:"")
 
         viewModelScope.launch {
-            val response = fetchOrdersDynamicallyUseCase.executeFetchOrdersDynamically(status, receiptType, orderDate)
+            val response = fetchOrdersDynamicallyUseCase.executeFetchOrdersDynamically(status, receiptType, hashMap["startDate"], hashMap["endDate"])
             _statusOrderList.value = response
         }
     }

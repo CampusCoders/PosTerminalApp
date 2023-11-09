@@ -73,8 +73,9 @@ class SaleRepositoryImpl @Inject constructor(
         return ordersDao.getOrderById(orderId)
     }
 
-    override suspend fun updateOrder(orderReceiptType: String, orderDate: String, orderTime: String, orderStatus: String, orderReceiptNo: String, orderId: String, orderTotal: String, orderTotalTax: String): Int {
-        return ordersDao.updateOrder(orderReceiptType, orderDate, orderTime, orderStatus, orderReceiptNo, orderId, orderTotal, orderTotalTax)
+    override suspend fun updateOrder(orderReceiptType: String, orderDate: String, orderTime: String, orderStatus: String, orderReceiptNo: String,
+                                     orderId: String, orderTotal: String, orderTotalTax: String, timestamp: Long): Int {
+        return ordersDao.updateOrder(orderReceiptType, orderDate, orderTime, orderStatus, orderReceiptNo, orderId, orderTotal, orderTotalTax, timestamp)
     }
 
     override suspend fun saveCustomerToDatabase(customer: Customers): Long {
