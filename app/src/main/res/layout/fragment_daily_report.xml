@@ -212,7 +212,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutDay"
+                android:id="@+id/textInputLayoutDate"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -227,7 +227,7 @@
                 app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium">
 
                 <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextViewDay"
+                    android:id="@+id/autoCompleteTextViewDate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"

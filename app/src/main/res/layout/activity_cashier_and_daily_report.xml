@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.CashierActivity">
+    tools:context=".presentation.CashierAndDailyReportActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerViewCashierActivity"
+        android:id="@+id/fragmentContainerViewCashierAndDailyReportActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:name="com.campuscoders.posterminalapp.presentation.sale.views.ProductsFragment"
-        tools:layout="@layout/fragment_products">
+        tools:layout="@layout/fragment_cashier_list">
     </androidx.fragment.app.FragmentContainerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

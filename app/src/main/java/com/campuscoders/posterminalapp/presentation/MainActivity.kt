@@ -9,7 +9,6 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.GravityCompat
-import android.content.Context
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.ActivityMainBinding
 import com.campuscoders.posterminalapp.utils.CustomSharedPreferences
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val intent = Intent(this, CashierActivity::class.java)
+        val intent = Intent(this, CashierAndDailyReportActivity::class.java)
 
         binding.imageViewMenu.setOnClickListener {
             binding.drawerParent.openDrawer(GravityCompat.END)

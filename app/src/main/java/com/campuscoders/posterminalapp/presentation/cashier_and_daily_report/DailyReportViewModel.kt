@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.domain.model.Orders
 import com.campuscoders.posterminalapp.domain.use_case.cashier_and_report.FetchOrdersDynamicallyUseCase
+import com.campuscoders.posterminalapp.utils.DateRange
 import com.campuscoders.posterminalapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -27,7 +28,6 @@ class DailyReportViewModel @Inject constructor(
 
         var status: String? = orderStatus
         var receiptType: String? = orderReceiptType
-        var date: String? = orderDate
 
         if (status == context.getString(R.string.adapter_all_result)) status = null
         if (receiptType == context.getString(R.string.adapter_all_documents)) receiptType = null
@@ -45,8 +45,11 @@ class DailyReportViewModel @Inject constructor(
             null -> null
             else -> ""
         }
+
+        val hashMap = DateRange.getDateRange(orderDate?:"")
+
         viewModelScope.launch {
-            val response = fetchOrdersDynamicallyUseCase.executeFetchOrdersDynamically(status, receiptType, date)
+            val response = fetchOrdersDynamicallyUseCase.executeFetchOrdersDynamically(status, receiptType, orderDate)
             _statusOrderList.value = response
         }
     }

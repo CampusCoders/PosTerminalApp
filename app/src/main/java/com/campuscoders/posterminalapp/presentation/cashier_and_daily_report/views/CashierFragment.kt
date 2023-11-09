@@ -62,7 +62,7 @@ class CashierFragment : Fragment() {
         binding.buttonAddCashier.setOnClickListener {
             if (terminalUser["kasiyer_ekleme_duzenleme"] as Boolean) {
                 ftransaction?.let {
-                    it.replace(R.id.fragmentContainerViewCashierActivity, AddCashierFragment())
+                    it.replace(R.id.fragmentContainerViewCashierAndDailyReportActivity, AddCashierFragment())
                     it.addToBackStack(null)
                     it.commit()
                 }
@@ -117,7 +117,7 @@ class CashierFragment : Fragment() {
                 bundle.putInt("terminal_id",terminalId)
                 addCashierFragment.arguments = bundle
                 ftransaction?.let {
-                    it.replace(R.id.fragmentContainerViewCashierActivity, addCashierFragment)
+                    it.replace(R.id.fragmentContainerViewCashierAndDailyReportActivity, addCashierFragment)
                     it.addToBackStack(null)
                     it.commit()
                 }

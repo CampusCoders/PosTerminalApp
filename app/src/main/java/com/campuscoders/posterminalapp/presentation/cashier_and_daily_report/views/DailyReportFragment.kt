@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.campuscoders.posterminalapp.R
@@ -25,6 +26,8 @@ class DailyReportFragment : Fragment() {
 
     private lateinit var viewModel: DailyReportViewModel
 
+    private var ftransaction: FragmentTransaction? = null
+
     private val dailyReportAdapter by lazy {
         DailyReportAdapter()
     }
@@ -39,7 +42,16 @@ class DailyReportFragment : Fragment() {
 
         viewModel = ViewModelProvider(requireActivity())[DailyReportViewModel::class.java]
 
+        ftransaction = requireActivity().supportFragmentManager.beginTransaction()
+
         viewModel.fetchOrders(null,null,null, requireContext())
+
+        binding.materialCardViewDocumentSearch.setOnClickListener {
+            ftransaction?.let {
+                it.replace(R.id.fragmentContainerViewCashierAndDailyReportActivity,CalendarFragment())
+                it.commit()
+            }
+        }
 
         setDropDownMenus()
 
@@ -52,21 +64,30 @@ class DailyReportFragment : Fragment() {
     private fun setDropDownMenus() {
         val optionsStatus = arrayOf(getString(R.string.adapter_all_result), getString(R.string.adapter_successful), getString(R.string.adapter_basket_cancel), getString(R.string.adapter_cancel_sale))
         val optionsDocument = arrayOf(getString(R.string.adapter_all_documents), getString(R.string.adapter_e_receipt), getString(R.string.adapter_e_archive_receipt))
-        // val optionsDate = arrayOf(getString(R.string.adapter_document_no), getString(R.string.adapter_mali_id), getString(R.string.adapter_terminal_id))
+        val optionsDate = arrayOf(getString(R.string.adapter_today), getString(R.string.adapter_yesterday), getString(R.string.adapter_last_week), getString(R.string.adapter_last_month))
         val arrayAdapterStatus = ArrayAdapter<String>(requireContext(),android.R.layout.simple_dropdown_item_1line,optionsStatus)
         val arrayAdapterDocument = ArrayAdapter<String>(requireContext(),android.R.layout.simple_dropdown_item_1line,optionsDocument)
-        // val arrayAdapterDate = ArrayAdapter<String>(requireContext(),android.R.layout.simple_dropdown_item_1line,optionsDate)
+        val arrayAdapterDate = ArrayAdapter<String>(requireContext(),android.R.layout.simple_dropdown_item_1line,optionsDate)
 
         binding.autoCompleteTextViewStatus.setAdapter(arrayAdapterStatus)
         binding.autoCompleteTextViewStatus.setText(getString(R.string.adapter_all_result),false)
         binding.autoCompleteTextViewStatus.setOnItemClickListener { _, _, _, _ ->
-            viewModel.fetchOrders(binding.textInputLayoutStatus.editText?.text.toString(),binding.textInputLayoutDocuments.editText?.text.toString(),null, requireContext())
+            viewModel.fetchOrders(binding.textInputLayoutStatus.editText?.text.toString(),binding.textInputLayoutDocuments.editText?.text.toString(),
+                binding.textInputLayoutDate.editText?.text.toString(), requireContext())
         }
 
         binding.autoCompleteTextViewDocuments.setAdapter(arrayAdapterDocument)
         binding.autoCompleteTextViewDocuments.setText(getString(R.string.adapter_all_documents),false)
         binding.autoCompleteTextViewDocuments.setOnItemClickListener { _, _, _, _ ->
-            viewModel.fetchOrders(binding.textInputLayoutStatus.editText?.text.toString(),binding.textInputLayoutDocuments.editText?.text.toString(),null, requireContext())
+            viewModel.fetchOrders(binding.textInputLayoutStatus.editText?.text.toString(),binding.textInputLayoutDocuments.editText?.text.toString(),
+                binding.textInputLayoutDate.editText?.text.toString(), requireContext())
+        }
+
+        binding.autoCompleteTextViewDate.setAdapter(arrayAdapterDate)
+        binding.autoCompleteTextViewDate.setText(getString(R.string.adapter_today),false)
+        binding.autoCompleteTextViewDate.setOnItemClickListener { _, _, _, _ ->
+            viewModel.fetchOrders(binding.textInputLayoutStatus.editText?.text.toString(),binding.textInputLayoutDocuments.editText?.text.toString(),
+                binding.textInputLayoutDate.editText?.text.toString(), requireContext())
         }
     }
 

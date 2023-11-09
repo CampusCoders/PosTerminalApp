@@ -73,7 +73,7 @@
             android:name=".presentation.CancelSaleEDocumentActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.CashierActivity"
+            android:name=".presentation.CashierAndDailyReportActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.SaleActivity"

@@ -9,13 +9,13 @@ import com.campuscoders.posterminalapp.presentation.cashier_and_daily_report.vie
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CashierActivity : AppCompatActivity() {
+class CashierAndDailyReportActivity : AppCompatActivity() {
 
     private var ftransaction: FragmentTransaction? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cashier)
+        setContentView(R.layout.activity_cashier_and_daily_report)
 
         ftransaction = supportFragmentManager.beginTransaction()
 
@@ -24,12 +24,12 @@ class CashierActivity : AppCompatActivity() {
         navigationValue?.let {
             if (it == "1") {
                 ftransaction?.let {ft ->
-                    ft.replace(R.id.fragmentContainerViewCashierActivity, DailyReportFragment())
+                    ft.replace(R.id.fragmentContainerViewCashierAndDailyReportActivity, DailyReportFragment())
                     ft.commit()
                 }
             } else {
                 ftransaction?.let {ft ->
-                    ft.replace(R.id.fragmentContainerViewCashierActivity, CashierFragment())
+                    ft.replace(R.id.fragmentContainerViewCashierAndDailyReportActivity, CashierFragment())
                     ft.commit()
                 }
             }
