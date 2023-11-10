@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -71,8 +72,10 @@
         android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/extendedFabSettings"
@@ -110,21 +113,6 @@
         app:tint="@color/white" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButtonBarcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/background"
-        android:src="@drawable/barcode_scan"
-        app:layout_constraintBottom_toTopOf="@+id/floatingActionButtonSearch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.961"
-        app:layout_constraintStart_toStartOf="parent"
-        app:tint="@color/white" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -133,7 +121,7 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/background"
         android:src="@drawable/baseline_add_24"
-        app:layout_constraintBottom_toTopOf="@+id/floatingActionButtonBarcode"
+        app:layout_constraintBottom_toTopOf="@+id/floatingActionButtonSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.961"
         app:layout_constraintStart_toStartOf="parent"
@@ -149,24 +137,9 @@
         android:backgroundTint="@color/background"
         android:src="@drawable/baseline_add_24"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/floatingActionButtonBarcode"
+        app:layout_constraintBottom_toTopOf="@+id/floatingActionButtonSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.961"
-        app:layout_constraintStart_toStartOf="parent"
-        app:tint="@color/white" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButtonBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/background"
-        android:src="@drawable/baseline_keyboard_backspace_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.032"
         app:layout_constraintStart_toStartOf="parent"
         app:tint="@color/white" />
 

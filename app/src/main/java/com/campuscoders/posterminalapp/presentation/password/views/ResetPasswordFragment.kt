@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentPasswordResetBinding
 import com.campuscoders.posterminalapp.presentation.login.views.LoginFragment
+import com.campuscoders.posterminalapp.presentation.login.views.LoginTwoFragment
 import com.campuscoders.posterminalapp.presentation.password.ResetPasswordViewModel
 import com.campuscoders.posterminalapp.utils.Constants
 import com.campuscoders.posterminalapp.utils.Constants.CELL_PHONE_NUMBER
@@ -27,11 +28,7 @@ class ResetPasswordFragment : Fragment() {
 
     private var ftransaction: FragmentTransaction? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentPasswordResetBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -46,13 +43,16 @@ class ResetPasswordFragment : Fragment() {
 
         binding.outlinedButtonConfirm.setOnClickListener {
             if (areFieldsNotEmpty()) {
-                //viewModel.updateMainUserPassword(binding.textInputEditTextNewPassword.text.toString())
-                toast(requireContext(), "PASSWORD UPDATED!", false)
+                viewModel.updateMainUserPassword(binding.textInputEditTextNewPassword.text.toString())
             }
         }
 
         binding.outlinedButtonCancel.setOnClickListener {
-            // try popupbackstack
+            ftransaction?.let {
+                it.setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
+                it.replace(R.id.fragmentContainerView, LoginTwoFragment())
+                it.commit()
+            }
         }
 
         binding.textViewResendResetFragment.setOnClickListener {
@@ -67,18 +67,15 @@ class ResetPasswordFragment : Fragment() {
             when (it) {
                 is Resource.Success -> {
                     binding.progressBarResetPassword.hide()
-                    toast(requireContext(), "MainUser password is updated", false)
                     ftransaction?.let { f ->
                         f.setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
                         f.replace(R.id.fragmentContainerView, LoginFragment())
                         f.commit()
                     }
                 }
-
                 is Resource.Loading -> {
                     binding.progressBarResetPassword.show()
                 }
-
                 is Resource.Error -> {
                     binding.progressBarResetPassword.hide()
                     toast(requireContext(), it.message ?: "failed!", false)

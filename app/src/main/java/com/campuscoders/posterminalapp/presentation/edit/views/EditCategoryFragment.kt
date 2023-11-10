@@ -15,7 +15,6 @@ import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentEditCategoryBinding
 import com.campuscoders.posterminalapp.presentation.UpdateOrAddActivity
 import com.campuscoders.posterminalapp.presentation.edit.EditCategoryViewModel
-import com.campuscoders.posterminalapp.presentation.sale.views.BarcodeScannerActivity
 import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.hide
 import com.campuscoders.posterminalapp.utils.show
@@ -67,36 +66,7 @@ class EditCategoryFragment: Fragment() {
             categoryId = it
         }
 
-        binding.extendedFabSettings.hide()
-        binding.floatingActionButtonSearch.hide()
-        binding.floatingActionButtonBarcode.hide()
-        binding.floatingActionButtonAdd.hide()
-
-        binding.floatingActionButtonBarcode.setOnClickListener {
-            val intent = Intent(requireActivity(), BarcodeScannerActivity::class.java)
-            startActivity(intent)
-            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
-        }
-
-        binding.floatingActionButtonAdd.setOnClickListener {
-            val intent = Intent(requireActivity(),UpdateOrAddActivity::class.java)
-            intent.putExtra("from","category")
-            intent.putExtra("category_or_product_id",-1)
-            startActivity(intent)
-            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
-        }
-
-        binding.floatingActionButtonMainAdd.setOnClickListener {
-            toggleFabMenu()
-        }
-
-        binding.floatingActionButtonBack.setOnClickListener {
-
-        }
-
-        binding.extendedFabSettings.setOnClickListener {
-            toggleFabMenu()
-        }
+        setFabMenu()
 
         observer()
     }
@@ -163,17 +133,35 @@ class EditCategoryFragment: Fragment() {
         dialog.show()
     }
 
+    private fun setFabMenu() {
+        binding.extendedFabSettings.hide()
+        binding.floatingActionButtonSearch.hide()
+        binding.floatingActionButtonAdd.hide()
+
+        binding.floatingActionButtonAdd.setOnClickListener {
+            val intent = Intent(requireActivity(),UpdateOrAddActivity::class.java)
+            intent.putExtra("from","category")
+            intent.putExtra("category_or_product_id",-1)
+            startActivity(intent)
+            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
+        }
+        binding.floatingActionButtonMainAdd.setOnClickListener {
+            toggleFabMenu()
+        }
+        binding.extendedFabSettings.setOnClickListener {
+            toggleFabMenu()
+        }
+    }
+
     private fun toggleFabMenu() {
         if (isFabMenuOpen) {
             binding.extendedFabSettings.hide()
             binding.floatingActionButtonSearch.hide()
-            binding.floatingActionButtonBarcode.hide()
             binding.floatingActionButtonAdd.hide()
             binding.floatingActionButtonMainAdd.show()
         } else {
             binding.extendedFabSettings.show()
             binding.floatingActionButtonSearch.show()
-            binding.floatingActionButtonBarcode.show()
             binding.floatingActionButtonAdd.show()
             binding.floatingActionButtonMainAdd.hide()
         }
