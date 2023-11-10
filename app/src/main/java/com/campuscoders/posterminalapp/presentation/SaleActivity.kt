@@ -37,7 +37,7 @@ class SaleActivity : AppCompatActivity() {
         binding.materialCardViewShoppingCart.setOnClickListener {
             if (binding.textViewShoppingCartItemCount.text != "0") {
                 val ftransaction = supportFragmentManager.beginTransaction()
-
+                ftransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
                 ftransaction.replace(R.id.fragmentContainerViewSaleActivity, ShoppingCartFragment())
                 ftransaction.addToBackStack(null)
                 ftransaction.commit()
@@ -137,5 +137,6 @@ class SaleActivity : AppCompatActivity() {
     fun goToBarcodeActivity() {
         val intent = Intent(this, BarcodeScannerActivity::class.java)
         startActivityForResult(intent, Constants.REQUEST_CODE)
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
     }
 }

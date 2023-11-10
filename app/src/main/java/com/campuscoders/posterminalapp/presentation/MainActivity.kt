@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity() {
                     if (terminalUser["tum_raporları_goruntuleme"] as Boolean) {
                         intent.putExtra("navigation", "1")
                         startActivity(intent)
+                        overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
                     } else {
                         Toast.makeText(this,"Yetkiniz yok.",Toast.LENGTH_SHORT).show()
                     }
@@ -78,6 +79,7 @@ class MainActivity : AppCompatActivity() {
                     if (terminalUser["kasiyer_goruntuleme"] as Boolean) {
                         intent.putExtra("navigation", "2")
                         startActivity(intent)
+                        overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
                     } else {
                         Toast.makeText(this,"Yetkiniz yok.",Toast.LENGTH_SHORT).show()
                     }
@@ -103,6 +105,7 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this,LoginActivity::class.java)
         intent.putExtra("logout","logout")
         startActivity(intent)
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         finish()
     }
 
@@ -145,6 +148,5 @@ class MainActivity : AppCompatActivity() {
 
         dialog.show()
     }
-
 
 }

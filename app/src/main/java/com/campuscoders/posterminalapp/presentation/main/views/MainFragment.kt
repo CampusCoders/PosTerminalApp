@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentMainBinding
 import com.campuscoders.posterminalapp.presentation.CancelSaleEDocumentActivity
 import com.campuscoders.posterminalapp.presentation.EditActivity
@@ -35,24 +36,28 @@ class MainFragment : Fragment() {
         binding.cardSaleStart.setOnClickListener {
             context?.showProgressDialog(Constants.LOADING_MALI_ID)
             Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(requireActivity(), SaleActivity::class.java)
-            startActivity(intent)
+                val intent = Intent(requireActivity(), SaleActivity::class.java)
+                startActivity(intent)
+                requireActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             }, Constants.PROGRESS_BAR_DURATION.toLong())
         }
 
         binding.cardSaleCancel.setOnClickListener {
             intent.putExtra("navigation", "1")
             startActivity(intent)
+            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         }
 
         binding.cardDocumentQuery.setOnClickListener {
             intent.putExtra("navigation", "2")
             startActivity(intent)
+            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         }
 
         binding.cardShowProducts.setOnClickListener {
             val intent = Intent(requireActivity(), EditActivity::class.java)
             startActivity(intent)
+            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         }
 
     }

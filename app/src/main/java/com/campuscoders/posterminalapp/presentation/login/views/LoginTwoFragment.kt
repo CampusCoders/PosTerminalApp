@@ -90,6 +90,7 @@ class LoginTwoFragment : Fragment() {
         binding.outlinedButtonForgotPassword.setOnClickListener {
             if (isAdmin) {
                 ftransaction?.let {
+                    it.setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
                     it.replace(R.id.fragmentContainerView, ForgetPasswordFragment())
                     it.addToBackStack(null)
                     it.commit()
@@ -112,6 +113,7 @@ class LoginTwoFragment : Fragment() {
                         val intent = Intent(requireActivity(), MainActivity::class.java)
                         startActivity(intent)
                         requireActivity().finish()
+                        requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
                     }, Constants.PROGRESS_BAR_DURATION.toLong())
                 }
 

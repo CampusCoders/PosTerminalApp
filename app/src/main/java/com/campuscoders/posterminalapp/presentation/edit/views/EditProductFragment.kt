@@ -39,11 +39,7 @@ class EditProductFragment : Fragment() {
         EditProductAdapter()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentEditProductBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -80,12 +76,14 @@ class EditProductFragment : Fragment() {
         binding.floatingActionButtonBarcode.setOnClickListener {
             val intent = Intent(requireActivity(), BarcodeScannerActivity::class.java)
             startActivity(intent)
+            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         }
         binding.floatingActionButtonAdd.setOnClickListener {
             val intent = Intent(requireActivity(), UpdateOrAddActivity::class.java)
             intent.putExtra("from", "product")
             intent.putExtra("category_or_product_id", -1)
             startActivity(intent)
+            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         }
 
         binding.floatingActionButtonMainAdd.setOnClickListener {
@@ -160,6 +158,7 @@ class EditProductFragment : Fragment() {
             intent.putExtra("from", "product")
             intent.putExtra("category_or_product_id", productId)
             startActivity(intent)
+            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         }
 
         linearDelete.setOnClickListener {

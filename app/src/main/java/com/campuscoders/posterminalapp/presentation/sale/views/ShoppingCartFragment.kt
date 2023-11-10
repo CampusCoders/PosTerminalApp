@@ -119,6 +119,7 @@ class ShoppingCartFragment : Fragment() {
                 is Resource.Success -> {
                     val intent = Intent(requireActivity(), PaymentActivity::class.java)
                     startActivity(intent)
+                    requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
                     baseViewModel.resetSaveToDatabaseLiveData()
                 }
                 is Resource.Loading -> {

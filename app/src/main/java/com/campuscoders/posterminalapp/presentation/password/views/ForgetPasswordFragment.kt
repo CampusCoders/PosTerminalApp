@@ -38,6 +38,7 @@ class ForgetPasswordFragment : Fragment() {
 
         binding.outlinedButtonCancel.setOnClickListener {
             ftransaction?.let {
+                it.setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
                 it.replace(R.id.fragmentContainerView, LoginTwoFragment())
                 it.commit()
                 // try popupbackstack
@@ -61,6 +62,7 @@ class ForgetPasswordFragment : Fragment() {
                     binding.progressBarForgetPassword.hide()
                     toast(requireContext(),"MATCHED!",false)
                     ftransaction?.let {f->
+                        f.setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
                         f.replace(R.id.fragmentContainerView, ResetPasswordFragment())
                         f.commit()
                     }

@@ -28,6 +28,7 @@ class VerificationFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: VerificationViewModel
+
     private var ftransaction: FragmentTransaction? = null
 
     private val textViews = mutableListOf<TextView>()
@@ -64,6 +65,7 @@ class VerificationFragment : Fragment() {
                 context?.showProgressDialog(Constants.PIN_VERIFYING)
                 Handler(Looper.getMainLooper()).postDelayed({
                     ftransaction?.let {
+                        it.setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
                         it.replace(R.id.fragmentContainerView, LoginTwoFragment())
                         it.commit()
                     }

@@ -129,6 +129,7 @@ class CustomerFragment : Fragment() {
                             false
                         )
                         ftransaction?.let { ft ->
+                            ft.setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
                             ft.replace(
                                 R.id.fragmentContainerViewPaymentActivity,
                                 SelectCartTypeFragment()

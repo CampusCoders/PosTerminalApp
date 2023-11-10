@@ -92,13 +92,14 @@ class LoginFragment : Fragment() {
                 }
             }
         }
-        viewModel.statusControlMainUser.observe(viewLifecycleOwner) { it ->
-            when (it) {
+        viewModel.statusControlMainUser.observe(viewLifecycleOwner) { resource ->
+            when (resource) {
                 is Resource.Success -> {
                     binding.progressBarLogin.hide()
                     context?.showProgressDialog(Constants.INFORMATIONS_VERIFYING)
                     Handler(Looper.getMainLooper()).postDelayed({
                         ftransaction?.let { f ->
+                            f.setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
                             f.replace(R.id.fragmentContainerView, VerificationFragment())
                             f.commit()
                         }
@@ -111,7 +112,7 @@ class LoginFragment : Fragment() {
                     binding.progressBarLogin.hide()
                     context?.showProgressDialog(Constants.INFORMATIONS_VERIFYING)
                     Handler(Looper.getMainLooper()).postDelayed({
-                    toast(requireContext(), it.message ?: "*Error*", false)
+                    toast(requireContext(), resource.message ?: "*Error*", false)
                     }, Constants.PROGRESS_BAR_DURATION.toLong())
                 }
             }

@@ -75,6 +75,7 @@ class EditCategoryFragment: Fragment() {
         binding.floatingActionButtonBarcode.setOnClickListener {
             val intent = Intent(requireActivity(), BarcodeScannerActivity::class.java)
             startActivity(intent)
+            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         }
 
         binding.floatingActionButtonAdd.setOnClickListener {
@@ -82,6 +83,7 @@ class EditCategoryFragment: Fragment() {
             intent.putExtra("from","category")
             intent.putExtra("category_or_product_id",-1)
             startActivity(intent)
+            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         }
 
         binding.floatingActionButtonMainAdd.setOnClickListener {
@@ -149,8 +151,8 @@ class EditCategoryFragment: Fragment() {
             val intent = Intent(requireActivity(),UpdateOrAddActivity::class.java)
             intent.putExtra("from","category")
             intent.putExtra("category_or_product_id",categoryId)
-
             startActivity(intent)
+            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         }
 
         linearDelete.setOnClickListener {

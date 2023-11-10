@@ -69,6 +69,7 @@ class ResetPasswordFragment : Fragment() {
                     binding.progressBarResetPassword.hide()
                     toast(requireContext(), "MainUser password is updated", false)
                     ftransaction?.let { f ->
+                        f.setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
                         f.replace(R.id.fragmentContainerView, LoginFragment())
                         f.commit()
                     }

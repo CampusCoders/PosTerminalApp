@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentServicesBinding
 import com.campuscoders.posterminalapp.presentation.UpdateOrAddActivity
 import com.campuscoders.posterminalapp.presentation.sale.views.BarcodeScannerActivity
@@ -33,12 +34,14 @@ class ServicesFragment : Fragment() {
         binding.floatingActionButtonBarcode.setOnClickListener {
             val intent = Intent(requireActivity(), BarcodeScannerActivity::class.java)
             startActivity(intent)
+            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         }
         binding.floatingActionButtonAdd.setOnClickListener {
             val intent = Intent(requireActivity(), UpdateOrAddActivity::class.java)
             intent.putExtra("from", "product")
             intent.putExtra("category_or_product_id", -1)
             startActivity(intent)
+            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         }
 
         binding.floatingActionButtonMainAdd.setOnClickListener {

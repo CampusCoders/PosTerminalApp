@@ -45,11 +45,13 @@ class LoginActivity() : AppCompatActivity() {
 
         if (logOut) {
             ftransaction?.let {
+                it.setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
                 it.replace(R.id.fragmentContainerView,LoginTwoFragment())
                 it.commit()
             }
         } else {
             ftransaction?.let {
+                it.setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
                 it.replace(R.id.fragmentContainerView,LoginFragment())
                 it.commit()
             }

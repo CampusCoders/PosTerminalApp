@@ -65,6 +65,7 @@ class CategoriesFragment : Fragment() {
             val productsFragment = ProductsFragment()
             productsFragment.arguments = bundle
             ftransaction?.let { ft ->
+                ft.setCustomAnimations(R.anim.fade_in,R.anim.fade_out)
                 ft.replace(R.id.fragmentContainerViewSaleActivity,productsFragment)
                 ft.addToBackStack(null)
                 ft.commit()
