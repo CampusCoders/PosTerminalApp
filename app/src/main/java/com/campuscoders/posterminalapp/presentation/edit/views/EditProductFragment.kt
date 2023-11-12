@@ -52,8 +52,9 @@ class EditProductFragment : Fragment() {
 
         arguments?.let {
             val categoryId = it.getString("categoryId")
+            println("arguments, categoryId -> $categoryId")
             viewModel.getProductsByCategoryId(categoryId.toString())
-        }
+        }?: println("arguments null")
 
         val staggeredGridLayoutManager = StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL)
         binding.recyclerViewEditProduct.adapter = editProductAdapter
@@ -68,35 +69,7 @@ class EditProductFragment : Fragment() {
             productId = it
         }
 
-        binding.extendedFabSettings.hide()
-        binding.floatingActionButtonSearch.hide()
-        binding.floatingActionButtonBarcode.hide()
-        binding.floatingActionButtonAdd.hide()
-
-        binding.floatingActionButtonBarcode.setOnClickListener {
-            val intent = Intent(requireActivity(), BarcodeScannerActivity::class.java)
-            startActivity(intent)
-            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
-        }
-        binding.floatingActionButtonAdd.setOnClickListener {
-            val intent = Intent(requireActivity(), UpdateOrAddActivity::class.java)
-            intent.putExtra("from", "product")
-            intent.putExtra("category_or_product_id", -1)
-            startActivity(intent)
-            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
-        }
-
-        binding.floatingActionButtonMainAdd.setOnClickListener {
-            toggleFabMenu()
-        }
-
-        binding.floatingActionButtonBack.setOnClickListener {
-
-        }
-
-        binding.extendedFabSettings.setOnClickListener {
-            toggleFabMenu()
-        }
+        setFabMenu()
 
         observer()
     }
@@ -167,6 +140,35 @@ class EditProductFragment : Fragment() {
         }
 
         dialog.show()
+    }
+
+    private fun setFabMenu() {
+        binding.extendedFabSettings.hide()
+        binding.floatingActionButtonSearch.hide()
+        binding.floatingActionButtonBarcode.hide()
+        binding.floatingActionButtonAdd.hide()
+
+        binding.floatingActionButtonBarcode.setOnClickListener {
+            val intent = Intent(requireActivity(), BarcodeScannerActivity::class.java)
+            startActivity(intent)
+            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
+        }
+        binding.floatingActionButtonAdd.setOnClickListener {
+            val intent = Intent(requireActivity(), UpdateOrAddActivity::class.java)
+            intent.putExtra("from", "product")
+            intent.putExtra("category_or_product_id", -1)
+            startActivity(intent)
+            requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
+        }
+        binding.floatingActionButtonMainAdd.setOnClickListener {
+            toggleFabMenu()
+        }
+        binding.floatingActionButtonBack.setOnClickListener {
+
+        }
+        binding.extendedFabSettings.setOnClickListener {
+            toggleFabMenu()
+        }
     }
 
     private fun toggleFabMenu() {

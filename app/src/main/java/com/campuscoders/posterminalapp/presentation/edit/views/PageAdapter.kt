@@ -12,24 +12,30 @@ class PageAdapter(
 
     private var changeableFragment: Fragment? = null
 
-    // callback
+    fun changeState(fragment: Fragment) {
+        changeableFragment = fragment
+        notifyDataSetChanged()
+        if (changeableFragment is EditProductFragment) {
+            println("EditProductFragment")
+        } else if (changeableFragment is EditCategoryFragment) {
+            println("EditCategoryFragment")
+        }
+        createFragment(1)
+    }
 
     override fun getItemCount(): Int {
         return 2
     }
 
     override fun createFragment(position: Int): Fragment {
+        println("position -> $position")
         if (position == 0) {
             return ServicesFragment()
         } else {
-            return EditCategoryFragment()
-            /*
             if (changeableFragment == null) {
-                changeableFragment = CategoriesFragment()
+                changeableFragment = EditCategoryFragment()
             }
             return changeableFragment!!
-
-             */
         }
     }
 }

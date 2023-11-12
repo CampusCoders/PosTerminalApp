@@ -1,5 +1,6 @@
 package com.campuscoders.posterminalapp.presentation.edit.views
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentEditCategoryBinding
+import com.campuscoders.posterminalapp.presentation.EditActivity
 import com.campuscoders.posterminalapp.presentation.UpdateOrAddActivity
 import com.campuscoders.posterminalapp.presentation.edit.EditCategoryViewModel
 import com.campuscoders.posterminalapp.utils.Resource
@@ -30,12 +32,19 @@ class EditCategoryFragment: Fragment() {
 
     private var ftransaction: FragmentTransaction? = null
 
+    private var editActivity: EditActivity? = null
+
     private var isFabMenuOpen: Boolean = false
 
     private var categoryId = 0
 
     private val editCategoryAdapter by lazy {
         EditCategoryAdapter()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        editActivity = context as EditActivity
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,6 +56,7 @@ class EditCategoryFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(requireActivity())[EditCategoryViewModel::class.java]
+
         ftransaction = requireActivity().supportFragmentManager.beginTransaction()
 
         val staggeredGridLayoutManager = StaggeredGridLayoutManager(3,LinearLayoutManager.VERTICAL)
@@ -54,11 +64,8 @@ class EditCategoryFragment: Fragment() {
         binding.recyclerViewEditCategory.layoutManager = staggeredGridLayoutManager
 
         editCategoryAdapter.setOnItemClickListener {
-            val editProductFragment = EditProductFragment()
-            val bundle = Bundle()
-            bundle.putString("categoryId", it.toString())
-            editProductFragment.arguments = bundle
-            // move to product fragment (callback - viewpager logic)
+            println("categoryId from editcategoryfragment -> $it")
+            editActivity?.changeFragment(it.toString())
         }
 
         editCategoryAdapter.setOnLongItemCliclListener {
