@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
@@ -13,12 +16,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentEditProductBinding
+import com.campuscoders.posterminalapp.domain.model.Products
 import com.campuscoders.posterminalapp.presentation.UpdateOrAddActivity
 import com.campuscoders.posterminalapp.presentation.edit.EditProductViewModel
 import com.campuscoders.posterminalapp.presentation.sale.views.BarcodeScannerActivity
 import com.campuscoders.posterminalapp.utils.Resource
+import com.campuscoders.posterminalapp.utils.glide
 import com.campuscoders.posterminalapp.utils.hide
+import com.campuscoders.posterminalapp.utils.placeHolderProgressBar
 import com.campuscoders.posterminalapp.utils.show
+import com.campuscoders.posterminalapp.utils.toCent
 import com.campuscoders.posterminalapp.utils.toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -52,16 +59,15 @@ class EditProductFragment : Fragment() {
 
         arguments?.let {
             val categoryId = it.getString("categoryId")
-            println("arguments, categoryId -> $categoryId")
             viewModel.getProductsByCategoryId(categoryId.toString())
-        }?: println("arguments null")
+        }
 
         val staggeredGridLayoutManager = StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL)
         binding.recyclerViewEditProduct.adapter = editProductAdapter
         binding.recyclerViewEditProduct.layoutManager = staggeredGridLayoutManager
 
         editProductAdapter.setOnItemClickListener {
-            // show product detail popup
+            showProductDetailPopup(it)
         }
 
         editProductAdapter.setOnLongItemClickListener {
@@ -86,11 +92,9 @@ class EditProductFragment : Fragment() {
                         binding.linearLayoutNoProduct.show()
                     }
                 }
-
                 is Resource.Loading -> {
                     binding.progressBarEditProduct.show()
                 }
-
                 is Resource.Error -> {
                     binding.progressBarEditProduct.hide()
                     toast(requireContext(), it.message ?: "Error!", false)
@@ -104,18 +108,40 @@ class EditProductFragment : Fragment() {
                     editProductAdapter.updateProductsList(productId)
                     toast(requireContext(), "Ürün silindi", false)
                 }
-
                 is Resource.Loading -> {
                     // loading popup
                     binding.progressBarEditProduct.show()
                 }
-
                 is Resource.Error -> {
                     binding.progressBarEditProduct.hide()
                     toast(requireContext(), it.message ?: "Error!", false)
                 }
             }
         }
+    }
+
+    private fun showProductDetailPopup(product: Products) {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.pop_up_product_details,null)
+        val dialog = MaterialAlertDialogBuilder(requireContext()).setView(dialogView).create()
+
+        val productImage = dialogView.findViewById<ImageView>(R.id.imageViewProductImage)
+        val productName = dialogView.findViewById<TextView>(R.id.textViewProductName)
+        val productTotal = dialogView.findViewById<TextView>(R.id.textViewTotal)
+        val productTax = dialogView.findViewById<TextView>(R.id.textViewTax)
+        val productBarcode = dialogView.findViewById<TextView>(R.id.textViewBarcode)
+        val buttonOk = dialogView.findViewById<Button>(R.id.buttonOk)
+
+        productImage.glide(product.productImage?:"", placeHolderProgressBar(requireContext()))
+        productName.text = product.productName
+        productTotal.text = "₺${product.productPrice},${product.productPriceCents?.toInt()?.toCent()}"
+        productTax.text = "%${product.productKdv}"
+        productBarcode.text = product.productBarcode
+
+        buttonOk.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     private fun showEditOrDeletePopup(productId: Int) {

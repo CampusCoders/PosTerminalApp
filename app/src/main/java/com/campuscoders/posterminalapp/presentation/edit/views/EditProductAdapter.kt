@@ -38,7 +38,7 @@ class EditProductAdapter : RecyclerView.Adapter<EditProductAdapter.MyViewHolder>
             )
             binding.cardViewItem.setOnClickListener {
                 onItemClickListener?.let {
-                    it(item.productId)
+                    it(item)
                 }
             }
             binding.cardViewItem.setOnLongClickListener {
@@ -50,10 +50,10 @@ class EditProductAdapter : RecyclerView.Adapter<EditProductAdapter.MyViewHolder>
         }
     }
 
-    private var onItemClickListener: ((Int) -> Unit)? = null
+    private var onItemClickListener: ((Products) -> Unit)? = null
     private var onLongItemClickListener: ((Int) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (Int) -> Unit) {
+    fun setOnItemClickListener(listener: (Products) -> Unit) {
         onItemClickListener = listener
     }
 
