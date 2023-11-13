@@ -200,7 +200,7 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardPaymentTransactions"
+                android:id="@+id/cardPayment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"

@@ -20,6 +20,7 @@ import com.campuscoders.posterminalapp.domain.model.Products
 import com.campuscoders.posterminalapp.presentation.UpdateOrAddActivity
 import com.campuscoders.posterminalapp.presentation.edit.EditProductViewModel
 import com.campuscoders.posterminalapp.presentation.sale.views.BarcodeScannerActivity
+import com.campuscoders.posterminalapp.utils.CustomSharedPreferences
 import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.glide
 import com.campuscoders.posterminalapp.utils.hide
@@ -38,6 +39,8 @@ class EditProductFragment : Fragment() {
 
     private var ftransaction: FragmentTransaction? = null
 
+    private lateinit var customSharedPreferences: CustomSharedPreferences
+
     private var isFabMenuOpen: Boolean = false
 
     private var productId = 0
@@ -54,6 +57,9 @@ class EditProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        customSharedPreferences = CustomSharedPreferences(requireContext())
+        val terminalUser = customSharedPreferences.getTerminalUserLogin()
+
         viewModel = ViewModelProvider(requireActivity())[EditProductViewModel::class.java]
         ftransaction = requireActivity().supportFragmentManager.beginTransaction()
 
@@ -67,12 +73,20 @@ class EditProductFragment : Fragment() {
         binding.recyclerViewEditProduct.layoutManager = staggeredGridLayoutManager
 
         editProductAdapter.setOnItemClickListener {
-            showProductDetailPopup(it)
+            if (terminalUser["urun_goruntuleme"] as Boolean) {
+                showProductDetailPopup(it)
+            } else {
+                toast(requireContext(),"Yetkiniz yok.",false)
+            }
         }
 
         editProductAdapter.setOnLongItemClickListener {
-            showEditOrDeletePopup(it)
-            productId = it
+            if (terminalUser["urun_ekleme_duzenleme"] as Boolean) {
+                showEditOrDeletePopup(it, terminalUser["urun_silme"] as Boolean)
+                productId = it
+            } else {
+                toast(requireContext(),"Yetkiniz yok.",false)
+            }
         }
 
         setFabMenu()
@@ -106,7 +120,7 @@ class EditProductFragment : Fragment() {
                 is Resource.Success -> {
                     binding.progressBarEditProduct.hide()
                     editProductAdapter.updateProductsList(productId)
-                    toast(requireContext(), "Ürün silindi", false)
+                    toast(requireContext(), "Ürün silindi.", false)
                 }
                 is Resource.Loading -> {
                     // loading popup
@@ -144,7 +158,7 @@ class EditProductFragment : Fragment() {
         dialog.show()
     }
 
-    private fun showEditOrDeletePopup(productId: Int) {
+    private fun showEditOrDeletePopup(productId: Int, deleteProduct: Boolean) {
         val dialogView =
             LayoutInflater.from(requireContext()).inflate(R.layout.pop_up_edit_or_delete_item, null)
         val dialog = MaterialAlertDialogBuilder(requireContext()).setView(dialogView).create()
@@ -161,8 +175,12 @@ class EditProductFragment : Fragment() {
         }
 
         linearDelete.setOnClickListener {
-            viewModel.deleteProduct(productId)
-            dialog.dismiss()
+            if (deleteProduct) {
+                viewModel.deleteProduct(productId)
+                dialog.dismiss()
+            } else {
+                toast(requireContext(),"Yetkiniz yok.",false)
+            }
         }
 
         dialog.show()

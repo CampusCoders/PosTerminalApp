@@ -13,6 +13,7 @@ import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentDocumentDetailsBinding
 import com.campuscoders.posterminalapp.domain.model.Orders
 import com.campuscoders.posterminalapp.presentation.cancel_and_document.BaseViewModel
+import com.campuscoders.posterminalapp.utils.CustomSharedPreferences
 import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.hide
 import com.campuscoders.posterminalapp.utils.placeHolderProgressBar
@@ -30,6 +31,8 @@ class DocumentDetailsFragment: Fragment() {
 
     private lateinit var ftransaction: androidx.fragment.app.FragmentManager
 
+    private lateinit var customSharedPreferences: CustomSharedPreferences
+
     private lateinit var cost: String
 
     private lateinit var documentNo: String
@@ -41,6 +44,9 @@ class DocumentDetailsFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        customSharedPreferences = CustomSharedPreferences(requireContext())
+        val terminalUser = customSharedPreferences.getTerminalUserLogin()
 
         ftransaction = requireActivity().supportFragmentManager
 
@@ -62,8 +68,12 @@ class DocumentDetailsFragment: Fragment() {
             ftransaction.popBackStack()
         }
         binding.buttonCancelSale.setOnClickListener {
-            viewModel.cancelSale()
-            showCancelSalePopUp()
+            if (terminalUser["iptal_iade"] as Boolean) {
+                viewModel.cancelSale()
+                showCancelSalePopUp()
+            } else {
+                toast(requireContext(),"Yetkiniz yok.",false)
+            }
         }
 
         // Query E-Document
@@ -74,7 +84,11 @@ class DocumentDetailsFragment: Fragment() {
             toast(requireContext(),"Coming soon",false)
         }
         binding.buttonSend.setOnClickListener {
-            showCustomerInfoPopUp()
+            if (terminalUser["rapor_kaydet_gonder"] as Boolean) {
+                showCustomerInfoPopUp()
+            } else {
+                toast(requireContext(),"Yetkiniz yok.",false)
+            }
         }
 
         observe()

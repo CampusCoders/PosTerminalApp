@@ -14,7 +14,9 @@ import com.campuscoders.posterminalapp.presentation.CancelSaleEDocumentActivity
 import com.campuscoders.posterminalapp.presentation.EditActivity
 import com.campuscoders.posterminalapp.presentation.SaleActivity
 import com.campuscoders.posterminalapp.utils.Constants
+import com.campuscoders.posterminalapp.utils.CustomSharedPreferences
 import com.campuscoders.posterminalapp.utils.showProgressDialog
+import com.campuscoders.posterminalapp.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,6 +34,9 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val intent = Intent(requireActivity(), CancelSaleEDocumentActivity::class.java)
+
+        val customSharedPreferences = CustomSharedPreferences(requireContext())
+        val terminalUser = customSharedPreferences.getTerminalUserLogin()
 
         binding.cardSaleStart.setOnClickListener {
             context?.showProgressDialog(Constants.LOADING_MALI_ID)
@@ -58,6 +63,14 @@ class MainFragment : Fragment() {
             val intent = Intent(requireActivity(), EditActivity::class.java)
             startActivity(intent)
             requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
+        }
+
+        binding.cardPayment.setOnClickListener {
+            if (terminalUser["tahsilat"] as Boolean) {
+                toast(requireContext(),"Coming soon...",false)
+            } else {
+                toast(requireContext(),"Yetkiniz yok.",false)
+            }
         }
 
     }
