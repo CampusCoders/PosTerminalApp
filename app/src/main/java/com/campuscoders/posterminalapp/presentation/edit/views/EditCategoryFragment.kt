@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.campuscoders.posterminalapp.R
@@ -17,11 +20,14 @@ import com.campuscoders.posterminalapp.databinding.FragmentEditCategoryBinding
 import com.campuscoders.posterminalapp.presentation.EditActivity
 import com.campuscoders.posterminalapp.presentation.UpdateOrAddActivity
 import com.campuscoders.posterminalapp.presentation.edit.EditCategoryViewModel
+import com.campuscoders.posterminalapp.utils.FilterList
 import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.hide
 import com.campuscoders.posterminalapp.utils.show
 import com.campuscoders.posterminalapp.utils.toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class EditCategoryFragment: Fragment() {
 
@@ -57,6 +63,24 @@ class EditCategoryFragment: Fragment() {
 
         viewModel = ViewModelProvider(requireActivity())[EditCategoryViewModel::class.java]
 
+        var job: Job? = null
+
+        binding.textInputLayoutSearch.hide()
+
+        binding.textInputEditTextSearch.addTextChangedListener {
+            job?.cancel()
+            job = lifecycleScope.launch {
+                it?.let {
+                    if (it.toString().isNotEmpty()) {
+                        editCategoryAdapter.categoriesList = FilterList.bySearch(viewModel.statusCategoriesList.value?.data?: listOf(),it.toString())
+                        editCategoryAdapter.notifyDataSetChanged()
+                    } else {
+                        editCategoryAdapter.categoriesList = viewModel.statusCategoriesList.value?.data?: listOf()
+                    }
+                }
+            }
+        }
+
         ftransaction = requireActivity().supportFragmentManager.beginTransaction()
 
         val staggeredGridLayoutManager = StaggeredGridLayoutManager(3,LinearLayoutManager.VERTICAL)
@@ -64,7 +88,7 @@ class EditCategoryFragment: Fragment() {
         binding.recyclerViewEditCategory.layoutManager = staggeredGridLayoutManager
 
         editCategoryAdapter.setOnItemClickListener {
-            println("categoryId from editcategoryfragment -> $it")
+            binding.textInputEditTextSearch.setText("")
             editActivity?.changeFragment(it.toString())
         }
 
@@ -151,11 +175,21 @@ class EditCategoryFragment: Fragment() {
             intent.putExtra("category_or_product_id",-1)
             startActivity(intent)
             requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
+            binding.textInputEditTextSearch.setText("")
         }
         binding.floatingActionButtonMainAdd.setOnClickListener {
             toggleFabMenu()
         }
         binding.extendedFabSettings.setOnClickListener {
+            toggleFabMenu()
+        }
+        binding.floatingActionButtonSearch.setOnClickListener {
+            if (binding.textInputLayoutSearch.isVisible) {
+                editCategoryAdapter.categoriesList = viewModel.statusCategoriesList.value?.data?: listOf()
+                binding.textInputLayoutSearch.hide()
+            } else {
+                binding.textInputLayoutSearch.show()
+            }
             toggleFabMenu()
         }
     }

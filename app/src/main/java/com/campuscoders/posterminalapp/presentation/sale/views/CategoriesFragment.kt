@@ -4,19 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentCategoriesBinding
 import com.campuscoders.posterminalapp.presentation.SaleActivity
 import com.campuscoders.posterminalapp.presentation.sale.CategoriesViewModel
+import com.campuscoders.posterminalapp.utils.FilterList
 import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.hide
 import com.campuscoders.posterminalapp.utils.show
 import com.campuscoders.posterminalapp.utils.toast
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class CategoriesFragment : Fragment() {
 
@@ -45,6 +51,24 @@ class CategoriesFragment : Fragment() {
 
         saleActivity = activity as? SaleActivity
 
+        var job: Job? = null
+
+        binding.textInputLayoutSearch.hide()
+
+        binding.textInputEditTextSearch.addTextChangedListener {
+            job?.cancel()
+            job = lifecycleScope.launch {
+                it?.let {
+                    if (it.toString().isNotEmpty()) {
+                        categoriesAdapter.categoriesList = FilterList.bySearch(viewModel.statusCategoriesList.value?.data?: listOf(),it.toString())
+                        categoriesAdapter.notifyDataSetChanged()
+                    } else {
+                        categoriesAdapter.categoriesList = viewModel.statusCategoriesList.value?.data?: listOf()
+                    }
+                }
+            }
+        }
+
         setFabMenu()
 
         viewModel = ViewModelProvider(requireActivity())[CategoriesViewModel::class.java]
@@ -70,6 +94,7 @@ class CategoriesFragment : Fragment() {
                 ft.addToBackStack(null)
                 ft.commit()
             }
+            binding.textInputEditTextSearch.setText("")
         }
         observer()
     }
@@ -114,7 +139,13 @@ class CategoriesFragment : Fragment() {
 
         }
         binding.floatingActionButtonSearch.setOnClickListener {
-
+            if (binding.textInputLayoutSearch.isVisible) {
+                categoriesAdapter.categoriesList = viewModel.statusCategoriesList.value?.data?: listOf()
+                binding.textInputLayoutSearch.hide()
+            } else {
+                binding.textInputLayoutSearch.show()
+            }
+            toggleFabMenu()
         }
         binding.floatingActionButtonBarcode.setOnClickListener {
             saleActivity?.goToBarcodeActivity()

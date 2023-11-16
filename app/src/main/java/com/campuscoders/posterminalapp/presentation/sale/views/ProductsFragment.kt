@@ -4,18 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.campuscoders.posterminalapp.databinding.FragmentProductsBinding
 import com.campuscoders.posterminalapp.presentation.SaleActivity
 import com.campuscoders.posterminalapp.presentation.sale.BaseViewModel
+import com.campuscoders.posterminalapp.utils.FilterList
 import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.hide
 import com.campuscoders.posterminalapp.utils.show
 import com.campuscoders.posterminalapp.utils.toast
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class ProductsFragment: Fragment() {
 
@@ -41,6 +47,24 @@ class ProductsFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var job: Job? = null
+
+        binding.textInputLayoutSearch.hide()
+
+        binding.textInputEditTextSearch.addTextChangedListener {
+            job?.cancel()
+            job = lifecycleScope.launch {
+                it?.let {
+                    if(it.toString().isNotEmpty()) {
+                        productsAdapter.products = FilterList.bySearch(baseViewModel.statusProductsList.value?.data?: listOf(),it.toString())
+                    } else {
+                        productsAdapter.products = baseViewModel.statusProductsList.value?.data?: listOf()
+                    }
+                    productsAdapter.notifyDataSetChanged()
+                }
+            }
+        }
 
         saleActivity = activity as? SaleActivity
         saleActivity?.setEnabledShoppingCartIcon(true)
@@ -126,7 +150,13 @@ class ProductsFragment: Fragment() {
 
         }
         binding.floatingActionButtonSearch.setOnClickListener {
-
+            if (binding.textInputLayoutSearch.isVisible) {
+                productsAdapter.products = baseViewModel.statusProductsList.value?.data?: listOf()
+                binding.textInputLayoutSearch.hide()
+            } else {
+                binding.textInputLayoutSearch.show()
+            }
+            toggleFabMenu()
         }
         binding.floatingActionButtonBarcode.setOnClickListener {
             saleActivity?.goToBarcodeActivity()

@@ -9,9 +9,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.campuscoders.posterminalapp.R
@@ -21,6 +24,7 @@ import com.campuscoders.posterminalapp.presentation.UpdateOrAddActivity
 import com.campuscoders.posterminalapp.presentation.edit.EditProductViewModel
 import com.campuscoders.posterminalapp.presentation.sale.views.BarcodeScannerActivity
 import com.campuscoders.posterminalapp.utils.CustomSharedPreferences
+import com.campuscoders.posterminalapp.utils.FilterList
 import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.glide
 import com.campuscoders.posterminalapp.utils.hide
@@ -29,6 +33,8 @@ import com.campuscoders.posterminalapp.utils.show
 import com.campuscoders.posterminalapp.utils.toCent
 import com.campuscoders.posterminalapp.utils.toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class EditProductFragment : Fragment() {
 
@@ -62,6 +68,24 @@ class EditProductFragment : Fragment() {
 
         viewModel = ViewModelProvider(requireActivity())[EditProductViewModel::class.java]
         ftransaction = requireActivity().supportFragmentManager.beginTransaction()
+
+        var job: Job? = null
+
+        binding.textInputLayoutSearch.hide()
+
+        binding.textInputEditTextSearch.addTextChangedListener {
+            job?.cancel()
+            job = lifecycleScope.launch {
+                it?.let {
+                    if (it.toString().isNotEmpty()) {
+                        editProductAdapter.productsList = FilterList.bySearch(viewModel.statusProductsList.value?.data?: listOf(),it.toString())
+                    } else {
+                        editProductAdapter.productsList = viewModel.statusProductsList.value?.data?: listOf()
+                    }
+                    editProductAdapter.notifyDataSetChanged()
+                }
+            }
+        }
 
         arguments?.let {
             val categoryId = it.getString("categoryId")
@@ -172,6 +196,7 @@ class EditProductFragment : Fragment() {
             intent.putExtra("category_or_product_id", productId)
             startActivity(intent)
             requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
+            dialog.dismiss()
         }
 
         linearDelete.setOnClickListener {
@@ -211,6 +236,15 @@ class EditProductFragment : Fragment() {
 
         }
         binding.extendedFabSettings.setOnClickListener {
+            toggleFabMenu()
+        }
+        binding.floatingActionButtonSearch.setOnClickListener {
+            if (binding.textInputLayoutSearch.isVisible) {
+                editProductAdapter.productsList = viewModel.statusProductsList.value?.data?: listOf()
+                binding.textInputLayoutSearch.hide()
+            } else {
+                binding.textInputLayoutSearch.show()
+            }
             toggleFabMenu()
         }
     }
