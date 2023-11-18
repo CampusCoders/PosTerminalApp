@@ -21,5 +21,5 @@ interface CategoriesDao {
     suspend fun deleteCategoryById(categoryId: Int): Int
 
     @Query("SELECT * FROM Categories WHERE categoryId = :categoryId")
-    suspend fun getCategoryById(categoryId: Int): Categories?
+    suspend fun getCategoryById(categoryId: String): Categories?
 }

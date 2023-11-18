@@ -30,7 +30,9 @@ class UpdateOrAddCategoryFragment: Fragment() {
     private lateinit var viewModel: UpdateOrAddCategoryViewModel
 
     private val CAMERA_REQUEST_CODE = 1
+
     private lateinit var currentPhotoPath: String
+
     private var currentPhotoUri: String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,10 +46,9 @@ class UpdateOrAddCategoryFragment: Fragment() {
         viewModel = ViewModelProvider(requireActivity())[UpdateOrAddCategoryViewModel::class.java]
 
         arguments?.let {
-            val categoryId = it.getInt("category_or_product_id")
-            if (categoryId != -1) {
-                // ilgili category'nin id'si ile veriler ekrana basılacak
-                viewModel.getCategory(categoryId)
+            val categoryId = it.getString(requireActivity().getString(R.string.category_id_or_product_id))
+            categoryId?.let { ctgryId ->
+                viewModel.getCategory(ctgryId)
             }
         }
 

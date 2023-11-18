@@ -150,10 +150,11 @@ class EditCategoryFragment: Fragment() {
 
         linearEdit.setOnClickListener {
             val intent = Intent(requireActivity(),UpdateOrAddActivity::class.java)
-            intent.putExtra("from","category")
-            intent.putExtra("category_or_product_id",categoryId)
+            intent.putExtra(requireActivity().getString(R.string.navigation_from),requireActivity().getString(R.string.navigation_from_category))
+            intent.putExtra(requireActivity().getString(R.string.category_id_or_product_id), categoryId.toString())
             startActivity(intent)
             requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
+            dialog.dismiss()
         }
 
         linearDelete.setOnClickListener {
@@ -171,8 +172,7 @@ class EditCategoryFragment: Fragment() {
 
         binding.floatingActionButtonAdd.setOnClickListener {
             val intent = Intent(requireActivity(),UpdateOrAddActivity::class.java)
-            intent.putExtra("from","category")
-            intent.putExtra("category_or_product_id",-1)
+            intent.putExtra(requireActivity().getString(R.string.navigation_from),requireActivity().getString(R.string.navigation_from_category))
             startActivity(intent)
             requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
             binding.textInputEditTextSearch.setText("")

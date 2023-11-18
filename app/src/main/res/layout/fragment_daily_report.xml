@@ -28,16 +28,6 @@
             app:cardElevation="4dp"
             app:strokeColor="@android:color/transparent">
 
-            <ImageView
-                android:id="@+id/imageViewDocumentSearch"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="center"
-                android:layout_margin="4dp"
-                android:focusable="true"
-                android:src="@drawable/file_document"
-                app:tint="@color/background"/>
-
         </com.google.android.material.card.MaterialCardView>
 
     </com.google.android.material.appbar.MaterialToolbar>
@@ -156,7 +146,6 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:hint="Durum"
                 android:textColorHint="@color/white"
@@ -186,7 +175,6 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:hint="Belgeler"
                 android:textColorHint="@color/white"
@@ -216,7 +204,6 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:hint="Gün"
                 android:textColorHint="@color/white"

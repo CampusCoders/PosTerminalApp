@@ -90,4 +90,8 @@
     <string name="adapter_e_receipt">E-Fatura</string>
     <string name="adapter_e_archive_receipt">E-Arşiv Fatura</string>
     <string name="add_product">ürünü sepetinize eklendi.</string>
+    <string name="navigation_from">from</string>
+    <string name="navigation_from_category">category</string>
+    <string name="navigation_from_product">product</string>
+    <string name="category_id_or_product_id">category_id_or_product_id</string>
 </resources>

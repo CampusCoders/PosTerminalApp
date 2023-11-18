@@ -6,7 +6,7 @@ import com.campuscoders.posterminalapp.utils.Resource
 import javax.inject.Inject
 
 class FetchCategoryByIdUseCase @Inject constructor(private val repository: EditRepository) {
-    suspend fun executeFetchCategoryById(categoryId: Int): Resource<Categories> {
+    suspend fun executeFetchCategoryById(categoryId: String): Resource<Categories> {
         return try {
             val response = repository.fetchCategoryById(categoryId)
             response?.let {

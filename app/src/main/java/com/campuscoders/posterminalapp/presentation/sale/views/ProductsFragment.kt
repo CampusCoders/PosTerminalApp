@@ -146,9 +146,6 @@ class ProductsFragment: Fragment() {
         binding.extendedFabSettings.setOnClickListener {
             toggleFabMenu()
         }
-        binding.floatingActionButtonBack.setOnClickListener {
-
-        }
         binding.floatingActionButtonSearch.setOnClickListener {
             if (binding.textInputLayoutSearch.isVisible) {
                 productsAdapter.products = baseViewModel.statusProductsList.value?.data?: listOf()

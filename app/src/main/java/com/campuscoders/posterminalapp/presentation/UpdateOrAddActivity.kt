@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentTransaction
 import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.presentation.edit.views.UpdateOrAddCategoryFragment
+import com.campuscoders.posterminalapp.presentation.edit.views.UpdateOrAddProductFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.NullPointerException
 
@@ -20,32 +21,30 @@ class UpdateOrAddActivity : AppCompatActivity() {
         ftransaction = supportFragmentManager.beginTransaction()
 
         val intent = intent
-        val destinationValue = intent.getStringExtra("from")
-        val categoryOrProductId = intent.getIntExtra("category_or_product_id",-1)
+        val destinationValue = intent.getStringExtra(getString(R.string.navigation_from))
+        val categoryOrProductId = intent.getStringExtra(getString(R.string.category_id_or_product_id))
 
         destinationValue?.let {
             when(it) {
-                "category" -> {
-                    ftransaction?.let {
+                getString(R.string.navigation_from_category) -> {
+                    ftransaction?.let { ft ->
                         val updateOrAddCategoryFragment = UpdateOrAddCategoryFragment()
                         val bundle = Bundle()
-                        bundle.putInt("category_or_product_id",categoryOrProductId)
+                        bundle.putString(getString(R.string.category_id_or_product_id), categoryOrProductId)
                         updateOrAddCategoryFragment.arguments = bundle
-                        it.replace(R.id.fragmentContainerViewUpdateOrEditActivity,UpdateOrAddCategoryFragment())
-                        it.commit()
+                        ft.replace(R.id.fragmentContainerViewUpdateOrEditActivity, updateOrAddCategoryFragment)
+                        ft.commit()
                     }
                 }
-                "product" -> {
-                    /*
-                    ftransaction?.let {
+                getString(R.string.navigation_from_product) -> {
+                    ftransaction?.let { ft ->
                         val updateOrAddProductFragment = UpdateOrAddProductFragment()
                         val bundle = Bundle()
-                        bundle.putString("update_or_add",updateOrAdd)
+                        bundle.putString(getString(R.string.category_id_or_product_id), categoryOrProductId)
                         updateOrAddProductFragment.arguments = bundle
-                        it.replace(R.id.fragmentContainerViewUpdateOrEditActivity,UpdateOrAddProductFragment())
-                        it.commit()
+                        ft.replace(R.id.fragmentContainerViewUpdateOrEditActivity, updateOrAddProductFragment)
+                        ft.commit()
                     }
-                    */
                 }
                 else -> throw NullPointerException()
             }

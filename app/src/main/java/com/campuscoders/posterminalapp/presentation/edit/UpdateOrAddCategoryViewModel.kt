@@ -20,7 +20,7 @@ class UpdateOrAddCategoryViewModel @Inject constructor(
     val statusFetchedCategory: LiveData<Resource<Categories>>
         get() = _statusFetchedCategory
 
-    fun getCategory(categoryId: Int) {
+    fun getCategory(categoryId: String) {
         _statusFetchedCategory.value = Resource.Loading(null)
         viewModelScope.launch {
             val response = fetchCategoryByIdUseCase.executeFetchCategoryById(categoryId)

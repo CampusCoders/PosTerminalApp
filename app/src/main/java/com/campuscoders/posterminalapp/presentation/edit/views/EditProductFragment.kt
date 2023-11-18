@@ -147,7 +147,6 @@ class EditProductFragment : Fragment() {
                     toast(requireContext(), "Ürün silindi.", false)
                 }
                 is Resource.Loading -> {
-                    // loading popup
                     binding.progressBarEditProduct.show()
                 }
                 is Resource.Error -> {
@@ -192,8 +191,8 @@ class EditProductFragment : Fragment() {
 
         linearEdit.setOnClickListener {
             val intent = Intent(requireActivity(), UpdateOrAddActivity::class.java)
-            intent.putExtra("from", "product")
-            intent.putExtra("category_or_product_id", productId)
+            intent.putExtra(requireActivity().getString(R.string.navigation_from), requireActivity().getString(R.string.navigation_from_product))
+            intent.putExtra(requireActivity().getString(R.string.category_id_or_product_id), productId.toString())
             startActivity(intent)
             requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
             dialog.dismiss()

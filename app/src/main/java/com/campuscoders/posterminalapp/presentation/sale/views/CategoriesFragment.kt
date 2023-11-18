@@ -135,9 +135,6 @@ class CategoriesFragment : Fragment() {
         binding.extendedFabSettings.setOnClickListener {
             toggleFabMenu()
         }
-        binding.floatingActionButtonBack.setOnClickListener {
-
-        }
         binding.floatingActionButtonSearch.setOnClickListener {
             if (binding.textInputLayoutSearch.isVisible) {
                 categoriesAdapter.categoriesList = viewModel.statusCategoriesList.value?.data?: listOf()
