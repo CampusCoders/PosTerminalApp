@@ -31,9 +31,13 @@ class UpdateOrAddCategoryFragment: Fragment() {
 
     private val CAMERA_REQUEST_CODE = 1
 
+    private var isAdd = true
+
     private lateinit var currentPhotoPath: String
 
     private var currentPhotoUri: String = ""
+
+    private var categoryFromDb: Categories? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentUpdateOrAddCategoryBinding.inflate(inflater,container,false)
@@ -49,6 +53,7 @@ class UpdateOrAddCategoryFragment: Fragment() {
             val categoryId = it.getString(requireActivity().getString(R.string.category_id_or_product_id))
             categoryId?.let { ctgryId ->
                 viewModel.getCategory(ctgryId)
+                isAdd = false
             }
         }
 
@@ -64,7 +69,14 @@ class UpdateOrAddCategoryFragment: Fragment() {
 
         binding.buttonAdd.setOnClickListener {
             if (areTheFieldsValid()) {
-                // viewModel.someMethod(getValues())
+                if (isAdd) {
+                    val category = getCategory()
+                    viewModel.addCategory(category)
+                } else {
+                    getChangedCategory()?.let {changedCtgry ->
+                        viewModel.updateCategory(changedCtgry)
+                    }
+                }
             }
         }
 
@@ -77,7 +89,36 @@ class UpdateOrAddCategoryFragment: Fragment() {
                 is Resource.Success -> {
                     it.data?.let {category ->
                         setCategoryInfos(category)
+                        categoryFromDb = category
                     }
+                }
+                is Resource.Loading -> {
+                    // loading popup or progressbar
+                }
+                is Resource.Error -> {
+                    toast(requireContext(),it.message?:"Error!",false)
+                }
+            }
+        }
+        viewModel.statusAddCategory.observe(viewLifecycleOwner) {
+            when(it) {
+                is Resource.Success -> {
+                    // toast
+                    requireActivity().finish()
+                }
+                is Resource.Loading -> {
+                    // loading popup or progressbar
+                }
+                is Resource.Error -> {
+                    toast(requireContext(),it.message?:"Error!",false)
+                }
+            }
+        }
+        viewModel.statusUpdateCategory.observe(viewLifecycleOwner) {
+            when(it) {
+                is Resource.Success -> {
+                    // toast
+                    requireActivity().finish()
                 }
                 is Resource.Loading -> {
                     // loading popup or progressbar
@@ -90,6 +131,7 @@ class UpdateOrAddCategoryFragment: Fragment() {
     }
 
     private fun setCategoryInfos(category: Categories) {
+        binding.buttonAdd.text = "Güncelle"
         binding.textInputEditTextCategoryCode.setText(category.categoryCode)
         binding.textInputEditTextCategoryName.setText(category.categoryName)
         binding.textInputEditTextDescription.setText(category.categoryDescription)
@@ -135,7 +177,18 @@ class UpdateOrAddCategoryFragment: Fragment() {
         }
     }
 
-    private fun getValues(): Categories {
+    private fun getChangedCategory(): Categories? {
+        categoryFromDb?.apply {
+            this.categoryCode = binding.textInputEditTextCategoryCode.text.toString();
+            this.categoryName = binding.textInputEditTextCategoryName.text.toString();
+            this.categoryDescription = binding.textInputEditTextDescription.text.toString();
+            this.categoryImage = currentPhotoUri
+        }
+
+        return categoryFromDb
+    }
+
+    private fun getCategory(): Categories {
         val categoryCode = binding.textInputEditTextCategoryCode.text.toString()
         val categoryName = binding.textInputEditTextCategoryName.text.toString()
         val categoryDescription = binding.textInputEditTextDescription.text.toString()

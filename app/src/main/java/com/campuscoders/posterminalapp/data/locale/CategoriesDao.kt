@@ -3,6 +3,7 @@ package com.campuscoders.posterminalapp.data.locale
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.campuscoders.posterminalapp.domain.model.Categories
 
 @Dao
@@ -22,4 +23,7 @@ interface CategoriesDao {
 
     @Query("SELECT * FROM Categories WHERE categoryId = :categoryId")
     suspend fun getCategoryById(categoryId: String): Categories?
+
+    @Update
+    suspend fun updateCategory(category: Categories): Int
 }

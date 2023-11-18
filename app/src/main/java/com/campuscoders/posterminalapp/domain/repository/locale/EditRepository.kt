@@ -11,4 +11,6 @@ interface EditRepository {
     suspend fun fetchCategoryById(categoryId: String): Categories?
 
     suspend fun deleteProductByCategoryId(categoryId: Int): Int
+
+    suspend fun updateCategory(categories: Categories): Int
 }
