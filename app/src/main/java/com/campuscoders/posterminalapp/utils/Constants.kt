@@ -41,6 +41,7 @@ object Constants {
     const val DATE_FORMAT = "yyyy-MM-dd"
     const val BARCODE = "barcode"
     const val REQUEST_CODE = 0
+    const val CAMERA_REQUEST_CODE = 1
 
     const val TEST_PIN = "00000"
     const val DURATION = 60000

@@ -15,6 +15,7 @@ import com.campuscoders.posterminalapp.R
 import com.campuscoders.posterminalapp.databinding.FragmentUpdateOrAddCategoryBinding
 import com.campuscoders.posterminalapp.domain.model.Categories
 import com.campuscoders.posterminalapp.presentation.edit.UpdateOrAddCategoryViewModel
+import com.campuscoders.posterminalapp.utils.Constants.CAMERA_REQUEST_CODE
 import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.glide
 import com.campuscoders.posterminalapp.utils.placeHolderProgressBar
@@ -28,8 +29,6 @@ class UpdateOrAddCategoryFragment: Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: UpdateOrAddCategoryViewModel
-
-    private val CAMERA_REQUEST_CODE = 1
 
     private var isAdd = true
 
@@ -158,9 +157,9 @@ class UpdateOrAddCategoryFragment: Fragment() {
     private fun createImageFile(): File? {
         val storageDir = requireActivity().getExternalFilesDir("images")
         val imageFileName = "JPEG_${System.currentTimeMillis()}.jpg"
-        val image = File(storageDir,imageFileName)
-        currentPhotoPath = image.absolutePath
-        return image
+        val imageFile = File(storageDir,imageFileName)
+        currentPhotoPath = imageFile.absolutePath
+        return imageFile
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -173,7 +172,7 @@ class UpdateOrAddCategoryFragment: Fragment() {
             binding.imageViewFromCamera.glide(currentPhotoUri, placeHolderProgressBar(requireContext()))
 
             // currentPhotoPath -> /storage/emulated/0/Android/data/com.campuscoders.posterminalapp/files/images/JPEG_1694090102822.jpg
-            // urrentPhotoUri   -> file:/storage/emulated/0/Android/data/com.campuscoders.posterminalapp/files/images/JPEG_1694090102822.jpg
+            // currentPhotoUri   -> file:/storage/emulated/0/Android/data/com.campuscoders.posterminalapp/files/images/JPEG_1694090102822.jpg
         }
     }
 

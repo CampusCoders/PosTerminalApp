@@ -51,6 +51,8 @@ class EditProductFragment : Fragment() {
 
     private var productId = 0
 
+    private lateinit var productCategoryId: String
+
     private val editProductAdapter by lazy {
         EditProductAdapter()
     }
@@ -67,6 +69,7 @@ class EditProductFragment : Fragment() {
         val terminalUser = customSharedPreferences.getTerminalUserLogin()
 
         viewModel = ViewModelProvider(requireActivity())[EditProductViewModel::class.java]
+
         ftransaction = requireActivity().supportFragmentManager.beginTransaction()
 
         var job: Job? = null
@@ -88,8 +91,8 @@ class EditProductFragment : Fragment() {
         }
 
         arguments?.let {
-            val categoryId = it.getString("categoryId")
-            viewModel.getProductsByCategoryId(categoryId.toString())
+            productCategoryId = it.getString("categoryId")?:"-1"
+            viewModel.getProductsByCategoryId(productCategoryId)
         }
 
         val staggeredGridLayoutManager = StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL)
@@ -182,8 +185,7 @@ class EditProductFragment : Fragment() {
     }
 
     private fun showEditOrDeletePopup(productId: Int, deleteProduct: Boolean) {
-        val dialogView =
-            LayoutInflater.from(requireContext()).inflate(R.layout.pop_up_edit_or_delete_item, null)
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.pop_up_edit_or_delete_item, null)
         val dialog = MaterialAlertDialogBuilder(requireContext()).setView(dialogView).create()
 
         val linearEdit = dialogView.findViewById<LinearLayout>(R.id.linearLayoutEdit)
@@ -193,6 +195,7 @@ class EditProductFragment : Fragment() {
             val intent = Intent(requireActivity(), UpdateOrAddActivity::class.java)
             intent.putExtra(requireActivity().getString(R.string.navigation_from), requireActivity().getString(R.string.navigation_from_product))
             intent.putExtra(requireActivity().getString(R.string.category_id_or_product_id), productId.toString())
+            intent.putExtra(requireActivity().getString(R.string.products_category_id), productCategoryId)
             startActivity(intent)
             requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
             dialog.dismiss()
@@ -201,10 +204,10 @@ class EditProductFragment : Fragment() {
         linearDelete.setOnClickListener {
             if (deleteProduct) {
                 viewModel.deleteProduct(productId)
-                dialog.dismiss()
             } else {
                 toast(requireContext(),"Yetkiniz yok.",false)
             }
+            dialog.dismiss()
         }
 
         dialog.show()

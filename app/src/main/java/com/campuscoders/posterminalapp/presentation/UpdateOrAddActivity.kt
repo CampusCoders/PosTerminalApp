@@ -23,6 +23,7 @@ class UpdateOrAddActivity : AppCompatActivity() {
         val intent = intent
         val destinationValue = intent.getStringExtra(getString(R.string.navigation_from))
         val categoryOrProductId = intent.getStringExtra(getString(R.string.category_id_or_product_id))
+        val productsCategoryId = intent.getStringExtra(getString(R.string.products_category_id))
 
         destinationValue?.let {
             when(it) {
@@ -41,6 +42,7 @@ class UpdateOrAddActivity : AppCompatActivity() {
                         val updateOrAddProductFragment = UpdateOrAddProductFragment()
                         val bundle = Bundle()
                         bundle.putString(getString(R.string.category_id_or_product_id), categoryOrProductId)
+                        bundle.putString(getString(R.string.products_category_id),productsCategoryId)
                         updateOrAddProductFragment.arguments = bundle
                         ft.replace(R.id.fragmentContainerViewUpdateOrEditActivity, updateOrAddProductFragment)
                         ft.commit()

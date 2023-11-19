@@ -64,6 +64,8 @@
     <string name="item_delete">Sil</string>
     <string name="item_edit">Düzenle</string>
     <string name="camera_category">Kategori görselini ekleyiniz.</string>
+    <string name="camera_product">Ürün görselini ekleyiniz.</string>
+    <string name="warn_price">Lütfen, fiyatı yazarken virgül kullanınız.</string>
     <string name="api_level_warn">Required min API level is 26.</string>
     <string name="order_successful">Sipariş oluşturuldu</string>
     <string name="order_cancel">Sipariş iptal edildi</string>
@@ -94,4 +96,5 @@
     <string name="navigation_from_category">category</string>
     <string name="navigation_from_product">product</string>
     <string name="category_id_or_product_id">category_id_or_product_id</string>
+    <string name="products_category_id">productsCategoryId</string>
 </resources>
