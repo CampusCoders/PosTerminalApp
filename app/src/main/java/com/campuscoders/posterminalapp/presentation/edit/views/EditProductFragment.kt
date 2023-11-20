@@ -226,8 +226,8 @@ class EditProductFragment : Fragment() {
         }
         binding.floatingActionButtonAdd.setOnClickListener {
             val intent = Intent(requireActivity(), UpdateOrAddActivity::class.java)
-            intent.putExtra("from", "product")
-            intent.putExtra("category_or_product_id", -1)
+            intent.putExtra(requireActivity().getString(R.string.navigation_from), requireActivity().getString(R.string.navigation_from_product))
+            intent.putExtra(requireActivity().getString(R.string.products_category_id), productCategoryId)
             startActivity(intent)
             requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         }

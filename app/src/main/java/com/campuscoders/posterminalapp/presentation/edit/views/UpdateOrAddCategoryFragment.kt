@@ -102,7 +102,7 @@ class UpdateOrAddCategoryFragment: Fragment() {
         viewModel.statusAddCategory.observe(viewLifecycleOwner) {
             when(it) {
                 is Resource.Success -> {
-                    // toast
+                    toast(requireContext(),"Kategori eklendi.",false)
                     requireActivity().finish()
                 }
                 is Resource.Loading -> {
@@ -116,7 +116,7 @@ class UpdateOrAddCategoryFragment: Fragment() {
         viewModel.statusUpdateCategory.observe(viewLifecycleOwner) {
             when(it) {
                 is Resource.Success -> {
-                    // toast
+                    toast(requireContext(),"Kategori güncellendi.",false)
                     requireActivity().finish()
                 }
                 is Resource.Loading -> {

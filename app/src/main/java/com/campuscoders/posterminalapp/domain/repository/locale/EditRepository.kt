@@ -1,6 +1,7 @@
 package com.campuscoders.posterminalapp.domain.repository.locale
 
 import com.campuscoders.posterminalapp.domain.model.Categories
+import com.campuscoders.posterminalapp.domain.model.Products
 
 interface EditRepository {
 
@@ -13,4 +14,6 @@ interface EditRepository {
     suspend fun deleteProductByCategoryId(categoryId: Int): Int
 
     suspend fun updateCategory(categories: Categories): Int
+
+    suspend fun updateProduct(products: Products): Int
 }

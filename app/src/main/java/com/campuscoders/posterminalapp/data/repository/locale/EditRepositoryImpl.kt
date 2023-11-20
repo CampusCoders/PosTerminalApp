@@ -3,6 +3,7 @@ package com.campuscoders.posterminalapp.data.repository.locale
 import com.campuscoders.posterminalapp.data.locale.CategoriesDao
 import com.campuscoders.posterminalapp.data.locale.ProductsDao
 import com.campuscoders.posterminalapp.domain.model.Categories
+import com.campuscoders.posterminalapp.domain.model.Products
 import com.campuscoders.posterminalapp.domain.repository.locale.EditRepository
 import javax.inject.Inject
 
@@ -29,5 +30,9 @@ class EditRepositoryImpl @Inject constructor(
 
     override suspend fun updateCategory(categories: Categories): Int {
         return categoriesDao.updateCategory(categories)
+    }
+
+    override suspend fun updateProduct(products: Products): Int {
+        return productsDao.updateProduct(products)
     }
 }

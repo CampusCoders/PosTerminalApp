@@ -3,6 +3,7 @@ package com.campuscoders.posterminalapp.data.locale
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.campuscoders.posterminalapp.domain.model.Products
 
 @Dao
@@ -31,4 +32,7 @@ interface ProductsDao {
 
     @Query("DELETE FROM Products WHERE product_category_id = :categoryId")
     suspend fun deleteProductByCategoryId(categoryId: Int): Int
+
+    @Update
+    suspend fun updateProduct(product: Products): Int
 }

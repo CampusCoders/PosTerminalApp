@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import android.app.Activity.RESULT_OK
+import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.campuscoders.posterminalapp.R
@@ -16,6 +17,7 @@ import com.campuscoders.posterminalapp.databinding.FragmentUpdateOrAddProductBin
 import com.campuscoders.posterminalapp.domain.model.Products
 import com.campuscoders.posterminalapp.presentation.edit.UpdateOrAddProductViewModel
 import com.campuscoders.posterminalapp.utils.Constants.CAMERA_REQUEST_CODE
+import com.campuscoders.posterminalapp.utils.Resource
 import com.campuscoders.posterminalapp.utils.glide
 import com.campuscoders.posterminalapp.utils.placeHolderProgressBar
 import com.campuscoders.posterminalapp.utils.toCent
@@ -53,10 +55,12 @@ class UpdateOrAddProductFragment: Fragment() {
             val productId = bundle.getString(requireActivity().getString(R.string.category_id_or_product_id))
             productsCategoryId = bundle.getString(requireActivity().getString(R.string.products_category_id))
             productId?.let {
-                // viewModel.getProduct(it)
+                viewModel.getProduct(it)
                 isAdd = false
             }
         }
+
+        setArrayAdapter()
 
         binding.materialCardViewCamera.setOnClickListener {
             openCamera()
@@ -70,10 +74,10 @@ class UpdateOrAddProductFragment: Fragment() {
             if (areTheFieldsValid()) {
                 if (isAdd) {
                     val product = getProduct()
-                    //viewModel.addProduct(product)
+                    viewModel.addProduct(product)
                 } else {
                     getChangedProduct()?.let {changedPrdct ->
-                        //viewModel.updateProduct(changedPrdct)
+                        viewModel.updateProduct(changedPrdct)
                     }
                 }
             }
@@ -83,7 +87,50 @@ class UpdateOrAddProductFragment: Fragment() {
     }
 
     private fun observer() {
-
+        viewModel.statusFetchedProduct.observe(viewLifecycleOwner) {
+            when(it) {
+                is Resource.Success -> {
+                    it.data?.let {product ->
+                        setProductInfos(product)
+                        productFromDb = product
+                    }
+                }
+                is Resource.Loading -> {
+                    // loading popup or progressbar
+                }
+                is Resource.Error -> {
+                    toast(requireContext(),it.message?:"Error!",false)
+                }
+            }
+        }
+        viewModel.statusAddProduct.observe(viewLifecycleOwner) {
+            when(it) {
+                is Resource.Success -> {
+                    toast(requireContext(),"Ürün eklendi.",false)
+                    requireActivity().finish()
+                }
+                is Resource.Loading -> {
+                    // loading popup or progressbar
+                }
+                is Resource.Error -> {
+                    toast(requireContext(),it.message?:"Error!",false)
+                }
+            }
+        }
+        viewModel.statusUpdateProduct.observe(viewLifecycleOwner) {
+            when(it) {
+                is Resource.Success -> {
+                    toast(requireContext(),"Ürün güncellendi.",false)
+                    requireActivity().finish()
+                }
+                is Resource.Loading -> {
+                    // loading popup or progressbar
+                }
+                is Resource.Error -> {
+                    toast(requireContext(),it.message?:"Error!",false)
+                }
+            }
+        }
     }
 
     private fun setProductInfos(product: Products) {
@@ -150,7 +197,7 @@ class UpdateOrAddProductFragment: Fragment() {
         val productBarcode = binding.textInputEditTextProductBarcode.text.toString()
         val productName = binding.textInputEditTextProductName.text.toString()
         val productDescription = binding.textInputEditTextDescription.text.toString()
-        val productKdv = binding.AutoCompleteTextViewKDV.text.toString()
+        val productKdv = binding.AutoCompleteTextViewKDV.text.toString().drop(1)
         val productImage = currentPhotoUri
         val splittedPrice = binding.textInputEditTextProductPrice.text.toString().split(",")
         val productPrice = splittedPrice[0]
@@ -177,10 +224,18 @@ class UpdateOrAddProductFragment: Fragment() {
         } else if (currentPhotoUri == "") {
             toast(requireContext(),requireActivity().getString(R.string.camera_product),false)
             return false
-        } else if (binding.textInputEditTextProductPrice.text.toString().contains(",")) {
+        } else if (!(binding.textInputEditTextProductPrice.text.toString().contains(","))) {
             toast(requireContext(),requireActivity().getString(R.string.warn_price),false)
+            return false
         }
         return true
+    }
+
+    private fun setArrayAdapter() {
+        val taxValues = arrayOf("%0", "%10", "%20")
+        val arrayAdapter = ArrayAdapter<String>(requireContext(),android.R.layout.simple_dropdown_item_1line,taxValues)
+        binding.AutoCompleteTextViewKDV.setAdapter(arrayAdapter)
+        binding.AutoCompleteTextViewKDV.setText("%0",false)
     }
 
     override fun onDestroyView() {
