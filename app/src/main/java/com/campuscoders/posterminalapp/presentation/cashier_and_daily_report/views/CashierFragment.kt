@@ -43,7 +43,7 @@ class CashierFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val customSharedPreferences = CustomSharedPreferences(requireContext())
-        terminalUser = customSharedPreferences.getTerminalUserLogin()
+        terminalUser = customSharedPreferences.getTerminalUserLogin(requireContext())
 
         viewModel = ViewModelProvider(requireActivity())[CashierViewModel::class.java]
         ftransaction = requireActivity().supportFragmentManager.beginTransaction()
@@ -60,14 +60,14 @@ class CashierFragment : Fragment() {
         }
 
         binding.buttonAddCashier.setOnClickListener {
-            if (terminalUser["kasiyer_ekleme_duzenleme"] as Boolean) {
+            if (terminalUser[requireContext().getString(R.string.user_kasiyer_ekleme_duzenleme)] as Boolean) {
                 ftransaction?.let {
                     it.replace(R.id.fragmentContainerViewCashierAndDailyReportActivity, AddCashierFragment())
                     it.addToBackStack(null)
                     it.commit()
                 }
             } else {
-                toast(requireContext(),"Yetkiniz yok.",false)
+                toast(requireContext(),requireContext().getString(R.string.no_authorization),false)
             }
         }
 
@@ -111,7 +111,7 @@ class CashierFragment : Fragment() {
         val linearDelete = dialogView.findViewById<LinearLayout>(R.id.linearLayoutDelete)
 
         linearEdit.setOnClickListener {
-            if (terminalUser["kasiyer_ekleme_duzenleme"] as Boolean) {
+            if (terminalUser[requireContext().getString(R.string.user_kasiyer_ekleme_duzenleme)] as Boolean) {
                 val addCashierFragment = AddCashierFragment()
                 val bundle = Bundle()
                 bundle.putInt("terminal_id",terminalId)
@@ -122,17 +122,17 @@ class CashierFragment : Fragment() {
                     it.commit()
                 }
             } else {
-                toast(requireContext(),"Yetkiniz yok.",false)
+                toast(requireContext(),requireContext().getString(R.string.no_authorization),false)
             }
 
             dialog.dismiss()
         }
 
         linearDelete.setOnClickListener {
-            if (terminalUser["kasiyer_silme"] as Boolean) {
+            if (terminalUser[requireContext().getString(R.string.user_kasiyer_silme)] as Boolean) {
                 viewModel.deleteCashier(terminalId)
             } else {
-                toast(requireContext(),"Yetkiniz yok.",false)
+                toast(requireContext(),requireContext().getString(R.string.no_authorization),false)
             }
             dialog.dismiss()
         }

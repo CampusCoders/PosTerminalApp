@@ -123,12 +123,12 @@ class LoginTwoViewModel @Inject constructor(
             terminalUser.terminalUserKasiyerGoruntuleme!!,terminalUser.terminalUserKasiyerEklemeDuzenleme!!,terminalUser.terminalUserKasiyerSilme!!,
             terminalUser.terminalUserUrunGoruntuleme!!,terminalUser.terminalUserUrunEklemeDuzenleme!!,terminalUser.terminalUserUrunSilme!!,
             terminalUser.terminalUserTumRaporlariGoruntule!!,terminalUser.terminalUserRaporKaydetGonder!!,terminalUser.terminalUserPosYonetimi!!,
-            terminalUser.terminalUserAdmin!!)
+            terminalUser.terminalUserAdmin!!, context)
 
         if (isAdmin) {
-            customSharedPreferences.setMainUserLoginRememberMeManager(true)
+            customSharedPreferences.setMainUserLoginRememberMeManager(true, context)
         } else {
-            customSharedPreferences.setMainUserLoginRememberMeCashier(true)
+            customSharedPreferences.setMainUserLoginRememberMeCashier(true, context)
         }
     }
 
@@ -152,7 +152,7 @@ class LoginTwoViewModel @Inject constructor(
                     if (passwordFromCallBack == password) {
                         _statusControlPassword.value = Resource.Success(true)
                         val customSharedPreferences = CustomSharedPreferences(context)
-                        customSharedPreferences.setMainUserLoginRememberMeManager(false)
+                        customSharedPreferences.setMainUserLoginRememberMeManager(false, context)
                     } else {
                         _statusControlPassword.value = Resource.Error(false, context.getString(R.string.not_matched))
                     }
@@ -173,7 +173,7 @@ class LoginTwoViewModel @Inject constructor(
                     if (passwordFromCallBack == password) {
                         _statusControlPassword.value = Resource.Success(true)
                         val customSharedPreferences = CustomSharedPreferences(context)
-                        customSharedPreferences.setMainUserLoginRememberMeCashier(false)
+                        customSharedPreferences.setMainUserLoginRememberMeCashier(false, context)
                     } else {
                         _statusControlPassword.value = Resource.Error(false, context.getString(R.string.not_matched))
                     }

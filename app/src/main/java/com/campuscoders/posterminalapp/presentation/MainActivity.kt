@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val customSharedPreferences = CustomSharedPreferences(this)
-        val terminalUser = customSharedPreferences.getTerminalUserLogin()
+        val terminalUser = customSharedPreferences.getTerminalUserLogin(this)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val writePermission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -67,21 +67,21 @@ class MainActivity : AppCompatActivity() {
         binding.menulayout.navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.itemDailyReport -> {
-                    if (terminalUser["tum_raporları_goruntuleme"] as Boolean) {
+                    if (terminalUser[getString(R.string.user_tum_raporları_goruntuleme)] as Boolean) {
                         intent.putExtra("navigation", "1")
                         startActivity(intent)
                         overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
                     } else {
-                        Toast.makeText(this,"Yetkiniz yok.",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this,getString(R.string.no_authorization),Toast.LENGTH_SHORT).show()
                     }
                 }
                 R.id.itemCashierOperations -> {
-                    if (terminalUser["kasiyer_goruntuleme"] as Boolean) {
+                    if (terminalUser[this.getString(R.string.user_kasiyer_goruntuleme)] as Boolean) {
                         intent.putExtra("navigation", "2")
                         startActivity(intent)
                         overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
                     } else {
-                        Toast.makeText(this,"Yetkiniz yok.",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this,getString(R.string.no_authorization),Toast.LENGTH_SHORT).show()
                     }
                 }
                 R.id.itemTerminalInformations -> {
@@ -100,8 +100,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun logOut() {
         val customSharedPreferences = CustomSharedPreferences(this)
-        customSharedPreferences.setMainUserLoginRememberMeManager(false)
-        customSharedPreferences.setMainUserLoginRememberMeCashier(false)
+        customSharedPreferences.setMainUserLoginRememberMeManager(false, this)
+        customSharedPreferences.setMainUserLoginRememberMeCashier(false, this)
         val intent = Intent(this,LoginActivity::class.java)
         intent.putExtra("logout","logout")
         startActivity(intent)
@@ -111,9 +111,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun showTerminalPopup() {
         val customSharedPreferences = CustomSharedPreferences(this)
-        val mainUserInfos = customSharedPreferences.getMainUserLogin()
-        val terminalNo = mainUserInfos["terminal_id"]
-        val uyeIsyeriNo = mainUserInfos["uye_isyeri_no"]
+        val mainUserInfos = customSharedPreferences.getMainUserLogin(this)
+        val terminalNo = mainUserInfos[getString(R.string.user_terminal_id)]
+        val uyeIsyeriNo = mainUserInfos[getString(R.string.user_uye_isyeri_no)]
         val versionName = this.packageManager.getPackageInfo(this.packageName, 0).versionName
         val androidVersion = Build.VERSION.RELEASE
         val serialNumber = Build.SERIAL

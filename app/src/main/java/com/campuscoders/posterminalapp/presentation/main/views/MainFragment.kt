@@ -36,7 +36,7 @@ class MainFragment : Fragment() {
         val intent = Intent(requireActivity(), CancelSaleEDocumentActivity::class.java)
 
         val customSharedPreferences = CustomSharedPreferences(requireContext())
-        val terminalUser = customSharedPreferences.getTerminalUserLogin()
+        val terminalUser = customSharedPreferences.getTerminalUserLogin(requireContext())
 
         binding.cardSaleStart.setOnClickListener {
             context?.showProgressDialog(Constants.LOADING_MALI_ID)
@@ -66,10 +66,10 @@ class MainFragment : Fragment() {
         }
 
         binding.cardPayment.setOnClickListener {
-            if (terminalUser["tahsilat"] as Boolean) {
+            if (terminalUser[requireContext().getString(R.string.user_tahsilat)] as Boolean) {
                 toast(requireContext(),"Coming soon...",false)
             } else {
-                toast(requireContext(),"Yetkiniz yok.",false)
+                toast(requireContext(),requireContext().getString(R.string.no_authorization),false)
             }
         }
 

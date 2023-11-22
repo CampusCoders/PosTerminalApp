@@ -135,16 +135,16 @@ class LoginTwoFragment : Fragment() {
     private fun getSharedPreferencesInfos() {
         binding.checkBoxRememberMe.isChecked = false
         val customSharedPreferences = CustomSharedPreferences(requireContext())
-        val manager = customSharedPreferences.getMainUserLogin()["remember_me_manager"] as Boolean
-        val cashier = customSharedPreferences.getMainUserLogin()["remember_me_terminal"] as Boolean
+        val manager = customSharedPreferences.getMainUserLogin(requireContext())[requireContext().getString(R.string.user_remember_me_manager)] as Boolean
+        val cashier = customSharedPreferences.getMainUserLogin(requireContext())[requireContext().getString(R.string.user_remember_me_terminal)] as Boolean
         if (manager && isAdmin) {
             binding.checkBoxRememberMe.isChecked = true
-            binding.textInputEditTextUyeNo.setText(customSharedPreferences.getMainUserLogin()["uye_isyeri_no"].toString())
-            binding.textInputEditTextPassword.setText(customSharedPreferences.getMainUserLogin()["password"].toString())
+            binding.textInputEditTextUyeNo.setText(customSharedPreferences.getMainUserLogin(requireContext())[requireContext().getString(R.string.user_uye_isyeri_no)].toString())
+            binding.textInputEditTextPassword.setText(customSharedPreferences.getMainUserLogin(requireContext())[requireContext().getString(R.string.user_password)].toString())
         } else if (cashier && !(isAdmin)) {
             binding.checkBoxRememberMe.isChecked = true
-            binding.textInputEditTextUyeNo.setText(customSharedPreferences.getTerminalUserLogin()["terminal_id"].toString())
-            binding.textInputEditTextPassword.setText(customSharedPreferences.getTerminalUserLogin()["password"].toString())
+            binding.textInputEditTextUyeNo.setText(customSharedPreferences.getTerminalUserLogin(requireContext())[requireContext().getString(R.string.user_terminal_id)].toString())
+            binding.textInputEditTextPassword.setText(customSharedPreferences.getTerminalUserLogin(requireContext())[requireContext().getString(R.string.user_password)].toString())
         }
     }
 

@@ -97,4 +97,27 @@
     <string name="navigation_from_product">product</string>
     <string name="category_id_or_product_id">category_id_or_product_id</string>
     <string name="products_category_id">productsCategoryId</string>
+    <string name="no_authorization">Yetkiniz yok.</string>
+
+    <string name="user_terminal_id">terminal_id</string>
+    <string name="user_vkn_tckn">vkn_tckn</string>
+    <string name="user_uye_isyeri_no">uye_isyeri_no</string>
+    <string name="user_password">password</string>
+    <string name="user_full_name">full_name</string>
+    <string name="user_date">date</string>
+    <string name="user_time">time</string>
+    <string name="user_iptal_iade">iptal_iade</string>
+    <string name="user_tahsilat">tahsilat</string>
+    <string name="user_kasiyer_goruntuleme">kasiyer_goruntuleme</string>
+    <string name="user_kasiyer_ekleme_duzenleme">kasiyer_ekleme_duzenleme</string>
+    <string name="user_kasiyer_silme">kasiyer_silme</string>
+    <string name="user_urun_goruntuleme">urun_goruntuleme</string>
+    <string name="user_urun_ekleme_duzenleme">urun_ekleme_duzenleme</string>
+    <string name="user_urun_silme">urun_silme</string>
+    <string name="user_tum_raporları_goruntuleme">tum_raporları_goruntuleme</string>
+    <string name="user_rapor_kaydet_gonder">rapor_kaydet_gonder</string>
+    <string name="user_pos_yonetimi">pos_yonetimi</string>
+    <string name="user_admin">admin</string>
+    <string name="user_remember_me_manager">remember_me_manager</string>
+    <string name="user_remember_me_terminal">remember_me_terminal</string>
 </resources>

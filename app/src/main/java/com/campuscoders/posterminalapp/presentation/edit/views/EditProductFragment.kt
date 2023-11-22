@@ -74,7 +74,7 @@ class EditProductFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         customSharedPreferences = CustomSharedPreferences(requireContext())
-        val terminalUser = customSharedPreferences.getTerminalUserLogin()
+        val terminalUser = customSharedPreferences.getTerminalUserLogin(requireContext())
 
         viewModel = ViewModelProvider(requireActivity())[EditProductViewModel::class.java]
 
@@ -108,19 +108,19 @@ class EditProductFragment : Fragment() {
         binding.recyclerViewEditProduct.layoutManager = staggeredGridLayoutManager
 
         editProductAdapter.setOnItemClickListener {
-            if (terminalUser["urun_goruntuleme"] as Boolean) {
+            if (terminalUser[requireContext().getString(R.string.user_urun_goruntuleme)] as Boolean) {
                 showProductDetailPopup(it)
             } else {
-                toast(requireContext(),"Yetkiniz yok.",false)
+                toast(requireContext(),requireContext().getString(R.string.no_authorization),false)
             }
         }
 
         editProductAdapter.setOnLongItemClickListener {
-            if (terminalUser["urun_ekleme_duzenleme"] as Boolean) {
-                showEditOrDeletePopup(it, terminalUser["urun_silme"] as Boolean)
+            if (terminalUser[requireContext().getString(R.string.user_urun_ekleme_duzenleme)] as Boolean) {
+                showEditOrDeletePopup(it, terminalUser[requireContext().getString(R.string.user_urun_silme)] as Boolean)
                 productId = it
             } else {
-                toast(requireContext(),"Yetkiniz yok.",false)
+                toast(requireContext(),requireContext().getString(R.string.no_authorization),false)
             }
         }
 
@@ -213,7 +213,7 @@ class EditProductFragment : Fragment() {
             if (deleteProduct) {
                 viewModel.deleteProduct(productId)
             } else {
-                toast(requireContext(),"Yetkiniz yok.",false)
+                toast(requireContext(),requireContext().getString(R.string.no_authorization),false)
             }
             dialog.dismiss()
         }

@@ -67,11 +67,11 @@ class AddCashierFragment : Fragment() {
 
     private fun getTerminalUser(): TerminalUsers {
         val customSharedPreferences = CustomSharedPreferences(requireContext())
-        val mainUserInfos = customSharedPreferences.getMainUserLogin()
+        val mainUserInfos = customSharedPreferences.getMainUserLogin(requireContext())
         return TerminalUsers(
             binding.textInputEditTextCashierNo.text.toString(),
-            mainUserInfos["vkn_tckn"].toString(),
-            mainUserInfos["uye_isyeri_no"].toString(),
+            mainUserInfos[requireContext().getString(R.string.user_vkn_tckn)].toString(),
+            mainUserInfos[requireContext().getString(R.string.user_uye_isyeri_no)].toString(),
             binding.textInputEditTextCashierNameSurname.text.toString(),
             binding.textInputEditTextPassword.text.toString(),
             TimeAndDate.getLocalDate(Constants.DATE_FORMAT),
@@ -93,11 +93,11 @@ class AddCashierFragment : Fragment() {
 
     private fun getUpdatedTerminalUser(): TerminalUsers {
         val customSharedPreferences = CustomSharedPreferences(requireContext())
-        val mainUserInfos = customSharedPreferences.getMainUserLogin()
+        val mainUserInfos = customSharedPreferences.getMainUserLogin(requireContext())
         return terminalUserFromDb.apply {
             terminalUserTerminalId = binding.textInputEditTextCashierNo.text.toString()
-            terminalUserVknTckn = mainUserInfos["vkn_tckn"].toString()
-            terminalUserUyeIsyeriNo = mainUserInfos["uye_isyeri_no"].toString()
+            terminalUserVknTckn = mainUserInfos[requireContext().getString(R.string.user_vkn_tckn)].toString()
+            terminalUserUyeIsyeriNo = mainUserInfos[requireContext().getString(R.string.user_uye_isyeri_no)].toString()
             terminalUserFullName = binding.textInputEditTextCashierNameSurname.text.toString()
             terminalUserPassword = binding.textInputEditTextPassword.text.toString()
             terminalUserDate = TimeAndDate.getLocalDate(Constants.DATE_FORMAT)

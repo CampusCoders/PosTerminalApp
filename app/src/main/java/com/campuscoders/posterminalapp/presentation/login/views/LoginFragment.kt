@@ -147,7 +147,7 @@ class LoginFragment : Fragment() {
                 )
             )
             sharedPreferences.setControl(false)
-            sharedPreferences.setMainUserLogin(TERMINAL_ID, VKN_TCKN, MEMBER_STORE, PASSWORD)
+            sharedPreferences.setMainUserLogin(TERMINAL_ID, VKN_TCKN, MEMBER_STORE, PASSWORD, requireContext())
         }
     }
 

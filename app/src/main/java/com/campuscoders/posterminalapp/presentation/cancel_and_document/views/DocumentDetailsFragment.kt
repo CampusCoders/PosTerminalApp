@@ -46,7 +46,7 @@ class DocumentDetailsFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         customSharedPreferences = CustomSharedPreferences(requireContext())
-        val terminalUser = customSharedPreferences.getTerminalUserLogin()
+        val terminalUser = customSharedPreferences.getTerminalUserLogin(requireContext())
 
         ftransaction = requireActivity().supportFragmentManager
 
@@ -68,11 +68,11 @@ class DocumentDetailsFragment: Fragment() {
             ftransaction.popBackStack()
         }
         binding.buttonCancelSale.setOnClickListener {
-            if (terminalUser["iptal_iade"] as Boolean) {
+            if (terminalUser[requireContext().getString(R.string.user_iptal_iade)] as Boolean) {
                 viewModel.cancelSale()
                 showCancelSalePopUp()
             } else {
-                toast(requireContext(),"Yetkiniz yok.",false)
+                toast(requireContext(),requireContext().getString(R.string.no_authorization),false)
             }
         }
 
@@ -84,10 +84,10 @@ class DocumentDetailsFragment: Fragment() {
             toast(requireContext(),"Coming soon",false)
         }
         binding.buttonSend.setOnClickListener {
-            if (terminalUser["rapor_kaydet_gonder"] as Boolean) {
+            if (terminalUser[requireContext().getString(R.string.user_rapor_kaydet_gonder)] as Boolean) {
                 showCustomerInfoPopUp()
             } else {
-                toast(requireContext(),"Yetkiniz yok.",false)
+                toast(requireContext(),requireContext().getString(R.string.no_authorization),false)
             }
         }
 

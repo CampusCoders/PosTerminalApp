@@ -213,7 +213,7 @@ class BaseViewModel @Inject constructor(
 
         val empty = ""
         val customSharedPreferences = CustomSharedPreferences(context)
-        val mainUserInfo = customSharedPreferences.getMainUserLogin()
+        val mainUserInfo = customSharedPreferences.getMainUserLogin(context)
 
         viewModelScope.launch {
             val orderId = saveOrderUseCase.executeSaveOrder(
