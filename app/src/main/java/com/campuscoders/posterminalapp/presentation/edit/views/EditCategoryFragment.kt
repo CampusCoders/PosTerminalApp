@@ -1,5 +1,6 @@
 package com.campuscoders.posterminalapp.presentation.edit.views
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -43,6 +45,12 @@ class EditCategoryFragment: Fragment() {
     private var isFabMenuOpen: Boolean = false
 
     private var categoryId = 0
+
+    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            viewModel.getCategories()
+        }
+    }
 
     private val editCategoryAdapter by lazy {
         EditCategoryAdapter()
@@ -152,7 +160,7 @@ class EditCategoryFragment: Fragment() {
             val intent = Intent(requireActivity(),UpdateOrAddActivity::class.java)
             intent.putExtra(requireActivity().getString(R.string.navigation_from),requireActivity().getString(R.string.navigation_from_category))
             intent.putExtra(requireActivity().getString(R.string.category_id_or_product_id), categoryId.toString())
-            startActivity(intent)
+            launcher.launch(intent)
             requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
             dialog.dismiss()
         }
@@ -173,7 +181,7 @@ class EditCategoryFragment: Fragment() {
         binding.floatingActionButtonAdd.setOnClickListener {
             val intent = Intent(requireActivity(),UpdateOrAddActivity::class.java)
             intent.putExtra(requireActivity().getString(R.string.navigation_from),requireActivity().getString(R.string.navigation_from_category))
-            startActivity(intent)
+            launcher.launch(intent)
             requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
             binding.textInputEditTextSearch.setText("")
         }

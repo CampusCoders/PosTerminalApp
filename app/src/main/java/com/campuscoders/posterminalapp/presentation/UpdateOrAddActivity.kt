@@ -1,5 +1,6 @@
 package com.campuscoders.posterminalapp.presentation
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.FragmentTransaction
@@ -21,6 +22,7 @@ class UpdateOrAddActivity : AppCompatActivity() {
         ftransaction = supportFragmentManager.beginTransaction()
 
         val intent = intent
+        setResult(Activity.RESULT_OK,intent)
         val destinationValue = intent.getStringExtra(getString(R.string.navigation_from))
         val categoryOrProductId = intent.getStringExtra(getString(R.string.category_id_or_product_id))
         val productsCategoryId = intent.getStringExtra(getString(R.string.products_category_id))

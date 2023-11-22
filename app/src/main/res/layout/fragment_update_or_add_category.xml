@@ -48,7 +48,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:inputType="none"
+                    android:inputType="number"
+                    android:maxLength="4"
                     android:textColor="@color/black"
                     android:textColorHint="#B6B5B5" />
             </com.google.android.material.textfield.TextInputLayout>

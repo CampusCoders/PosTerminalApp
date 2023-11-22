@@ -1,5 +1,6 @@
 package com.campuscoders.posterminalapp.presentation.edit.views
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -52,6 +54,12 @@ class EditProductFragment : Fragment() {
     private var productId = 0
 
     private lateinit var productCategoryId: String
+
+    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            viewModel.getProductsByCategoryId(productCategoryId)
+        }
+    }
 
     private val editProductAdapter by lazy {
         EditProductAdapter()
@@ -196,7 +204,7 @@ class EditProductFragment : Fragment() {
             intent.putExtra(requireActivity().getString(R.string.navigation_from), requireActivity().getString(R.string.navigation_from_product))
             intent.putExtra(requireActivity().getString(R.string.category_id_or_product_id), productId.toString())
             intent.putExtra(requireActivity().getString(R.string.products_category_id), productCategoryId)
-            startActivity(intent)
+            launcher.launch(intent)
             requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
             dialog.dismiss()
         }
@@ -228,7 +236,7 @@ class EditProductFragment : Fragment() {
             val intent = Intent(requireActivity(), UpdateOrAddActivity::class.java)
             intent.putExtra(requireActivity().getString(R.string.navigation_from), requireActivity().getString(R.string.navigation_from_product))
             intent.putExtra(requireActivity().getString(R.string.products_category_id), productCategoryId)
-            startActivity(intent)
+            launcher.launch(intent)
             requireActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out)
         }
         binding.floatingActionButtonMainAdd.setOnClickListener {

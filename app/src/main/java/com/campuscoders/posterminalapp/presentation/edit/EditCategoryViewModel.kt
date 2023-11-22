@@ -32,7 +32,7 @@ class EditCategoryViewModel @Inject constructor(
         getCategories()
     }
 
-    private fun getCategories() {
+    fun getCategories() {
         _statusCategoriesList.value = Resource.Loading(null)
         viewModelScope.launch {
             val response = fetchAllCategoriesUseCase.executeFetchAllCategories()

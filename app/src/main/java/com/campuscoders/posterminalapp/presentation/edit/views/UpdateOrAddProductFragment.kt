@@ -141,6 +141,7 @@ class UpdateOrAddProductFragment: Fragment() {
         binding.textInputEditTextProductPrice.setText("${product.productPrice},${product.productPriceCents}")
         binding.imageViewFromCamera.glide(product.productImage, placeHolderProgressBar(requireContext()))
         binding.AutoCompleteTextViewKDV.setText(product.productKdv)
+        currentPhotoUri = product.productImage?:""
     }
 
     private fun openCamera() {
