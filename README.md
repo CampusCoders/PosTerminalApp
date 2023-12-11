@@ -78,7 +78,7 @@ You can access the figma design [here](https://www.figma.com/file/bBP1Pn46TUZsnd
 ## Authors
 
 - Hasan Ali Çalışkan [Github](https://github.com/hasanalic)
-- Çağrı Ömer Asan [Github](https://github.com/cagriiasan)
+- Çağrı Asan [Github](https://github.com/cagriiasan)
 
 ## License
 
